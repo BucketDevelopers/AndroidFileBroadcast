@@ -1,0 +1,20 @@
+var file = document.getElementById('loadfile').files[0];
+document.myform.filesize.value=file.size;
+if(availablespace<(2*file.size)){
+alert("The Receivers SD Card Doesnt have enough space for this file to be stored.\nNote: The receiver must have atleast twice the space as that of the file you are sending.\nSpace Required:"+((2*file.size)/(1024*1024))+" MB "+"\nThe Space on Device is : "+(availablespace/(1024*1024))+" MB ");
+
+}else{
+document.getElementById('upform').submit();
+}
+}   
+</script>   
+
+<form name="myform" id="upform" method="post" enctype="multipart/form-data">   
+<input type="file" id="loadfile" name="myfile">   
+<input type="hidden" name="filenamebackup" value="nofile">   
+<input type="hidden" name="filesize" value="nullsize">   
+<input type="button" value="Upload" onClick="extract(document.myform.myfile.value)">   
+</form>   
+
+</body>
+</html>  

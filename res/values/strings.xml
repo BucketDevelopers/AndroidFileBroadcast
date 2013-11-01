@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FileTransfer</string>
+    <string name="action_settings">Settings</string>
+    <string name="sdcard_error">Oops! External Storage Not Present (O_o) ! Please switch of USB Storage Mode or insert a SDCard</string>
+    <string name="availabeSpace">Cannot get Available Space !</string>
+    <string name="ipaddress">IPAddress</string>
+    <string name="stop_uploadserver">Stop Server</string>
+	<string name="start_uploadserver">Start Server</string>
+	<string name="dummytext">DummyText</string>
+	<string name="tagline">Flash \'em All</string>
+	<string name="wifi">Wi-Fi</string>
+	<string name="server_status">Start</string>
+	<string name="current_Mode">Select the mode below:</string>
+	<string name="speednumber">XY.ABC</string>
+	<string name="currentFileName">filename.ext</string>
+	<string name="TransferPercent">xy%</string>
+</resources>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/ipaddr"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="40dp"
+        android:text="@string/ipaddress" />
+
+    <TextView
+        android:id="@+id/spaceSD"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/availabeSpace" />
+
+    <Button
+        android:id="@+id/startUS"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/start_uploadserver" />
+
+    <Button
+        android:id="@+id/stopUS"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/stop_uploadserver" 
+        
+        />
+
+</LinearLayout>
