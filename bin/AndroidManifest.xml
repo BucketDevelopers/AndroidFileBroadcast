@@ -33,6 +33,20 @@
             android:name="com.master.webserver.MainActivity" />
         <activity
             android:name="com.master.webserver.firstPage" />
+       <activity
+            android:name="com.master.webserver.File_Download" />       
+        <activity
+   			android:name="com.ipaulpro.afilechooser.FileChooserActivity"
+    		android:icon="@drawable/ic_chooser"
+    		android:label="This is label" >
+    		<intent-filter>
+        		<action android:name="android.intent.action.GET_CONTENT" />
+		 		<action android:name="com.master.webserver.FILE" /> 
+        		<category android:name="android.intent.category.DEFAULT" />
+        		<category android:name="android.intent.category.OPENABLE" />
+        		<data android:mimeType="*/*" />
+    		</intent-filter>
+		</activity>
         
         <service 
             android:name="com.master.webserver.UploadServerService$HTTPD"

@@ -42,7 +42,7 @@ public class XmlParser{
     static final String NODE_PATH = "path";
     static File xmlPath;
 	
-	XmlParser(File file){
+	public XmlParser(File file){
 		xmlPath = file;
 		File xmlFile = new File(xmlPath,"list.xml");
 		InputStream stream;
@@ -69,7 +69,7 @@ public class XmlParser{
 		}
 	}
 	
-	ArrayList<String> fileList(){
+	public ArrayList<String> fileList(){
 		 // Get elements by name file
         NodeList nodeList = doc.getElementsByTagName(NODE_FILE);
 
@@ -83,12 +83,12 @@ public class XmlParser{
         }
 		return retList;
 	}
-	String getFilePath(String name)
+	public String getFilePath(String name)
 	{
 		return hm.get(name);
 	}
 	@SuppressLint("NewApi")
-	void addFile(String fname,String fpath)
+	public void addFile(String fname,String fpath)
 	{
 		NodeList rootList = doc.getElementsByTagName("list");
 		Node root = rootList.item(0);
