@@ -57,7 +57,7 @@ public class UploadServerService extends Service {
 		Toast.makeText(this, "Service stopped", Toast.LENGTH_LONG).show();
 		if (server != null) {
 			server.stop();
-			onoff = false;
+			UploadServerService.onoff = false;
 			removeNotification();
 		}
 	}
@@ -76,7 +76,7 @@ public class UploadServerService extends Service {
 
 		try {
 			server.start();
-			onoff = true;
+			UploadServerService.onoff = true;
 		} catch (IOException e) {
 			Log.d("FTDebug", e.getMessage());
 		}

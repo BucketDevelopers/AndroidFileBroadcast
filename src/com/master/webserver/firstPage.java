@@ -30,7 +30,6 @@ public class firstPage extends SherlockActivity {
 	private OnClickListener changeChecker;
 	private TextView startstatus;
 	private TextView modestatus;
-	private TextView ipaddressdisplay;
 	private ImageView orb;
 	private ImageButton shareButton;
 	private Typeface robotoregular;
@@ -42,6 +41,41 @@ public class firstPage extends SherlockActivity {
 	private AnimationDrawable progressanimleft;
 	private AnimationDrawable progressanimright;
 	protected Intent uploaddownloadservice;
+	private TextView textIpaddr;
+	private TextView availableSpace;
+
+	public void updateUI() {
+
+		// To set the available sdcard field
+		if (AvailableSpaceHandler.getExternalAvailableSpaceInMB() > 50) {
+
+			availableSpace.setText("Availabe Space : "
+					+ AvailableSpaceHandler.getExternalAvailableSpaceInMB()
+					+ " MB ");
+
+		} else {
+
+			availableSpace.setText("Availabe Space : "
+					+ AvailableSpaceHandler.getExternalAvailableSpaceInMB()
+					+ " MB (Warning! Low Space !)");
+
+		}
+
+		if (UploadServerService.onoff) {
+
+			// To get the IP Address of the device
+			String ipaddress = IpAddress.getHostIPAddress();
+			textIpaddr.setText("http://" + ipaddress + ":" + PORT);
+			// End of Setting the IP
+
+			startstatus.setText("Stop Flash");
+
+		} else {
+			startstatus.setText("Start Flash");
+			textIpaddr.setText("Flash Not Started");
+		}
+
+	}
 
 	/** Called when the activity is first created. */
 
@@ -73,11 +107,13 @@ public class firstPage extends SherlockActivity {
 
 		shareButton = (ImageButton) findViewById(R.id.shareButton);
 
+		availableSpace = (TextView) findViewById(R.id.spaceSD);
 		startstatus = (TextView) findViewById(R.id.startstatus);
 		modestatus = (TextView) findViewById(R.id.modestatus);
-		ipaddressdisplay = (TextView) findViewById(R.id.ipaddress);
+		textIpaddr = (TextView) findViewById(R.id.ipaddress);
 		speed = (TextView) findViewById(R.id.speed);
 		filename = (TextView) findViewById(R.id.currentfilename);
+
 		wifihotspotToggle = (ImageButton) findViewById(R.id.wifihotspot);
 		wifiNetToggle = (ImageButton) findViewById(R.id.wifinetwork);
 		dataToggle = (ImageButton) findViewById(R.id.dataconnection);
@@ -86,7 +122,7 @@ public class firstPage extends SherlockActivity {
 
 		startstatus.setTypeface(robotoregular);
 		modestatus.setTypeface(robotoregular);
-		ipaddressdisplay.setTypeface(robotolight);
+		textIpaddr.setTypeface(robotolight);
 		speed.setTypeface(robotolight);
 		filename.setTypeface(robotoregular);
 		// onEvent Listeners
@@ -117,14 +153,6 @@ public class firstPage extends SherlockActivity {
 
 				}
 
-				/*
-				 * To get the IP Address of the device
-				 */
-				TextView textIpaddr = (TextView) findViewById(R.id.ipaddress);
-				String ipaddress = IpAddress.getHostIPAddress();
-				textIpaddr.setText("http://" + ipaddress + ":" + PORT);
-				// End of Setting the IP
-
 			}
 
 		};
@@ -137,10 +165,8 @@ public class firstPage extends SherlockActivity {
 				if (v.getId() == R.id.Orb) {
 
 					// Start The service
-					if (UploadServerService.onoff == false) {
-						
-						startstatus.setText("Stop Flash");
-						
+					if (UploadServerService.onoff != true) {
+
 						
 						// Bug Fix:
 						// Just So that App doesnt FORCE CLOSE even for some
@@ -187,11 +213,14 @@ public class firstPage extends SherlockActivity {
 
 						uploaddownloadservice.putExtra("Port", PORT);
 						startService(uploaddownloadservice);
-
+						UploadServerService.onoff=true;
+						updateUI();
+						
+						
 					} else {
-						startstatus.setText("Start Flash");
 						stopService(uploaddownloadservice);
-
+						UploadServerService.onoff=false;
+						updateUI();
 					}
 
 				} else if (v.getId() == R.id.shareButton) {
@@ -263,8 +292,6 @@ public class firstPage extends SherlockActivity {
 	protected void onResume() {
 		super.onResume();
 
-		TextView availableSpace = (TextView) findViewById(R.id.spaceSD);
-
 		// Check whether user switched to USB Storage Mode or not
 		try {
 			ExternalStorage.getsdcardfolderpath(); // This will check if sd card
@@ -279,37 +306,8 @@ public class firstPage extends SherlockActivity {
 
 		}
 
-		if (AvailableSpaceHandler.getExternalAvailableSpaceInMB() > 50) {
-
-			availableSpace.setText("Availabe Space : "
-					+ AvailableSpaceHandler.getExternalAvailableSpaceInMB()
-					+ " MB ");
-
-		} else {
-
-			availableSpace.setText("Availabe Space : "
-					+ AvailableSpaceHandler.getExternalAvailableSpaceInMB()
-					+ " MB (Warning! Low Space !)");
-
-		}
-
-		if (UploadServerService.onoff) {
-
-			// Reinitialise the UI
-			
-			startstatus.setText("Stop Flash");
-			
-			
-			
-
-		} else {
-
-			// Reinitialise the UI
-			startstatus.setText("Start Flash");
-			
-			
-			
-		}
+		// To update the UI after resume
+		updateUI();
 
 	}
 
