@@ -14,5 +14,9 @@
     <item
         android:drawable="@drawable/animprogress4"
         android:duration="300"/>
-
+	
+    <item
+        android:drawable="@drawable/animprogress1"
+        android:duration="1200"/>
+    
 </animation-list>

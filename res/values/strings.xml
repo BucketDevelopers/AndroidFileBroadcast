@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">FileTransfer</string>
-    <string name="action_settings">Settings</string>
+    <string name="settings">Settings</string>
     <string name="sdcard_error">Oops! External Storage Not Present (O_o) ! Please switch of USB Storage Mode or insert a SDCard</string>
     <string name="availabeSpace">Cannot get Available Space !</string>
     <string name="ipaddress">IPAddress</string>
@@ -16,4 +16,5 @@
 	<string name="speednumber">XY.ABC</string>
 	<string name="currentFileName">filename.ext</string>
 	<string name="TransferPercent">xy%</string>
+	<string name="about">About</string>
 </resources>

@@ -13,12 +13,12 @@ import android.widget.Toast;
 import com.common.methods.ClearCache;
 import com.common.methods.ExternalStorage;
 import com.library.Httpdserver.NanoHTTPD;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
 public class UploadServerService extends Service {
+	public static boolean onoff=false;
 	public static NotificationCompat.Builder mBuilder;
 	public static NotificationManager manager;
 	private MyHTTPD server;
@@ -30,41 +30,38 @@ public class UploadServerService extends Service {
 
 		return null;
 	}
-	
-	public static void updateNotification(String Title,String msg,Context ctx){
-		
+
+	public static void updateNotification(String Title, String msg, Context ctx) {
+
 		mBuilder.setContentTitle(Title);
 		mBuilder.setContentText(msg);
-		Notification not=mBuilder.build();
-		not.flags=Notification.FLAG_ONGOING_EVENT;
-		manager = (NotificationManager) ctx.getSystemService(Context.NOTIFICATION_SERVICE);  
-	    manager.notify(100,not);  
-	    
-	    /*
-	     * End of Notification Management
-	     */
-	  
-		
+		Notification not = mBuilder.getNotification();
+		not.flags = Notification.FLAG_ONGOING_EVENT;
+		manager = (NotificationManager) ctx
+				.getSystemService(Context.NOTIFICATION_SERVICE);
+		manager.notify(100, not);
+
+		/*
+		 * End of Notification Management
+		 */
+
 	}
-	
-	public void removeNotification() {  
-		manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);  
-	    manager.cancel(100);  
-	}  
-	
-	
+
+	public void removeNotification() {
+		manager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+		manager.cancel(100);
+	}
+
 	@Override
 	public void onDestroy() {
 		Toast.makeText(this, "Service stopped", Toast.LENGTH_LONG).show();
 		if (server != null) {
 			server.stop();
-			MainActivity.serverEnabled = false;
+			onoff = false;
 			removeNotification();
 		}
 	}
-	
-	
-	
+
 	@Override
 	public void onStart(Intent intent, int startid) {
 		PORT = intent.getExtras().getInt("Port");
@@ -79,47 +76,45 @@ public class UploadServerService extends Service {
 
 		try {
 			server.start();
-			MainActivity.serverEnabled = true;
+			onoff = true;
 		} catch (IOException e) {
 			Log.d("FTDebug", e.getMessage());
 		}
-		
+
 		/*
 		 * Creating the Notification when the server starts to notify the user
-		 * 
 		 */
-		
-		Intent notificationIntent = new Intent(this, MainActivity.class);  
-		PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent,   
-	            PendingIntent.FLAG_UPDATE_CURRENT);
-	            
-		 mBuilder = new NotificationCompat.Builder(this)
-			    .setSmallIcon(R.drawable.ic_launcher)
-			    .setContentTitle("File Server is Running")
-			    .setContentText("Just Started :)")
-			    .setContentIntent(contentIntent)
-			    .setAutoCancel(false)
-			    //.setProgress(100, 30, false)
-			    ;
-		
-		updateNotification("File Server Started"," Waiting to Connect !", getApplicationContext());	    
-	    /*
-	     * End of Notification Management
-	     */
-	    
+
+		Intent notificationIntent = new Intent(this, firstPage.class);
+		PendingIntent contentIntent = PendingIntent.getActivity(this, 0,
+				notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+		mBuilder = new NotificationCompat.Builder(this)
+				.setSmallIcon(R.drawable.ic_launcher)
+				.setContentTitle("File Server is Running")
+				.setContentText("Just Started :)")
+				.setContentIntent(contentIntent).setAutoCancel(false)
+		// .setProgress(100, 30, false)
+		;
+
+		updateNotification("File Server Started", " Waiting to Connect !",
+				getApplicationContext());
+		/*
+		 * End of Notification Management
+		 */
 
 	}
 
 	// Http Response Server
 
 	private class MyHTTPD extends NanoHTTPD {
-		
+
 		public MyHTTPD() {
 			super(PORT, htmldata);
 		}
-		
+
 		public MyHTTPD(Context parentContext) {
-			super(PORT, htmldata,parentContext);
+			super(PORT, htmldata, parentContext);
 		}
 
 		@Override
@@ -206,16 +201,17 @@ public class UploadServerService extends Service {
 						ExternalStorage.getsdcardfolderwithoutcheck(), fileName);
 
 				from.renameTo(to);
-				
-				UploadServerService.updateNotification("File Server is Processing", "Cleaning Up Temp Files", getApplicationContext());
-				
-				
+
+				UploadServerService.updateNotification(
+						"File Server is Processing", "Cleaning Up Temp Files",
+						getApplicationContext());
+
 				// To Clean Cache File Created in the Process
 				ClearCache.clean();
-				
-				UploadServerService.updateNotification("File Saved","File: "+fileName, getApplicationContext());
-			
-			
+
+				UploadServerService.updateNotification("File Saved", "File: "
+						+ fileName, getApplicationContext());
+
 			}
 
 			return new Response(
