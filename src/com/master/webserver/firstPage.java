@@ -115,7 +115,7 @@ public class firstPage extends Activity {
 					/* Create an Intent that will start the Menu-Activity. */
 
 					Intent mainIntent = new Intent(firstPage.this,
-							MainActivity.class);
+							File_Download.class);
 					firstPage.this.startActivity(mainIntent);
 				} else if (v.getId() == R.id.shareButton) {
 					/* Create an intent for sharing IP */

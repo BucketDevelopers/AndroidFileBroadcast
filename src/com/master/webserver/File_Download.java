@@ -10,6 +10,7 @@ import java.util.Map;
 
 
 import com.common.methods.IpAddress;
+import com.common.methods.MimeUtils;
 import com.common.methods.XmlParser;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
@@ -78,32 +79,25 @@ public class File_Download extends Activity implements OnClickListener{
 			public void onItemClick(AdapterView<?> parent, View view, int position,
 					long id) {
 				String fpath = xml.getFilePath(filearray.get(position)).toLowerCase();
-				Toast.makeText(getBaseContext(), "Click"+position,Toast.LENGTH_SHORT).show();
+				String extension = fpath.substring(fpath.lastIndexOf('.')+1);
+				
+				File file = new File(fpath.substring(1));
+				Toast.makeText(getBaseContext(), "--"+MimeUtils.guessMimeTypeFromExtension(extension)+"--",Toast.LENGTH_SHORT).show();
 				Intent intent = new Intent();
 				intent.setAction(android.content.Intent.ACTION_VIEW);
-				intent.setData(Uri.parse(fpath));
-				if (fpath.endsWith(".wav") || fpath.endsWith(".ogg") || fpath.endsWith(".mp3")
-                        || fpath.endsWith(".mid") || fpath.endsWith(".midi") || fpath.endsWith(".amr")) {
-                    intent.setType("audio/*");
-                } else if (fpath.endsWith(".mpg") || fpath.endsWith(".mpeg") || fpath.endsWith(".3gp")
-                        || fpath.endsWith(".mp4")) {
-                    intent.setType("video/*");
-                } else if (fpath.endsWith(".jpg") || fpath.endsWith(".jpeg") || fpath.endsWith(".gif")
-                        || fpath.endsWith(".png") || fpath.endsWith(".bmp")) {
-                    intent.setType("image/*");
-                } else if (fpath.endsWith(".txt") || fpath.endsWith(".csv") || fpath.endsWith(".xml")) {
-                    intent.setType("text/*");
-                } else if (fpath.endsWith(".gz") || fpath.endsWith(".rar") || fpath.endsWith(".zip")) {
-                    intent.setType("package/*");
-                } else if (fpath.endsWith(".apk")) {
-                    intent.setType("application/vnd.android.package-archive");
-                }else
-                {
-                //All other
-                }
-				startActivityForResult(intent,10);
+				intent.setDataAndType(Uri.fromFile(file),MimeUtils.guessMimeTypeFromExtension(extension));
+				//intent.setData(Uri.fromFile(file)); //Remove the initial '/' and parse
+				//intent.setType("text/*");				
+				//intent.setType(MimeUtils.guessMimeTypeFromExtension(extension));
+				startActivity(intent);
 				// TODO Auto-generated method stub
-				
+				/*
+				Intent intent = new Intent();
+				intent.setAction(android.content.Intent.ACTION_VIEW);
+				File file = new File("storage/sdcard0/hash.txt");
+				intent.setDataAndType(Uri.fromFile(file),"text/*");
+				startActivity(intent);
+				*/
 			}
 		});
 	}
