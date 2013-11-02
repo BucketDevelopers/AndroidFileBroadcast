@@ -141,7 +141,8 @@
                     android:contentDescription="dataToggle"
                     android:hapticFeedbackEnabled="true"
                     android:src="@drawable/data"
-                    tools:ignore="HardcodedText" />
+                    tools:ignore="HardcodedText" 
+                    />
             </LinearLayout>
             <!-- end of three toggles for three modes -->
 

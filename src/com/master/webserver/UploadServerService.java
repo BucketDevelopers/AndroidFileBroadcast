@@ -10,15 +10,16 @@ import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
+
 import com.common.methods.ClearCache;
 import com.common.methods.ExternalStorage;
 import com.library.Httpdserver.NanoHTTPD;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Map;
 
 public class UploadServerService extends Service {
-	public static boolean onoff=false;
 	public static NotificationCompat.Builder mBuilder;
 	public static NotificationManager manager;
 	private MyHTTPD server;
@@ -57,7 +58,6 @@ public class UploadServerService extends Service {
 		Toast.makeText(this, "Service stopped", Toast.LENGTH_LONG).show();
 		if (server != null) {
 			server.stop();
-			UploadServerService.onoff = false;
 			removeNotification();
 		}
 	}
@@ -76,7 +76,6 @@ public class UploadServerService extends Service {
 
 		try {
 			server.start();
-			UploadServerService.onoff = true;
 		} catch (IOException e) {
 			Log.d("FTDebug", e.getMessage());
 		}
@@ -211,7 +210,10 @@ public class UploadServerService extends Service {
 
 				UploadServerService.updateNotification("File Saved", "File: "
 						+ fileName, getApplicationContext());
-
+				
+					
+				
+				
 			}
 
 			return new Response(

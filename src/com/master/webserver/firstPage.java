@@ -2,11 +2,13 @@ package com.master.webserver;
 
 import java.io.IOException;
 import java.io.InputStream;
+
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.common.methods.AvailableSpaceHandler;
 import com.common.methods.ExternalStorage;
 import com.common.methods.IpAddress;
+
 import android.content.Intent;
 import android.content.res.AssetManager;
 import android.graphics.Color;
@@ -18,12 +20,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class firstPage extends SherlockActivity {
 
-	protected static final int PORT = 8080;
+	private int PORT = 8080;
 	private ImageButton wifihotspotToggle;
 	private ImageButton dataToggle;
 	private ImageButton wifiNetToggle;
@@ -40,11 +43,26 @@ public class firstPage extends SherlockActivity {
 	private ImageView progressimviewright;
 	private AnimationDrawable progressanimleft;
 	private AnimationDrawable progressanimright;
-	protected Intent uploaddownloadservice;
+	private Intent uploaddownloadservice;
 	private TextView textIpaddr;
 	private TextView availableSpace;
+	private LinearLayout transferstatus;
+	private LinearLayout connectionTogglesgroup;
+	private boolean speedenable;
+	private boolean serveronoff;
 
 	public void updateUI() {
+
+		if (speedenable) {
+
+			transferstatus.setVisibility(LinearLayout.VISIBLE);
+			connectionTogglesgroup.setVisibility(LinearLayout.GONE);
+
+		} else {
+			transferstatus.setVisibility(LinearLayout.GONE);
+			connectionTogglesgroup.setVisibility(LinearLayout.VISIBLE);
+
+		}
 
 		// To set the available sdcard field
 		if (AvailableSpaceHandler.getExternalAvailableSpaceInMB() > 50) {
@@ -61,7 +79,7 @@ public class firstPage extends SherlockActivity {
 
 		}
 
-		if (UploadServerService.onoff) {
+		if (serveronoff) {
 
 			// To get the IP Address of the device
 			String ipaddress = IpAddress.getHostIPAddress();
@@ -118,6 +136,9 @@ public class firstPage extends SherlockActivity {
 		wifiNetToggle = (ImageButton) findViewById(R.id.wifinetwork);
 		dataToggle = (ImageButton) findViewById(R.id.dataconnection);
 
+		transferstatus = (LinearLayout) findViewById(R.id.transferStatusLayout);
+		connectionTogglesgroup = (LinearLayout) findViewById(R.id.connectiontogglesLayout);
+
 		// setting fonts
 
 		startstatus.setTypeface(robotoregular);
@@ -165,9 +186,8 @@ public class firstPage extends SherlockActivity {
 				if (v.getId() == R.id.Orb) {
 
 					// Start The service
-					if (UploadServerService.onoff != true) {
+					if (serveronoff != true) {
 
-						
 						// Bug Fix:
 						// Just So that App doesnt FORCE CLOSE even for some
 						// reason the UI is ******
@@ -213,14 +233,9 @@ public class firstPage extends SherlockActivity {
 
 						uploaddownloadservice.putExtra("Port", PORT);
 						startService(uploaddownloadservice);
-						UploadServerService.onoff=true;
-						updateUI();
-						
-						
+
 					} else {
 						stopService(uploaddownloadservice);
-						UploadServerService.onoff=false;
-						updateUI();
 					}
 
 				} else if (v.getId() == R.id.shareButton) {

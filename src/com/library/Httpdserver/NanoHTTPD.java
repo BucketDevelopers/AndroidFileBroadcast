@@ -5,7 +5,6 @@ import android.content.Context;
 import android.util.Log;
 import com.common.methods.ExternalStorage;
 import com.master.webserver.UploadServerService;
-
 import java.io.*;
 import java.net.*;
 import java.nio.ByteBuffer;
@@ -1053,6 +1052,7 @@ public abstract class NanoHTTPD {
 				//Patch 512=>4096
 				//Patch
 				UploadServerService.updateNotification("File Server is Running", "Receiving File ..",ServerContext);
+				UploadServerService.speedenable=true;
 				//End Patch
 				byte[] buf = new byte[4096];
 				while (rlen >= 0 && size > 0) {
