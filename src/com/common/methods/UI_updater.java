@@ -3,6 +3,7 @@ package com.common.methods;
 import com.master.webserver.R;
 import com.master.webserver.UploadServerService;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
 import android.util.Log;
@@ -32,6 +33,8 @@ public class UI_updater {
 	private static TextView availableSpace;
 	public static boolean speedviewenable = false;
 	public static int modeSelected = 0;
+	public static Context appContext;
+	private static Boolean okornot;
 
 	public static void ui_initializer(int PORT, ImageButton wifihotspotToggle,
 			ImageButton dataToggle, ImageButton wifiNetToggle,
@@ -40,7 +43,7 @@ public class UI_updater {
 			ImageView progressimviewright, AnimationDrawable progressanimleft,
 			AnimationDrawable progressanimright, TextView textIpaddr,
 			TextView availableSpace, LinearLayout transferstatus,
-			LinearLayout connectionTogglesgroup) {
+			LinearLayout connectionTogglesgroup, Context appContext) {
 
 		UI_updater.PORT = PORT;
 		UI_updater.wifihotspotToggle = wifihotspotToggle;
@@ -59,6 +62,7 @@ public class UI_updater {
 		UI_updater.availableSpace = availableSpace;
 		UI_updater.transferstatus = transferstatus;
 		UI_updater.connectionTogglesgroup = connectionTogglesgroup;
+		UI_updater.appContext = appContext;
 
 	}
 
@@ -137,7 +141,10 @@ public class UI_updater {
 			break;
 		case 3:
 			if (UploadServerService.serverenabled) {
+				// ----------------------------------------------
+				// Creating the alert to warn the user
 
+				// ----------------------------------------------
 				orb.setImageResource(R.drawable.data);
 				startstatus.setText("Stop Flash");
 			}

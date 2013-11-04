@@ -130,7 +130,8 @@ public class firstPage extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				if (v.getId() == R.id.Orb) {
-
+					
+					
 					// Start The service
 					if (UploadServerService.serverenabled != true) {
 
@@ -220,7 +221,7 @@ public class firstPage extends SherlockActivity {
 				wifiNetToggle, startstatus, modestatus, orb, speed, filename,
 				progressimviewleft, progressimviewright, progressanimleft,
 				progressanimright, textIpaddr, availableSpace, transferstatus,
-				connectionTogglesgroup);
+				connectionTogglesgroup, firstPage.this);
 
 		UI_updater.update();
 		//

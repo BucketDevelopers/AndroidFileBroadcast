@@ -73,7 +73,7 @@ public class UploadServerService extends Service {
 		htmldata = intent.getExtras().getString("htmlfile");
 		Toast.makeText(this, "Upload Service started ", Toast.LENGTH_SHORT)
 				.show();
-		UI_updater.updateServerStatus();
+		
 		Log.d("FTDebug", "Upload Server Started!");
 
 		server = new MyHTTPD(getApplicationContext());
