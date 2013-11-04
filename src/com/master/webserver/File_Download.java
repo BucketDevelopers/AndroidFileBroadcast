@@ -1,17 +1,17 @@
 package com.master.webserver;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
+//import java.io.FileInputStream;
+//import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
-import com.common.methods.IpAddress;
+//import com.common.methods.IpAddress;
 import com.common.methods.MimeUtils;
 import com.common.methods.XmlParser;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
-import com.library.Httpdserver.NanoHTTPD;
-import com.library.Httpdserver.NanoHTTPD.Response.Status;
+//import com.library.Httpdserver.NanoHTTPD;
+//import com.library.Httpdserver.NanoHTTPD.Response.Status;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,13 +28,13 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
+//import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("DefaultLocale")
 public class File_Download extends Activity implements OnClickListener{
-	private static final int PORT = 8181;
-	private MyHTTPD server;
+	//private static final int PORT = 8181;
+	//private MyHTTPD server;
 	private static final int REQUEST_CODE = 100;
 	Button upload;
 	ListView listview;
@@ -73,7 +73,7 @@ public class File_Download extends Activity implements OnClickListener{
 				 switch(index)
 				 {
 				 case 0:		//Open that file
-					 String fpath = xml.getFilePath(filearray.get(pos)).toLowerCase();
+					 String fpath = XmlParser.getFilePath(filearray.get(pos)).toLowerCase();
 					 String extension = fpath.substring(fpath.lastIndexOf('.')+1);
 					 File file = new File(fpath.substring(1));
 					 if(MimeUtils.guessMimeTypeFromExtension(extension) == null)
@@ -161,7 +161,7 @@ public class File_Download extends Activity implements OnClickListener{
 	            }
 	    }
 	}
-
+/*
 	@Override
 	protected void onResume() {
 		super.onResume();
@@ -245,4 +245,5 @@ public class File_Download extends Activity implements OnClickListener{
 		    }
 		}//end of serve
 	} //end of class myHTTPD
+*/
 }//end of main activity

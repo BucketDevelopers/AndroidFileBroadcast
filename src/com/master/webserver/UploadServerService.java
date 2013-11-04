@@ -11,13 +11,18 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.common.methods.AvailableSpaceHandler;
 import com.common.methods.ClearCache;
 import com.common.methods.ExternalStorage;
 import com.common.methods.UI_updater;
+import com.common.methods.XmlParser;
 import com.library.Httpdserver.NanoHTTPD;
+import com.library.Httpdserver.NanoHTTPD.Response.Status;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class UploadServerService extends Service {
@@ -128,7 +133,7 @@ public class UploadServerService extends Service {
 
 		{
 
-			/*
+			/*COMMENT V=1.0
 			 * This will happen but nothing will be displayed as already a
 			 * response would have gone because of a Patch in Nano HTTPD file
 			 * Thus The Text sent here will be of no use But this function is
@@ -142,47 +147,71 @@ public class UploadServerService extends Service {
 			 * false and set the patchenable variable value in NanoHTTPD.java to
 			 * false.
 			 */
+			
+			/*COMMENT V=2.0
+			 * This is the serve method which is responsible for handling requests
+			 * from browser. Depending on the uri, we can do the corresponding action
+			 * 
+			 * In case uri is / we need to display filelist and the upload form
+			 * 
+			 * In case the uri is /upload we need to first give a response and then 
+			 * do the processing.
+			 * 
+			 * For all other uri of form /xyz we need to send the file xyz to the \
+			 * client
+			 * 
+			 */
+			if(uri.contentEquals("/")){
+				
+			StringBuilder sb = new StringBuilder();
+			XmlParser xml = new XmlParser(getFilesDir());
+			ArrayList<String> fileList = xml.fileList();
+			StringBuilder filesHtml = new StringBuilder();
+			for(int i=0;i<fileList.size();i++)
+			 {
+				 filesHtml.append("<a href=\""+fileList.get(i)+"\">"+fileList.get(i)+"</a><br/>");
+			 }
+		 
+			sb.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" " +
+						"xml:lang=\"en\" lang=\"en\">" +
+						"<head><meta http-equiv=\"Content-Type\" " +
+						"content=\"text/html; charset=UTF-8\" />" +
+						"<title> File Server </title></head><body>"+
+						"<script>\n  var extract=function(answer){\n " +
+					    "document.myform.filenamebackup.value=answer;\n " +
+					    "var availablespace= ");
+			
+			sb.append(AvailableSpaceHandler
+					.getExternalAvailableSpaceInBytes() + ";\n");
+			
+			sb.append("var file = document.getElementById('loadfile').files[0];\n" +
+					"document.myform.filesize.value=file.size;\n" +
+					"if(availablespace<(2*file.size)){\n" +
+					"alert(\"The Receivers SD Card Doesnt have enough space for this file" +
+					" to be stored.\\nNote: The receiver must have atleast twice the space " +
+					"as that of the file you are sending.\\n" +
+					"Space Required:\"+((2*file.size)/(1024*1024))+\" MB \"+\"\\nThe Space" +
+					" on Device is : \"+(availablespace/(1024*1024))+\" MB \");\n }\nelse{" +
+					" document.getElementById('upform').submit();\n" +
+					" }\n }\n " +
+					"</script>");
+			
+			sb.append(filesHtml.toString());
+			
+			sb.append("<form name=\"myform\" id=\"upform\" method=\"post\" enctype=\"multipart/form-data\" action = \"upload\"> " +
+						"<input type=\"file\" id=\"loadfile\" name=\"myfile\">" +
+						"<input type=\"hidden\" name=\"filenamebackup\" value=\"nofile\"> " +
+						"<input type=\"hidden\" name=\"filesize\" value=\"nullsize\"> " +
+						"<input type=\"button\" value=\"Upload\" onClick=\"extract(document.myform.myfile.value)\">  " +
+						"</form> " +
+						"</body> " +
+						"</html> ");
 
-			boolean patchenable = true;
-			if (!patchenable) {
-				StringBuilder sb = new StringBuilder();
-				sb.append("<html>");
-				sb.append("<head>");
-
-				sb.append("<title>File Server</title></head>");
-				sb.append("<body>");
-				sb.append("<script>");
-				sb.append("var extract=function(answer){");
-				sb.append(";document.myform.filenamebackup.value=answer;document.getElementById('upform').submit();}");
-				sb.append("</script>");
-
-				sb.append("<form name=\"myform\" id='upform' method='post' enctype='multipart/form-data'>");
-				sb.append("<input type=\"file\" name=\"myfile\">");
-				sb.append("<input type=\"hidden\" name=\"filenamebackup\" value=\"nofile\">");
-				sb.append("<input type=\"button\" value=\"Upload\" onClick=\"extract(document.myform.myfile.value)\">");
-				sb.append("	</form>");
-
-				sb.append("<h1>Response</h1>");
-				sb.append("<p><blockquote><b>URI -</b> ")
-						.append(String.valueOf(uri)).append("<br />");
-				sb.append("<b>Method -</b> ").append(String.valueOf(method))
-						.append("</blockquote></p>");
-				sb.append("<h3>Headers</h3><p><blockquote>")
-						.append(String.valueOf(header))
-						.append("</blockquote></p>");
-				sb.append("<h3>Parms</h3><p><blockquote>")
-						.append(String.valueOf(parms))
-						.append("</blockquote></p>");
-				sb.append("<h3>Files</h3><p><blockquote>")
-						.append(String.valueOf(files))
-						.append("</blockquote></p>");
-
-				sb.append("</body>");
-				sb.append("</html>");
+			
 				return new Response(sb.toString());
-
 			}
-
+			else if(uri.contentEquals("/upload"))
+			{
 			/*
 			 * To rename the Temp File Created into Actual File Name
 			 */
@@ -221,6 +250,26 @@ public class UploadServerService extends Service {
 			return new Response(
 					"<center><h1>Oops! This was not supposed to happen ! My Bad ! :P </h1></center><br><center><h1>Please Reload Again!</h1></center></h1></center><br><center><h5>U Forgot one of patchenable Flag!</h5></center>");
 		}
+			else{
+				 String fileName = uri.substring(1);
+				 String fpath=XmlParser.getFilePath(fileName);
+				 File file = new File(fpath);  
+				     
+				 try {
+		        
+					 FileInputStream in = new FileInputStream(file);
+					 Response res= new Response(Status.OK,"application/octet-stream",in );
+					 res.addHeader("Content-Disposition", "attachment; filename=\""+fileName+"\"");
+					 return res;
+				 }
+				 catch (IOException e) {
+		                //You'll need to add proper error handling here
+				 }
+				 return new Response("Fail!!");
+				
+			}	
+		}
+		
 	}
-
+	
 }

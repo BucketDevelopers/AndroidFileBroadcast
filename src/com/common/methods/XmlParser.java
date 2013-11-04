@@ -91,7 +91,7 @@ public class XmlParser{
         }
 		return retList;
 	}
-	public String getFilePath(String name)
+	static public String getFilePath(String name)
 	{
 		return hm.get(name);
 	}
