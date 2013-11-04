@@ -1,33 +1,24 @@
 package com.master.webserver;
 
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
-
-
 import com.common.methods.IpAddress;
 import com.common.methods.MimeUtils;
 import com.common.methods.XmlParser;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
-
 import com.library.Httpdserver.NanoHTTPD;
 import com.library.Httpdserver.NanoHTTPD.Response.Status;
-
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
-import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.text.InputFilter.LengthFilter;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -40,6 +31,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+@SuppressLint("DefaultLocale")
 public class File_Download extends Activity implements OnClickListener{
 	private static final int PORT = 8181;
 	private MyHTTPD server;

@@ -23,7 +23,7 @@
 
             <TextView
                 android:id="@+id/startstatus"
-                android:layout_width="match_parent"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="@string/server_status"
@@ -48,11 +48,11 @@
 
             <ImageView
                 android:id="@+id/progrleft"
-               	android:minWidth="50dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:contentDescription="PROGRESS"
+                android:minWidth="50dp"
                 tools:ignore="HardcodedText" />
 
             <ImageView
@@ -66,11 +66,11 @@
 
             <ImageView
                 android:id="@+id/progrright"
-                android:minWidth="50dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="10dp"
                 android:contentDescription="Progress"
+                android:minWidth="50dp"
                 tools:ignore="HardcodedText" />
 
             <ImageView
@@ -95,51 +95,65 @@
             android:background="#333333" />
         <!-- three toggles for three modes -->
 
-        <TextView
-            android:id="@+id/modestatus"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/current_Mode" />
-
         <LinearLayout
             android:id="@+id/connectiontogglesLayout"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:visibility="visible" >
 
-            <ImageButton
-                android:id="@+id/wifihotspot"
+            <TextView
+                android:id="@+id/modestatus"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:contentDescription="hotspotToggle"
-                android:src="@drawable/hotspot"
-                android:hapticFeedbackEnabled="true"
-                tools:ignore="HardcodedText"
-                 />
+                android:layout_gravity="center_horizontal"
+                android:text="@string/current_Mode" />
 
-            <ImageButton
-                android:id="@+id/wifinetwork"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="wifiToggle"
-                android:src="@drawable/wifi"
-                android:hapticFeedbackEnabled="true"
-                tools:ignore="HardcodedText" />
+                android:gravity="center_horizontal"
+                android:orientation="horizontal" >
 
-            <ImageButton
-                android:id="@+id/dataconnection"
-                android:layout_width="wrap_content"
+                <ImageButton
+                    android:id="@+id/wifihotspot"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="hotspotToggle"
+                    android:hapticFeedbackEnabled="true"
+                    android:src="@drawable/hotspot"
+                    tools:ignore="HardcodedText" />
+
+                <ImageButton
+                    android:id="@+id/wifinetwork"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="wifiToggle"
+                    android:hapticFeedbackEnabled="true"
+                    android:src="@drawable/wifi"
+                    tools:ignore="HardcodedText" />
+
+                <ImageButton
+                    android:id="@+id/dataconnection"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="dataToggle"
+                    android:hapticFeedbackEnabled="true"
+                    android:src="@drawable/data"
+                    tools:ignore="HardcodedText" 
+                    />
+            </LinearLayout>
+            <!-- end of three toggles for three modes -->
+
+            <TextView
+                android:id="@+id/spaceSD"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:contentDescription="dataToggle"
-                android:src="@drawable/data"
-				android:hapticFeedbackEnabled="true"
-                tools:ignore="HardcodedText" />
-
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:text="@string/availabeSpace" />
         </LinearLayout>
-        <!-- end of three toggles for three modes -->
         <!-- Transfer Status -->
 
         <LinearLayout
@@ -175,7 +189,6 @@
                         android:text=" KB/s"
                         android:textSize="20sp"
                         tools:ignore="HardcodedText" />
-
                 </TableRow>
             </TableLayout>
             <!-- end speed -->
@@ -220,7 +233,7 @@
         </LinearLayout>
         <!-- end Transfer Status -->
 
-  <View
+        <View
             android:layout_width="fill_parent"
             android:layout_height="1dp"
             android:layout_gravity="center_horizontal"
@@ -245,7 +258,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal|center_vertical"
                 android:text="@string/ipaddress"
-                android:textSize="20sp" />
+                android:textSize="18sp" />
 
             <View
                 android:layout_width="1dp"
@@ -262,7 +275,6 @@
                 android:contentDescription="share"
                 android:src="@drawable/ic_action_share"
                 tools:ignore="HardcodedText" />
-
         </LinearLayout>
 
         <LinearLayout
@@ -276,14 +288,9 @@
                 android:layout_gravity="center_horizontal"
                 android:contentDescription="QR Code"
                 tools:ignore="HardcodedText" />
-
         </LinearLayout>
         <!-- end for space of ipaddress -->
         <!-- ==================================================================== -->
-        <!-- 2nd Part of the Page -->
-
-
-        <!-- end of Second Page -->
     </LinearLayout>
 
 </ScrollView>

@@ -3,6 +3,7 @@ package com.library.Httpdserver;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
+
 import com.common.methods.ExternalStorage;
 import com.master.webserver.UploadServerService;
 
@@ -986,7 +987,7 @@ public abstract class NanoHTTPD {
 				 * MainActivity also set patchenable variable to false
 				 */
 
-				boolean patchenable = false;
+				boolean patchenable = true;
 				if (patchenable) {
 					/*
 					 * fileuploadhtml is passed on to Response via MainActivity

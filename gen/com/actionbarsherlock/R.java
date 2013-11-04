@@ -4,7 +4,7 @@
  * aapt tool from the resource data it found.  It
  * should not be modified by hand.
  */
-package com.ipaulpro.afilechooser;
+package com.actionbarsherlock;
 
 public final class R {
 	public static final class attr {
@@ -143,8 +143,6 @@ public final class R {
 		public static final int abs__dropdownitem_text_padding_right = 0x7f080009;
 		public static final int abs__search_view_preferred_width = 0x7f08000c;
 		public static final int abs__search_view_text_min_width = 0x7f08000b;
-		public static final int list_item_padding = 0x7f080010;
-		public static final int list_padding = 0x7f08000f;
 	}
 	public static final class drawable {
 		public static final int abs__ab_bottom_solid_dark_holo = 0x7f020000;
@@ -259,9 +257,6 @@ public final class R {
 		public static final int abs__textfield_searchview_right_holo_dark = 0x7f02006d;
 		public static final int abs__textfield_searchview_right_holo_light = 0x7f02006e;
 		public static final int abs__toast_frame = 0x7f02006f;
-		public static final int ic_chooser = 0x7f020078;
-		public static final int ic_file = 0x7f020079;
-		public static final int ic_folder = 0x7f02007a;
 	}
 	public static final class id {
 		public static final int abs__action_bar = 0x7f050020;
@@ -305,9 +300,6 @@ public final class R {
 		public static final int abs__up = 0x7f05000b;
 		public static final int disableHome = 0x7f050009;
 		public static final int edit_query = 0x7f050026;
-		public static final int explorer_fragment = 0x7f050036;
-		public static final int file_icon = 0x7f050037;
-		public static final int file_name = 0x7f050038;
 		public static final int homeAsUp = 0x7f050006;
 		public static final int listMode = 0x7f050002;
 		public static final int normal = 0x7f050001;
@@ -343,8 +335,6 @@ public final class R {
 		public static final int abs__search_dropdown_item_icons_2line = 0x7f030013;
 		public static final int abs__search_view = 0x7f030014;
 		public static final int abs__simple_dropdown_hint = 0x7f030015;
-		public static final int chooser = 0x7f030017;
-		public static final int file = 0x7f030018;
 		public static final int sherlock_spinner_dropdown_item = 0x7f03001c;
 		public static final int sherlock_spinner_item = 0x7f03001d;
 	}
@@ -362,10 +352,6 @@ public final class R {
 		public static final int abs__searchview_description_voice = 0x7f0a000c;
 		public static final int abs__shareactionprovider_share_with = 0x7f0a0006;
 		public static final int abs__shareactionprovider_share_with_application = 0x7f0a0007;
-		public static final int choose_file = 0x7f0a000f;
-		public static final int empty_directory = 0x7f0a000d;
-		public static final int error_selecting_file = 0x7f0a0010;
-		public static final int storage_removed = 0x7f0a000e;
 	}
 	public static final class style {
 		public static final int Sherlock___TextAppearance_Small = 0x7f0b0046;
@@ -457,8 +443,6 @@ public final class R {
 		public static final int Widget_Sherlock_SearchAutoCompleteTextView = 0x7f0b0034;
 		public static final int Widget_Sherlock_Spinner_DropDown_ActionBar = 0x7f0b0024;
 		public static final int Widget_Sherlock_TextView_SpinnerItem = 0x7f0b0032;
-		public static final int fileChooserIcon = 0x7f0b005a;
-		public static final int fileChooserName = 0x7f0b0059;
 	}
 	public static final class styleable {
 		public static final int[] SherlockActionBar = { 0x7f010000, 0x7f010001, 0x7f010002, 0x7f010003, 0x7f010004, 0x7f010005, 0x7f010049, 0x7f01004a, 0x7f01004b, 0x7f01004c, 0x7f01004d, 0x7f01004e, 0x7f01004f, 0x7f010050, 0x7f010051, 0x7f010052, 0x7f010053, 0x7f010054, 0x7f010055 };
@@ -612,8 +596,5 @@ public final class R {
 		public static final int SherlockTheme_windowSplitActionBar = 62;
 		public static final int[] SherlockView = { 0x010100da };
 		public static final int SherlockView_android_focusable = 0;
-	}
-	public static final class xml {
-		public static final int mimetypes = 0x7f040000;
 	}
 }
