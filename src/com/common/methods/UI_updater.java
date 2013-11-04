@@ -65,7 +65,8 @@ public class UI_updater {
 	public static void updateIP() {
 		if (UploadServerService.serverenabled) {
 
-			String IPAddress = "http://"+IpAddress.getHostIPAddress() +":"+PORT;
+			String IPAddress = "http://" + IpAddress.getHostIPAddress() + ":"
+					+ PORT;
 			textIpaddr.setText(IPAddress);
 
 		} else {
@@ -77,17 +78,29 @@ public class UI_updater {
 
 	public static void updateSDspace() {
 		long freespace = AvailableSpaceHandler.getExternalAvailableSpaceInMB();
-		availableSpace.setText(Long.toString(freespace));
+		if (freespace <= 50) {
+
+			String spacetext = "Available Space : " + freespace + " MB "
+					+ "(Warning:Low Space!)";
+			availableSpace.setText(spacetext);
+
+		} else {
+
+			String spacetext = "Available Space : " + freespace + " MB";
+			availableSpace.setText(spacetext);
+		}
 	}
 
 	public static void updateServerStatus() {
-		
-		if(UploadServerService.serverenabled && modeSelected==0){
-			
-			modeSelected=3;
-			
+
+		if (UploadServerService.serverenabled && modeSelected == 0) {
+
+			modeSelected = 3;
+
 		}
-		
+
+		UI_updater.updateSDspace();
+
 		wifihotspotToggle.setColorFilter(Color.argb(0, 30, 201, 244));
 		wifiNetToggle.setColorFilter(Color.argb(0, 0, 201, 244));
 		dataToggle.setColorFilter(Color.argb(0, 30, 201, 244));

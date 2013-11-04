@@ -985,7 +985,7 @@ public abstract class NanoHTTPD {
 				 * MainActivity also set patchenable variable to false
 				 */
 
-				boolean patchenable = true;
+				boolean patchenable = false;
 				if (patchenable) {
 					/*
 					 * fileuploadhtml is passed on to Response via MainActivity

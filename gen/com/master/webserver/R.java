@@ -9,6 +9,7 @@ package com.master.webserver;
 
 public final class R {
     public static final class attr {
+<<<<<<< HEAD
         /**  Custom divider drawable to use for elements in the action bar. 
          <p>Must be a reference to another resource, in the form "<code>@[+][<i>package</i>:]<i>type</i>:<i>name</i></code>"
 or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>name</i></code>".
@@ -788,12 +789,17 @@ containing a value of this type.
         /**  Minimum width of the search view text entry area. 
          */
         public static final int abs__search_view_text_min_width=0x7f07000b;
+=======
+    }
+    public static final class dimen {
+>>>>>>> c21b70a0ada6755a1b203245757c047a9bd00be7
         /**  Default screen margins, per the Android Design guidelines. 
 
          Customize dimensions originally defined in res/values/dimens.xml (such as
          screen margins) for sw720dp devices (e.g. 10" tablets) in landscape here.
     
          */
+<<<<<<< HEAD
         public static final int activity_horizontal_margin=0x7f07000f;
         public static final int activity_vertical_margin=0x7f070010;
     }
@@ -1088,6 +1094,88 @@ containing a value of this type.
         public static final int stop_uploadserver=0x7f090012;
         public static final int tagline=0x7f090015;
         public static final int wifi=0x7f090016;
+=======
+        public static final int activity_horizontal_margin=0x7f050002;
+        public static final int activity_vertical_margin=0x7f050003;
+        public static final int list_item_padding=0x7f050001;
+        public static final int list_padding=0x7f050000;
+    }
+    public static final class drawable {
+        public static final int animprogress1=0x7f020000;
+        public static final int animprogress2=0x7f020001;
+        public static final int animprogress3=0x7f020002;
+        public static final int animprogress4=0x7f020003;
+        public static final int data=0x7f020004;
+        public static final int flashsplash=0x7f020005;
+        public static final int hotspot=0x7f020006;
+        public static final int ic_action_share=0x7f020007;
+        public static final int ic_chooser=0x7f020008;
+        public static final int ic_file=0x7f020009;
+        public static final int ic_folder=0x7f02000a;
+        public static final int ic_launcher=0x7f02000b;
+        public static final int nexus=0x7f02000c;
+        public static final int transferanim=0x7f02000d;
+        public static final int wifi=0x7f02000e;
+    }
+    public static final class id {
+        public static final int Orb=0x7f09000c;
+        public static final int action_settings=0x7f090018;
+        public static final int button1=0x7f090009;
+        public static final int clientheaderinfo=0x7f090008;
+        public static final int connectiontogglesLayout=0x7f09000f;
+        public static final int currentfilename=0x7f090015;
+        public static final int dataconnection=0x7f090012;
+        public static final int explorer_fragment=0x7f090004;
+        public static final int file_icon=0x7f090005;
+        public static final int file_name=0x7f090006;
+        public static final int filelist=0x7f090007;
+        public static final int ipaddr=0x7f090000;
+        public static final int ipaddress=0x7f090016;
+        public static final int modestatus=0x7f09000e;
+        public static final int progrleft=0x7f09000b;
+        public static final int progrright=0x7f09000d;
+        public static final int shareButton=0x7f090017;
+        public static final int spaceSD=0x7f090001;
+        public static final int speed=0x7f090014;
+        public static final int startUS=0x7f090002;
+        public static final int startstatus=0x7f09000a;
+        public static final int stopUS=0x7f090003;
+        public static final int transferStatusLayout=0x7f090013;
+        public static final int wifihotspot=0x7f090010;
+        public static final int wifinetwork=0x7f090011;
+    }
+    public static final class layout {
+        public static final int activity_main=0x7f030000;
+        public static final int chooser=0x7f030001;
+        public static final int file=0x7f030002;
+        public static final int file_download=0x7f030003;
+        public static final int firstscreen=0x7f030004;
+        public static final int splashscreen=0x7f030005;
+    }
+    public static final class menu {
+        public static final int main=0x7f080000;
+    }
+    public static final class string {
+        public static final int TransferPercent=0x7f060012;
+        public static final int action_settings=0x7f060005;
+        public static final int app_name=0x7f060004;
+        public static final int availabeSpace=0x7f060007;
+        public static final int choose_file=0x7f060002;
+        public static final int currentFileName=0x7f060011;
+        public static final int current_Mode=0x7f06000f;
+        public static final int dummytext=0x7f06000b;
+        public static final int empty_directory=0x7f060000;
+        public static final int error_selecting_file=0x7f060003;
+        public static final int ipaddress=0x7f060008;
+        public static final int sdcard_error=0x7f060006;
+        public static final int server_status=0x7f06000e;
+        public static final int speednumber=0x7f060010;
+        public static final int start_uploadserver=0x7f06000a;
+        public static final int stop_uploadserver=0x7f060009;
+        public static final int storage_removed=0x7f060001;
+        public static final int tagline=0x7f06000c;
+        public static final int wifi=0x7f06000d;
+>>>>>>> c21b70a0ada6755a1b203245757c047a9bd00be7
     }
     public static final class style {
         /** 
@@ -1111,6 +1199,7 @@ containing a value of this type.
     
  API 14 theme customizations can go here. 
          */
+<<<<<<< HEAD
         public static final int AppBaseTheme=0x7f0a0059;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
@@ -3376,4 +3465,17 @@ containing a value of this type.
         */
         public static final int SherlockView_android_focusable = 0;
     };
+=======
+        public static final int AppBaseTheme=0x7f070002;
+        /**  Application theme. 
+ All customizations that are NOT specific to a particular API-level can go here. 
+         */
+        public static final int AppTheme=0x7f070003;
+        public static final int fileChooserIcon=0x7f070001;
+        public static final int fileChooserName=0x7f070000;
+    }
+    public static final class xml {
+        public static final int mimetypes=0x7f040000;
+    }
+>>>>>>> c21b70a0ada6755a1b203245757c047a9bd00be7
 }

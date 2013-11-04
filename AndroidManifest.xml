@@ -7,6 +7,7 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="18" />
+<<<<<<< HEAD
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" >
     </uses-permission>
@@ -17,6 +18,15 @@
     <uses-permission android:name="android.permission.INTERNET" >
     </uses-permission>
 
+=======
+	    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+   		<uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+   		<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"></uses-permission>
+   		<uses-permission android:name="android.permission.READ_INTERNAL_STORAGE"></uses-permission>
+   		<uses-permission android:name="android.permission.READ_INTERNAL_STORAGE"></uses-permission>
+   		<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
+    	<uses-permission android:name="android.permission.INTERNET"></uses-permission>
+>>>>>>> c21b70a0ada6755a1b203245757c047a9bd00be7
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -34,6 +44,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+<<<<<<< HEAD
         <activity android:name="com.master.webserver.firstPage" />
         <activity android:name="com.master.webserver.About" />
         <activity android:name="com.master.webserver.Settings" />
@@ -42,6 +53,33 @@
         </service>
         <service android:name="com.master.webserver.UploadServerService" >
         </service>
+=======
+        <activity
+            android:name="com.master.webserver.MainActivity" />
+        <activity
+            android:name="com.master.webserver.firstPage" />
+       <activity
+            android:name="com.master.webserver.File_Download" />       
+        <activity
+   			android:name="com.ipaulpro.afilechooser.FileChooserActivity"
+    		android:icon="@drawable/ic_chooser"
+    		android:label="This is label" >
+    		<intent-filter>
+        		<action android:name="android.intent.action.GET_CONTENT" />
+		 		<action android:name="com.master.webserver.FILE" /> 
+        		<category android:name="android.intent.category.DEFAULT" />
+        		<category android:name="android.intent.category.OPENABLE" />
+        		<data android:mimeType="*/*" />
+    		</intent-filter>
+		</activity>
+        
+        <service 
+            android:name="com.master.webserver.UploadServerService$HTTPD"
+            ></service>
+        <service 
+            android:name="com.master.webserver.UploadServerService"
+            ></service>
+>>>>>>> c21b70a0ada6755a1b203245757c047a9bd00be7
     </application>
 
 </manifest>
