@@ -131,7 +131,6 @@ public class firstPage extends SherlockActivity {
 			public void onClick(View v) {
 				if (v.getId() == R.id.Orb) {
 
-<<<<<<< HEAD
 					// Start The service
 					if (UploadServerService.serverenabled != true) {
 
@@ -188,12 +187,6 @@ public class firstPage extends SherlockActivity {
 						UI_updater.modeSelected = 0;
 						UI_updater.updateServerStatus();
 					}
-
-=======
-					Intent mainIntent = new Intent(firstPage.this,
-							File_Download.class);
-					firstPage.this.startActivity(mainIntent);
->>>>>>> c21b70a0ada6755a1b203245757c047a9bd00be7
 				} else if (v.getId() == R.id.shareButton) {
 					/* Create an intent for sharing IP */
 					Intent sharingIntent = new Intent(
@@ -257,8 +250,12 @@ public class firstPage extends SherlockActivity {
 		switch (item.getItemId()) {
 
 		case R.id.about:
-			Intent aboutIntent = new Intent(firstPage.this, About.class);
-			firstPage.this.startActivity(aboutIntent);
+//			Intent aboutIntent = new Intent(firstPage.this, About.class);
+//			firstPage.this.startActivity(aboutIntent);
+			Intent mainIntent = new Intent(firstPage.this,
+					File_Download.class);
+			firstPage.this.startActivity(mainIntent);
+
 			break;
 		case R.id.settings:
 			Intent settingsIntent = new Intent(firstPage.this, Settings.class);

@@ -34,7 +34,7 @@ public class XmlParser{
     Document doc ;
     XMLDOMParser parser = new XMLDOMParser();
     AssetManager asset_manager;
-    Map <String,String> hm = new HashMap<String,String>();
+    static Map <String,String> hm = new HashMap<String,String>();
     ArrayList<String> retList = new ArrayList<String>();
     // XML node names
     static final String NODE_FILE = "file";
@@ -117,6 +117,11 @@ public class XmlParser{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		hm.put(fname, fpath);
+	}
+	static public Map<String,String> getFileMap()
+	{
+		return hm;
 	}
 	static public void checkXml(File fpath,String fname)
 	{
