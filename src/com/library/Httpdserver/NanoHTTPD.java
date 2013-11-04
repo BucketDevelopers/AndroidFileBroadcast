@@ -1052,7 +1052,6 @@ public abstract class NanoHTTPD {
 				//Patch 512=>4096
 				//Patch
 				UploadServerService.updateNotification("File Server is Running", "Receiving File ..",ServerContext);
-				UploadServerService.speedenable=true;
 				//End Patch
 				byte[] buf = new byte[4096];
 				while (rlen >= 0 && size > 0) {

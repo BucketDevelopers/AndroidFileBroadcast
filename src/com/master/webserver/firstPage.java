@@ -7,11 +7,10 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
 import com.common.methods.AvailableSpaceHandler;
 import com.common.methods.ExternalStorage;
-import com.common.methods.IpAddress;
+import com.common.methods.UI_updater;
 
 import android.content.Intent;
 import android.content.res.AssetManager;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -48,52 +47,6 @@ public class firstPage extends SherlockActivity {
 	private TextView availableSpace;
 	private LinearLayout transferstatus;
 	private LinearLayout connectionTogglesgroup;
-	private boolean speedenable;
-	private boolean serveronoff;
-
-	public void updateUI() {
-
-		if (speedenable) {
-
-			transferstatus.setVisibility(LinearLayout.VISIBLE);
-			connectionTogglesgroup.setVisibility(LinearLayout.GONE);
-
-		} else {
-			transferstatus.setVisibility(LinearLayout.GONE);
-			connectionTogglesgroup.setVisibility(LinearLayout.VISIBLE);
-
-		}
-
-		// To set the available sdcard field
-		if (AvailableSpaceHandler.getExternalAvailableSpaceInMB() > 50) {
-
-			availableSpace.setText("Availabe Space : "
-					+ AvailableSpaceHandler.getExternalAvailableSpaceInMB()
-					+ " MB ");
-
-		} else {
-
-			availableSpace.setText("Availabe Space : "
-					+ AvailableSpaceHandler.getExternalAvailableSpaceInMB()
-					+ " MB (Warning! Low Space !)");
-
-		}
-
-		if (serveronoff) {
-
-			// To get the IP Address of the device
-			String ipaddress = IpAddress.getHostIPAddress();
-			textIpaddr.setText("http://" + ipaddress + ":" + PORT);
-			// End of Setting the IP
-
-			startstatus.setText("Stop Flash");
-
-		} else {
-			startstatus.setText("Start Flash");
-			textIpaddr.setText("Flash Not Started");
-		}
-
-	}
 
 	/** Called when the activity is first created. */
 
@@ -102,7 +55,7 @@ public class firstPage extends SherlockActivity {
 		super.onCreate(icicle);
 		setContentView(R.layout.firstscreen);
 
-		// Data elements initialisation
+		// Data elements initialization
 		uploaddownloadservice = new Intent(firstPage.this,
 				UploadServerService.class);
 
@@ -154,26 +107,19 @@ public class firstPage extends SherlockActivity {
 			public void onClick(View v) {
 				// Setting the tint color to blue
 
-				wifihotspotToggle.setColorFilter(Color.argb(0, 30, 201, 244));
-				wifiNetToggle.setColorFilter(Color.argb(0, 0, 201, 244));
-				dataToggle.setColorFilter(Color.argb(0, 30, 201, 244));
-
 				if (v.getId() == wifihotspotToggle.getId()) {
 
-					wifihotspotToggle.setColorFilter(Color.argb(255, 250, 164,
-							12));
+					UI_updater.modeSelected = 1;
 
 				}
 				if (v.getId() == wifiNetToggle.getId()) {
-
-					wifiNetToggle.setColorFilter(Color.argb(255, 30, 131, 244));
-
+					UI_updater.modeSelected = 2;
 				}
 				if (v.getId() == dataToggle.getId()) {
-					dataToggle.setColorFilter(Color.argb(255, 30, 131, 244));
-
+					UI_updater.modeSelected = 3;
 				}
 
+				UI_updater.updateServerStatus();
 			}
 
 		};
@@ -186,7 +132,7 @@ public class firstPage extends SherlockActivity {
 				if (v.getId() == R.id.Orb) {
 
 					// Start The service
-					if (serveronoff != true) {
+					if (UploadServerService.serverenabled != true) {
 
 						// Bug Fix:
 						// Just So that App doesnt FORCE CLOSE even for some
@@ -232,10 +178,14 @@ public class firstPage extends SherlockActivity {
 						}
 
 						uploaddownloadservice.putExtra("Port", PORT);
+
 						startService(uploaddownloadservice);
 
 					} else {
 						stopService(uploaddownloadservice);
+						UploadServerService.serverenabled = false;
+						UI_updater.modeSelected = 0;
+						UI_updater.updateServerStatus();
 					}
 
 				} else if (v.getId() == R.id.shareButton) {
@@ -265,10 +215,22 @@ public class firstPage extends SherlockActivity {
 		shareButton.setOnClickListener(clickListener);
 		orb.setOnClickListener(clickListener);
 
-		// Starting the Animation(This has to be changed)
+		// Initializing the UI
 
-		progressanimleft.start();
-		progressanimright.start();
+		UI_updater.ui_initializer(PORT, wifihotspotToggle, dataToggle,
+				wifiNetToggle, startstatus, modestatus, orb, speed, filename,
+				progressimviewleft, progressimviewright, progressanimleft,
+				progressanimright, textIpaddr, availableSpace, transferstatus,
+				connectionTogglesgroup);
+
+		UI_updater.update();
+		//
+		//
+		//
+		// // Starting the Animation(This has to be changed)
+		//
+		// progressanimleft.start();
+		// progressanimright.start();
 
 	}
 
@@ -320,9 +282,6 @@ public class firstPage extends SherlockActivity {
 			this.finish();
 
 		}
-
-		// To update the UI after resume
-		updateUI();
 
 	}
 

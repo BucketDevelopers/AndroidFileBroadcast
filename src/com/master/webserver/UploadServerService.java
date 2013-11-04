@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.common.methods.ClearCache;
 import com.common.methods.ExternalStorage;
+import com.common.methods.UI_updater;
 import com.library.Httpdserver.NanoHTTPD;
 
 import java.io.File;
@@ -25,6 +26,7 @@ public class UploadServerService extends Service {
 	private MyHTTPD server;
 	public int PORT;
 	public String htmldata;
+	public static boolean serverenabled;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -55,20 +57,23 @@ public class UploadServerService extends Service {
 
 	@Override
 	public void onDestroy() {
-		Toast.makeText(this, "Service stopped", Toast.LENGTH_LONG).show();
+		Toast.makeText(this, "Service stopped", Toast.LENGTH_SHORT).show();
 		if (server != null) {
 			server.stop();
+			UploadServerService.serverenabled = false;
 			removeNotification();
 		}
 	}
 
 	@Override
 	public void onStart(Intent intent, int startid) {
+
+		UploadServerService.serverenabled = true;
 		PORT = intent.getExtras().getInt("Port");
 		htmldata = intent.getExtras().getString("htmlfile");
-		Toast.makeText(this, "Upload Service started ", Toast.LENGTH_LONG)
+		Toast.makeText(this, "Upload Service started ", Toast.LENGTH_SHORT)
 				.show();
-
+		UI_updater.updateServerStatus();
 		Log.d("FTDebug", "Upload Server Started!");
 
 		server = new MyHTTPD(getApplicationContext());
@@ -210,10 +215,7 @@ public class UploadServerService extends Service {
 
 				UploadServerService.updateNotification("File Saved", "File: "
 						+ fileName, getApplicationContext());
-				
-					
-				
-				
+
 			}
 
 			return new Response(

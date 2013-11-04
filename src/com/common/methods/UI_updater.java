@@ -1,88 +1,149 @@
 package com.common.methods;
 
-import com.master.webserver.firstPage;
+import com.master.webserver.R;
+import com.master.webserver.UploadServerService;
 
+import android.graphics.Color;
+import android.graphics.drawable.AnimationDrawable;
+import android.util.Log;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class UI_updater {
 
-	private static boolean serveronoff;
-	private static boolean speedviewenable;
-	private static LinearLayout connectionTogglesgroup;
-	private static LinearLayout transferstatus;
-	private static TextView availableSpace;
-	private static TextView textIpaddr;
-	private static TextView startstatus;
 	private static int PORT;
+	private static ImageButton wifihotspotToggle;
+	private static ImageButton dataToggle;
+	private static ImageButton wifiNetToggle;
+	private static TextView startstatus;
+	private static TextView modestatus;
+	private static ImageView orb;
+	private static TextView speed;
+	private static TextView filename;
+	private static ImageView progressimviewleft;
+	private static ImageView progressimviewright;
+	private static AnimationDrawable progressanimleft;
+	private static AnimationDrawable progressanimright;
+	private static TextView textIpaddr;
+	private static LinearLayout transferstatus;
+	private static LinearLayout connectionTogglesgroup;
+	private static TextView availableSpace;
+	public static boolean speedviewenable = false;
+	public static int modeSelected = 0;
 
-	
-	public static void inti_firstpage_UI(boolean serveronoff,
-			boolean speedviewenable, LinearLayout connectionTogglesgroup,
-			LinearLayout transferstatus, TextView textIpaddr,
-			TextView availableSpace, TextView startstatus, int PORT) {
-		
-		UI_updater.serveronoff = serveronoff;
-		UI_updater.speedviewenable = speedviewenable;
-		UI_updater.connectionTogglesgroup = connectionTogglesgroup;
-		UI_updater.transferstatus = transferstatus;
-		UI_updater.availableSpace = availableSpace;
-		UI_updater.textIpaddr = textIpaddr;
-		UI_updater.startstatus = startstatus;
+	public static void ui_initializer(int PORT, ImageButton wifihotspotToggle,
+			ImageButton dataToggle, ImageButton wifiNetToggle,
+			TextView startstatus, TextView modestatus, ImageView orb,
+			TextView speed, TextView filename, ImageView progressimviewleft,
+			ImageView progressimviewright, AnimationDrawable progressanimleft,
+			AnimationDrawable progressanimright, TextView textIpaddr,
+			TextView availableSpace, LinearLayout transferstatus,
+			LinearLayout connectionTogglesgroup) {
+
 		UI_updater.PORT = PORT;
+		UI_updater.wifihotspotToggle = wifihotspotToggle;
+		UI_updater.dataToggle = dataToggle;
+		UI_updater.wifiNetToggle = wifiNetToggle;
+		UI_updater.startstatus = startstatus;
+		UI_updater.modestatus = modestatus;
+		UI_updater.orb = orb;
+		UI_updater.speed = speed;
+		UI_updater.filename = filename;
+		UI_updater.progressimviewleft = progressimviewleft;
+		UI_updater.progressimviewright = progressimviewright;
+		UI_updater.progressanimleft = progressanimleft;
+		UI_updater.progressanimright = progressanimright;
+		UI_updater.textIpaddr = textIpaddr;
+		UI_updater.availableSpace = availableSpace;
+		UI_updater.transferstatus = transferstatus;
+		UI_updater.connectionTogglesgroup = connectionTogglesgroup;
 
 	}
 
-	public static void updatefirstpageUI() {
+	public static void updateIP() {
+		if (UploadServerService.serverenabled) {
 
-		if (speedviewenable) {
-
-			transferstatus.setVisibility(LinearLayout.VISIBLE);
-			connectionTogglesgroup.setVisibility(LinearLayout.GONE);
+			String IPAddress = "http://"+IpAddress.getHostIPAddress() +":"+PORT;
+			textIpaddr.setText(IPAddress);
 
 		} else {
-			transferstatus.setVisibility(LinearLayout.GONE);
-			connectionTogglesgroup.setVisibility(LinearLayout.VISIBLE);
+
+			textIpaddr.setText("Flash is not Running");
 
 		}
+	}
 
-		// To set the available sdcard field
-		if (AvailableSpaceHandler.getExternalAvailableSpaceInMB() > 50) {
+	public static void updateSDspace() {
+		long freespace = AvailableSpaceHandler.getExternalAvailableSpaceInMB();
+		availableSpace.setText(Long.toString(freespace));
+	}
 
-			availableSpace.setText("Availabe Space : "
-					+ AvailableSpaceHandler.getExternalAvailableSpaceInMB()
-					+ " MB ");
-
-		} else {
-
-			availableSpace.setText("Availabe Space : "
-					+ AvailableSpaceHandler.getExternalAvailableSpaceInMB()
-					+ " MB (Warning! Low Space !)");
-
+	public static void updateServerStatus() {
+		
+		if(UploadServerService.serverenabled && modeSelected==0){
+			
+			modeSelected=3;
+			
 		}
+		
+		wifihotspotToggle.setColorFilter(Color.argb(0, 30, 201, 244));
+		wifiNetToggle.setColorFilter(Color.argb(0, 0, 201, 244));
+		dataToggle.setColorFilter(Color.argb(0, 30, 201, 244));
+		modestatus.setText("Please Select the Mode: ");
+		startstatus.setText("Start Flash");
 
-		if (serveronoff) {
+		orb.setImageResource(R.drawable.ic_launcher);
+		startstatus.setText("Start Flash");
+		UI_updater.updateIP();
+		Log.d("msg", "Mode selected Value here: " + modeSelected);
+		Log.d("msg", "serverenabled Value here: "
+				+ UploadServerService.serverenabled);
 
-			// To get the IP Address of the device
-			String ipaddress = IpAddress.getHostIPAddress();
-			textIpaddr.setText("http://" + ipaddress + ":" + PORT);
-			// End of Setting the IP
+		switch (modeSelected) {
 
-			startstatus.setText("Stop Flash");
+		case 1:
+			if (UploadServerService.serverenabled) {
+				orb.setImageResource(R.drawable.hotspot);
+				startstatus.setText("Stop Flash");
+			}
+			modestatus.setText("Wifi Hotspot Mode");
+			wifihotspotToggle.setColorFilter(Color.argb(255, 30, 131, 244));
+			break;
+		case 2:
+			if (UploadServerService.serverenabled) {
 
-		} else {
-			startstatus.setText("Start Flash");
-			textIpaddr.setText("Flash Not Started");
+				orb.setImageResource(R.drawable.wifi);
+				startstatus.setText("Stop Flash");
+			}
+			modestatus.setText("Wifi Network Mode");
+
+			wifiNetToggle.setColorFilter(Color.argb(255, 30, 131, 244));
+
+			break;
+		case 3:
+			if (UploadServerService.serverenabled) {
+
+				orb.setImageResource(R.drawable.data);
+				startstatus.setText("Stop Flash");
+			}
+			modestatus.setText("Internet or Data Mode");
+
+			dataToggle.setColorFilter(Color.argb(255, 30, 131, 244));
+
+			break;
+
 		}
 
 	}
 
+	public static void update() {
 
-	public static void updateUI_firstPage(firstPage fp){
-		
-		
-		
+		UI_updater.updateServerStatus();
+		UI_updater.updateSDspace();
+		UI_updater.updateIP();
+
 	}
 
 }
-
