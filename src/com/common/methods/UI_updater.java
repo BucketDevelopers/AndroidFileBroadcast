@@ -34,7 +34,6 @@ public class UI_updater {
 	public static boolean speedviewenable = false;
 	public static int modeSelected = 0;
 	public static Context appContext;
-	private static Boolean okornot;
 
 	public static void ui_initializer(int PORT, ImageButton wifihotspotToggle,
 			ImageButton dataToggle, ImageButton wifiNetToggle,
@@ -143,7 +142,7 @@ public class UI_updater {
 			if (UploadServerService.serverenabled) {
 				// ----------------------------------------------
 				// Creating the alert to warn the user
-
+				
 				// ----------------------------------------------
 				orb.setImageResource(R.drawable.data);
 				startstatus.setText("Stop Flash");
