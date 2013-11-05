@@ -59,8 +59,17 @@ public class XmlParser{
 	 
 			}
 			else{
-					stream = new FileInputStream(xmlFile);
-					doc = parser.getDocument(stream);
+				stream = new FileInputStream(xmlFile);
+				doc = parser.getDocument(stream);
+				NodeList nodeList = doc.getElementsByTagName(NODE_FILE);
+
+			        for (int i = 0; i < nodeList.getLength(); i++) {
+			            Element e = (Element) nodeList.item(i);
+			            fname= parser.getValue(e, NODE_NAME).toString();
+			            fpath = parser.getValue(e, NODE_PATH).toString();
+			            hm.put(fname,fpath);
+			        }
+
 			    
 			}
 		} catch (IOException e) {
@@ -83,7 +92,7 @@ public class XmlParser{
         }
 		return retList;
 	}
-	public String getFilePath(String name)
+	static public String getFilePath(String name)
 	{
 		return hm.get(name);
 	}

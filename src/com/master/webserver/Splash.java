@@ -23,7 +23,7 @@ public class Splash extends Activity {
 	public void onCreate(Bundle icicle) {
 		super.onCreate(icicle);
 		setContentView(R.layout.splashscreen);
-		XmlParser.checkXml(getFilesDir(), "list.xml");
+		XmlParser.checkXml(getFilesDir(), "list.xml");	//Create xml file
 		/*
 		 * New Handler to start the Menu-Activity and close this Splash-Screen
 		 * after some seconds.

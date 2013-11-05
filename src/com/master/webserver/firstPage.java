@@ -130,8 +130,7 @@ public class firstPage extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				if (v.getId() == R.id.Orb) {
-					
-					
+
 					// Start The service
 					if (UploadServerService.serverenabled != true) {
 
@@ -216,7 +215,6 @@ public class firstPage extends SherlockActivity {
 		orb.setOnClickListener(clickListener);
 
 		// Initializing the UI
-
 		UI_updater.ui_initializer(PORT, wifihotspotToggle, dataToggle,
 				wifiNetToggle, startstatus, modestatus, orb, speed, filename,
 				progressimviewleft, progressimviewright, progressanimleft,
@@ -251,10 +249,9 @@ public class firstPage extends SherlockActivity {
 		switch (item.getItemId()) {
 
 		case R.id.about:
-//			Intent aboutIntent = new Intent(firstPage.this, About.class);
-//			firstPage.this.startActivity(aboutIntent);
-			Intent mainIntent = new Intent(firstPage.this,
-					File_Download.class);
+			// Intent aboutIntent = new Intent(firstPage.this, About.class);
+			// firstPage.this.startActivity(aboutIntent);
+			Intent mainIntent = new Intent(firstPage.this, File_Download.class);
 			firstPage.this.startActivity(mainIntent);
 
 			break;
