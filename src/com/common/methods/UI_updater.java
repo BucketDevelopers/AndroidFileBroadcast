@@ -1,5 +1,6 @@
 package com.common.methods;
 
+
 import com.master.webserver.R;
 import com.master.webserver.UploadServerService;
 
@@ -12,30 +13,33 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class UI_updater {
+public class UI_updater{
 
-	private static int PORT;
-	private static ImageButton wifihotspotToggle;
-	private static ImageButton dataToggle;
-	private static ImageButton wifiNetToggle;
-	private static TextView startstatus;
-	private static TextView modestatus;
-	private static ImageView orb;
-	private static TextView speed;
-	private static TextView filename;
-	private static ImageView progressimviewleft;
-	private static ImageView progressimviewright;
-	private static AnimationDrawable progressanimleft;
-	private static AnimationDrawable progressanimright;
-	private static TextView textIpaddr;
-	private static LinearLayout transferstatus;
-	private static LinearLayout connectionTogglesgroup;
-	private static TextView availableSpace;
-	public static boolean speedviewenable = false;
-	public static int modeSelected = 0;
-	public static Context appContext;
+	/**
+	 * 
+	 */
+	private int PORT;
+	private ImageButton wifihotspotToggle;
+	private ImageButton dataToggle;
+	private ImageButton wifiNetToggle;
+	private TextView startstatus;
+	private TextView modestatus;
+	private ImageView orb;
+	private TextView speed;
+	private TextView filename;
+	private ImageView progressimviewleft;
+	private ImageView progressimviewright;
+	private AnimationDrawable progressanimleft;
+	private AnimationDrawable progressanimright;
+	private TextView textIpaddr;
+	private LinearLayout transferstatus;
+	private LinearLayout connectionTogglesgroup;
+	private TextView availableSpace;
+	public boolean speedviewenable = false;
+	public int modeSelected = 0;
+	public Context appContext;
 
-	public static void ui_initializer(int PORT, ImageButton wifihotspotToggle,
+	public void ui_initializer(int PORT, ImageButton wifihotspotToggle,
 			ImageButton dataToggle, ImageButton wifiNetToggle,
 			TextView startstatus, TextView modestatus, ImageView orb,
 			TextView speed, TextView filename, ImageView progressimviewleft,
@@ -44,28 +48,28 @@ public class UI_updater {
 			TextView availableSpace, LinearLayout transferstatus,
 			LinearLayout connectionTogglesgroup, Context appContext) {
 
-		UI_updater.PORT = PORT;
-		UI_updater.wifihotspotToggle = wifihotspotToggle;
-		UI_updater.dataToggle = dataToggle;
-		UI_updater.wifiNetToggle = wifiNetToggle;
-		UI_updater.startstatus = startstatus;
-		UI_updater.modestatus = modestatus;
-		UI_updater.orb = orb;
-		UI_updater.speed = speed;
-		UI_updater.filename = filename;
-		UI_updater.progressimviewleft = progressimviewleft;
-		UI_updater.progressimviewright = progressimviewright;
-		UI_updater.progressanimleft = progressanimleft;
-		UI_updater.progressanimright = progressanimright;
-		UI_updater.textIpaddr = textIpaddr;
-		UI_updater.availableSpace = availableSpace;
-		UI_updater.transferstatus = transferstatus;
-		UI_updater.connectionTogglesgroup = connectionTogglesgroup;
-		UI_updater.appContext = appContext;
+		this.PORT = PORT;
+		this.wifihotspotToggle = wifihotspotToggle;
+		this.dataToggle = dataToggle;
+		this.wifiNetToggle = wifiNetToggle;
+		this.startstatus = startstatus;
+		this.modestatus = modestatus;
+		this.orb = orb;
+		this.speed = speed;
+		this.filename = filename;
+		this.progressimviewleft = progressimviewleft;
+		this.progressimviewright = progressimviewright;
+		this.progressanimleft = progressanimleft;
+		this.progressanimright = progressanimright;
+		this.textIpaddr = textIpaddr;
+		this.availableSpace = availableSpace;
+		this.transferstatus = transferstatus;
+		this.connectionTogglesgroup = connectionTogglesgroup;
+		this.appContext = appContext;
 
 	}
 
-	public static void updateIP() {
+	public void updateIP() {
 		if (UploadServerService.serverenabled) {
 
 			String IPAddress = "http://" + IpAddress.getHostIPAddress() + ":"
@@ -79,7 +83,7 @@ public class UI_updater {
 		}
 	}
 
-	public static void updateSDspace() {
+	public void updateSDspace() {
 		long freespace = AvailableSpaceHandler.getExternalAvailableSpaceInMB();
 		if (freespace <= 50) {
 
@@ -94,7 +98,7 @@ public class UI_updater {
 		}
 	}
 
-	public static void updateServerStatus() {
+	public void updateServerStatus() {
 
 		if (UploadServerService.serverenabled && modeSelected == 0) {
 
@@ -102,7 +106,7 @@ public class UI_updater {
 
 		}
 
-		UI_updater.updateSDspace();
+		this.updateSDspace();
 
 		wifihotspotToggle.setColorFilter(Color.argb(0, 30, 201, 244));
 		wifiNetToggle.setColorFilter(Color.argb(0, 0, 201, 244));
@@ -112,7 +116,7 @@ public class UI_updater {
 
 		orb.setImageResource(R.drawable.ic_launcher);
 		startstatus.setText("Start Flash");
-		UI_updater.updateIP();
+		this.updateIP();
 		Log.d("msg", "Mode selected Value here: " + modeSelected);
 		Log.d("msg", "serverenabled Value here: "
 				+ UploadServerService.serverenabled);
@@ -157,11 +161,11 @@ public class UI_updater {
 
 	}
 
-	public static void update() {
+	public void update() {
 
-		UI_updater.updateServerStatus();
-		UI_updater.updateSDspace();
-		UI_updater.updateIP();
+		this.updateServerStatus();
+		this.updateSDspace();
+		this.updateIP();
 
 	}
 

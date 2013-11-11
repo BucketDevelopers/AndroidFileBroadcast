@@ -1,16 +1,12 @@
 package com.master.webserver;
 
-import java.io.IOException;
-import java.io.InputStream;
-
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.MenuItem;
-import com.common.methods.AvailableSpaceHandler;
 import com.common.methods.ExternalStorage;
+import com.common.methods.IntentHelper;
 import com.common.methods.UI_updater;
 
 import android.content.Intent;
-import android.content.res.AssetManager;
 import android.graphics.Typeface;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -24,7 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class firstPage extends SherlockActivity {
-
+	public UI_updater UI;
 	private int PORT = 8080;
 	private ImageButton wifihotspotToggle;
 	private ImageButton dataToggle;
@@ -109,17 +105,17 @@ public class firstPage extends SherlockActivity {
 
 				if (v.getId() == wifihotspotToggle.getId()) {
 
-					UI_updater.modeSelected = 1;
+					UI.modeSelected = 1;
 
 				}
 				if (v.getId() == wifiNetToggle.getId()) {
-					UI_updater.modeSelected = 2;
+					UI.modeSelected = 2;
 				}
 				if (v.getId() == dataToggle.getId()) {
-					UI_updater.modeSelected = 3;
+					UI.modeSelected = 3;
 				}
 
-				UI_updater.updateServerStatus();
+				UI.updateServerStatus();
 			}
 
 		};
@@ -140,52 +136,16 @@ public class firstPage extends SherlockActivity {
 						stopService(uploaddownloadservice);
 
 						// Now the Real Deal
-						/*
-						 * To Read From The Upload html File from assets folder
-						 * and preparing the intent
-						 */
-
-						AssetManager assetManager = getAssets();
-						InputStream input;
-						try {
-							input = assetManager.open("uploadfile_part1.html");
-
-							int size = input.available();
-							byte[] buffer = new byte[size];
-							input.read(buffer);
-							input.close();
-
-							// byte buffer into a string
-							String text = new String(buffer);
-
-							// Adding the SD card size into the html response
-							text += (AvailableSpaceHandler
-									.getExternalAvailableSpaceInBytes() + ";");
-							//
-							input = assetManager.open("uploadfile_part2.html");
-
-							size = input.available();
-							buffer = new byte[size];
-							input.read(buffer);
-							input.close();
-
-							text += new String(buffer);
-
-							// passing the upload html String to NanoHTTPD
-							uploaddownloadservice.putExtra("htmlfile", text);
-						} catch (IOException e) {
-							Log.d("FTDebug", e.getMessage());
-						}
 
 						uploaddownloadservice.putExtra("Port", PORT);
-
+						IntentHelper.addObjectForKey(UI, "UIObj");
 						startService(uploaddownloadservice);
 
 					} else {
 						stopService(uploaddownloadservice);
 						UploadServerService.serverenabled = false;
-						UI_updater.modeSelected = 0;
-						UI_updater.updateServerStatus();
+						UI.modeSelected = 0;
+						UI.updateServerStatus();
 					}
 				} else if (v.getId() == R.id.shareButton) {
 					/* Create an intent for sharing IP */
@@ -215,13 +175,14 @@ public class firstPage extends SherlockActivity {
 		orb.setOnClickListener(clickListener);
 
 		// Initializing the UI
-		UI_updater.ui_initializer(PORT, wifihotspotToggle, dataToggle,
+		UI=new UI_updater();
+		UI.ui_initializer(PORT, wifihotspotToggle, dataToggle,
 				wifiNetToggle, startstatus, modestatus, orb, speed, filename,
 				progressimviewleft, progressimviewright, progressanimleft,
 				progressanimright, textIpaddr, availableSpace, transferstatus,
 				connectionTogglesgroup, firstPage.this);
 
-		UI_updater.update();
+		UI.update();
 		//
 		//
 		//

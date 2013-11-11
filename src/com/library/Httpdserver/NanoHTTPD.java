@@ -100,7 +100,6 @@ public abstract class NanoHTTPD {
 	private TempFileManagerFactory tempFileManagerFactory;
 	
 	//Patch
-	private String fileuploadhtml;
 	private static Context ServerContext;
 	//Patch
 	/**
@@ -113,19 +112,11 @@ public abstract class NanoHTTPD {
 	/*
 	 * Patch
 	 */
-	public NanoHTTPD(int port, String htmldata, Context parentContext) {
+	public NanoHTTPD(int port,Context parentContext) {
 
 		this(null, port);
-		fileuploadhtml = htmldata;
 		ServerContext=parentContext;
 	
-	}
-
-	public NanoHTTPD(int port, String htmldata) {
-
-		this(null, port);
-		fileuploadhtml = htmldata;
-
 	}
 
 	/*
@@ -988,17 +979,22 @@ public abstract class NanoHTTPD {
 				 */
 
 				boolean patchenable = false;
+				if(uri.contentEquals("/upload")){
+					
+					patchenable=true;
+				}
 				if (patchenable) {
 					/*
 					 * fileuploadhtml is passed on to Response via MainActivity
 					 * through the intent
 					 */
 					Response Tempr = new Response(Response.Status.OK,
-							MIME_HTML, fileuploadhtml);
+							MIME_HTML, "<center>Done</center>");
 					cookies.unloadQueue(Tempr);
 					Tempr.setRequestMethod(method);
 					Tempr.send(outputStream);
 				}
+				patchenable=false;
 				// //end patch
 
 				// Ok, now do the serve()
@@ -1055,9 +1051,9 @@ public abstract class NanoHTTPD {
 				//Patch
 				UploadServerService.updateNotification("File Server is Running", "Receiving File ..",ServerContext);
 				//End Patch
-				byte[] buf = new byte[4096];
+				byte[] buf = new byte[512];
 				while (rlen >= 0 && size > 0) {
-					rlen = inputStream.read(buf, 0, 4096);
+					rlen = inputStream.read(buf, 0, 512);
 					size -= rlen;
 					if (rlen > 0) {
 						randomAccessFile.write(buf, 0, rlen);
