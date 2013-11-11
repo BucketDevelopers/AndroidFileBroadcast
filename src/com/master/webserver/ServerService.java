@@ -13,7 +13,6 @@ import android.widget.Toast;
 
 import com.common.methods.AvailableSpaceHandler;
 import com.common.methods.ClearCache;
-import com.common.methods.ExternalStorage;
 import com.common.methods.IntentHelper;
 import com.common.methods.UI_updater;
 import com.common.methods.XmlParser;
@@ -211,43 +210,10 @@ public class ServerService extends Service {
 
 				return new Response(sb.toString());
 			} else if (uri.contentEquals("/upload")) {
-				/*
-				 * To rename the Temp File Created into Actual File Name
-				 */
-//
-				if (files.get("myfile") != null
-						&& parms.get("filenamebackup") != null) {
-					/*
-					 * myfile is the Temp Cache file name fileName is the actual
-					 * File name we get from the extra variable in the form data
-					 * ..ie filenamebackup
-					 */
-					int index = parms.get("filenamebackup").lastIndexOf("\\");
-					String fileName = parms.get("filenamebackup").substring(
-							index + 1);
-
-					File from = new File(
-							ExternalStorage.getsdcardfolderwithoutcheck(),
-							new File(files.get("myfile")).getName());
-					File to = new File(
-							ExternalStorage.getsdcardfolderwithoutcheck(),
-							fileName);
-
-					from.renameTo(to);
-//
-					
-					
-					ServerService.updateNotification(
-							"File Server is Processing",
-							"Cleaning Up Temp Files", getApplicationContext());
 
 					// To Clean Cache File Created in the Process
 					ClearCache.clean();
 
-					ServerService.updateNotification("File Saved", "File: "
-							+ fileName, getApplicationContext());
-
-				}
 
 				return new Response(
 						"<center><h1>Oops! This was not supposed to happen ! My Bad ! :P </h1></center><br><center><h1>Please Reload Again!</h1></center></h1></center><br><center><h5>U Forgot one of patchenable Flag!</h5></center>");

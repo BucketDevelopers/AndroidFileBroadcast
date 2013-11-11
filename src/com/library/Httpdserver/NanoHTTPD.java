@@ -1125,7 +1125,36 @@ public abstract class NanoHTTPD {
 					files.put("content", saveTmpFile(fbuf, 0, fbuf.limit()));
 				}
 			} finally {
+				//Patch to rename the file created by NanoHttpd
 				
+				if (files.get("myfile") != null
+						&& parms.get("filenamebackup") != null) {
+					/*
+					 * myfile is the Temp Cache file name fileName is the actual
+					 * File name we get from the extra variable in the form data
+					 * ..ie filenamebackup
+					 */
+					int index = parms.get("filenamebackup").lastIndexOf("\\");
+					String fileName = parms.get("filenamebackup").substring(
+							index + 1);
+
+					File from = new File(
+							ExternalStorage.getsdcardfolderwithoutcheck(),
+							new File(files.get("myfile")).getName());
+					File to = new File(
+							ExternalStorage.getsdcardfolderwithoutcheck(),
+							fileName);
+
+					from.renameTo(to);
+
+
+					ServerService.updateNotification("File Saved", "File: "
+							+ fileName, ServerContext);
+
+				
+				}
+				
+				// End Patch
 				safeClose(randomAccessFile);
 				safeClose(in);
 			}
