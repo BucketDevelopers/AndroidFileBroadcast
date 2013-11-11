@@ -52,9 +52,9 @@
         <activity android:name="com.master.webserver.About" />
         <activity android:name="com.master.webserver.Settings" />
 
-        <service android:name="com.master.webserver.UploadServerService$HTTPD" >
+        <service android:name="com.master.webserver.ServerService$HTTPD" >
         </service>
-        <service android:name="com.master.webserver.UploadServerService" >
+        <service android:name="com.master.webserver.ServerService" >
         </service>
 
         <activity android:name="com.master.webserver.MainActivity" />

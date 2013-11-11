@@ -1047,7 +1047,6 @@ public abstract class NanoHTTPD {
 				}
 
 				// Now read all the body and write it to First Temp File
-				//Patch 512=>4096
 				//Patch
 				ServerService.updateNotification("File Server is Running", "Receiving File ..",ServerContext);
 				//End Patch
@@ -1126,6 +1125,7 @@ public abstract class NanoHTTPD {
 					files.put("content", saveTmpFile(fbuf, 0, fbuf.limit()));
 				}
 			} finally {
+				
 				safeClose(randomAccessFile);
 				safeClose(in);
 			}

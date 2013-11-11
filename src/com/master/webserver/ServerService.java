@@ -34,6 +34,7 @@ public class ServerService extends Service {
 	public String htmldata;
 	public static boolean serverenabled;
 	private UI_updater UI;
+
 	@Override
 	public IBinder onBind(Intent intent) {
 
@@ -78,9 +79,9 @@ public class ServerService extends Service {
 		PORT = intent.getExtras().getInt("Port");
 		Toast.makeText(this, "Upload Service started ", Toast.LENGTH_SHORT)
 				.show();
-		
+
 		UI = (UI_updater) IntentHelper.getObjectForKey("UIObj");
-		
+
 		UI.updateServerStatus();
 
 		Log.d("FTDebug", "Upload Server Started!");
@@ -213,7 +214,7 @@ public class ServerService extends Service {
 				/*
 				 * To rename the Temp File Created into Actual File Name
 				 */
-				Log.d("msg", "I am here2");
+//
 				if (files.get("myfile") != null
 						&& parms.get("filenamebackup") != null) {
 					/*
@@ -233,7 +234,9 @@ public class ServerService extends Service {
 							fileName);
 
 					from.renameTo(to);
-
+//
+					
+					
 					ServerService.updateNotification(
 							"File Server is Processing",
 							"Cleaning Up Temp Files", getApplicationContext());
@@ -241,8 +244,8 @@ public class ServerService extends Service {
 					// To Clean Cache File Created in the Process
 					ClearCache.clean();
 
-					ServerService.updateNotification("File Saved",
-							"File: " + fileName, getApplicationContext());
+					ServerService.updateNotification("File Saved", "File: "
+							+ fileName, getApplicationContext());
 
 				}
 
