@@ -2,8 +2,7 @@ package com.common.methods;
 
 
 import com.master.webserver.R;
-import com.master.webserver.UploadServerService;
-
+import com.master.webserver.ServerService;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.AnimationDrawable;
@@ -15,10 +14,7 @@ import android.widget.TextView;
 
 public class UI_updater{
 
-	/**
-	 * 
-	 */
-	private int PORT;
+ 	private int PORT;
 	private ImageButton wifihotspotToggle;
 	private ImageButton dataToggle;
 	private ImageButton wifiNetToggle;
@@ -70,7 +66,7 @@ public class UI_updater{
 	}
 
 	public void updateIP() {
-		if (UploadServerService.serverenabled) {
+		if (ServerService.serverenabled) {
 
 			String IPAddress = "http://" + IpAddress.getHostIPAddress() + ":"
 					+ PORT;
@@ -100,7 +96,7 @@ public class UI_updater{
 
 	public void updateServerStatus() {
 
-		if (UploadServerService.serverenabled && modeSelected == 0) {
+		if (ServerService.serverenabled && modeSelected == 0) {
 
 			modeSelected = 3;
 
@@ -119,12 +115,12 @@ public class UI_updater{
 		this.updateIP();
 		Log.d("msg", "Mode selected Value here: " + modeSelected);
 		Log.d("msg", "serverenabled Value here: "
-				+ UploadServerService.serverenabled);
+				+ ServerService.serverenabled);
 
 		switch (modeSelected) {
 
 		case 1:
-			if (UploadServerService.serverenabled) {
+			if (ServerService.serverenabled) {
 				orb.setImageResource(R.drawable.hotspot);
 				startstatus.setText("Stop Flash");
 			}
@@ -132,7 +128,7 @@ public class UI_updater{
 			wifihotspotToggle.setColorFilter(Color.argb(255, 30, 131, 244));
 			break;
 		case 2:
-			if (UploadServerService.serverenabled) {
+			if (ServerService.serverenabled) {
 
 				orb.setImageResource(R.drawable.wifi);
 				startstatus.setText("Stop Flash");
@@ -143,7 +139,7 @@ public class UI_updater{
 
 			break;
 		case 3:
-			if (UploadServerService.serverenabled) {
+			if (ServerService.serverenabled) {
 				// ----------------------------------------------
 				// Creating the alert to warn the user
 				

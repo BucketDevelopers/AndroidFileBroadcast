@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class UploadServerService extends Service {
+public class ServerService extends Service {
 	public static NotificationCompat.Builder mBuilder;
 	public static NotificationManager manager;
 	private MyHTTPD server;
@@ -66,7 +66,7 @@ public class UploadServerService extends Service {
 		Toast.makeText(this, "Service stopped", Toast.LENGTH_SHORT).show();
 		if (server != null) {
 			server.stop();
-			UploadServerService.serverenabled = false;
+			ServerService.serverenabled = false;
 			removeNotification();
 		}
 	}
@@ -74,7 +74,7 @@ public class UploadServerService extends Service {
 	@Override
 	public void onStart(Intent intent, int startid) {
 
-		UploadServerService.serverenabled = true;
+		ServerService.serverenabled = true;
 		PORT = intent.getExtras().getInt("Port");
 		Toast.makeText(this, "Upload Service started ", Toast.LENGTH_SHORT)
 				.show();
@@ -234,14 +234,14 @@ public class UploadServerService extends Service {
 
 					from.renameTo(to);
 
-					UploadServerService.updateNotification(
+					ServerService.updateNotification(
 							"File Server is Processing",
 							"Cleaning Up Temp Files", getApplicationContext());
 
 					// To Clean Cache File Created in the Process
 					ClearCache.clean();
 
-					UploadServerService.updateNotification("File Saved",
+					ServerService.updateNotification("File Saved",
 							"File: " + fileName, getApplicationContext());
 
 				}

@@ -53,7 +53,7 @@ public class firstPage extends SherlockActivity {
 
 		// Data elements initialization
 		uploaddownloadservice = new Intent(firstPage.this,
-				UploadServerService.class);
+				ServerService.class);
 
 		// Font
 		robotoregular = Typeface.createFromAsset(getAssets(),
@@ -128,7 +128,7 @@ public class firstPage extends SherlockActivity {
 				if (v.getId() == R.id.Orb) {
 
 					// Start The service
-					if (UploadServerService.serverenabled != true) {
+					if (ServerService.serverenabled != true) {
 
 						// Bug Fix:
 						// Just So that App doesnt FORCE CLOSE even for some
@@ -143,7 +143,7 @@ public class firstPage extends SherlockActivity {
 
 					} else {
 						stopService(uploaddownloadservice);
-						UploadServerService.serverenabled = false;
+						ServerService.serverenabled = false;
 						UI.modeSelected = 0;
 						UI.updateServerStatus();
 					}

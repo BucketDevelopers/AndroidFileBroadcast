@@ -5,7 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.common.methods.ExternalStorage;
-import com.master.webserver.UploadServerService;
+import com.master.webserver.ServerService;
 
 import java.io.*;
 import java.net.*;
@@ -1049,7 +1049,7 @@ public abstract class NanoHTTPD {
 				// Now read all the body and write it to First Temp File
 				//Patch 512=>4096
 				//Patch
-				UploadServerService.updateNotification("File Server is Running", "Receiving File ..",ServerContext);
+				ServerService.updateNotification("File Server is Running", "Receiving File ..",ServerContext);
 				//End Patch
 				byte[] buf = new byte[512];
 				while (rlen >= 0 && size > 0) {
@@ -1061,7 +1061,7 @@ public abstract class NanoHTTPD {
 					}
 				}
 				//Patch
-				UploadServerService.updateNotification("File Server is Running", "Received RAW file",ServerContext);
+				ServerService.updateNotification("File Server is Running", "Received RAW file",ServerContext);
 				//End Patch
 				
 				// Get the raw body as a byte []
@@ -1311,7 +1311,7 @@ public abstract class NanoHTTPD {
 		 */
 		private int[] getBoundaryPositions(ByteBuffer b, byte[] boundary) {
 			//Patch
-			UploadServerService.updateNotification("Boundary", " ", ServerContext);
+			ServerService.updateNotification("Boundary", " ", ServerContext);
 			//End Patch
 		
 			int matchcount = 0;
@@ -1338,7 +1338,7 @@ public abstract class NanoHTTPD {
 				ret[i] = matchbytes.get(i);
 			}
 			//Patch
-			UploadServerService.updateNotification("Boundary stop"," ", ServerContext);
+			ServerService.updateNotification("Boundary stop"," ", ServerContext);
 			//End Patch
 		
 			return ret;
@@ -1359,11 +1359,11 @@ public abstract class NanoHTTPD {
 					FileChannel dest = fileOutputStream.getChannel();
 					src.position(offset).limit(offset + len);
 					//Patch
-					UploadServerService.updateNotification("File Server is Processing", "Writing Decoded File", ServerContext);
+					ServerService.updateNotification("File Server is Processing", "Writing Decoded File", ServerContext);
 					//End Patch
 					dest.write(src.slice());
 					//Patch
-					UploadServerService.updateNotification("File Server is Processing", "Decoded File Written", ServerContext);
+					ServerService.updateNotification("File Server is Processing", "Decoded File Written", ServerContext);
 					//End Patch
 				
 					
