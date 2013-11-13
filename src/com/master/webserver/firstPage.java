@@ -16,6 +16,7 @@ import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,8 @@ public class firstPage extends SherlockActivity {
 	private TextView availableSpace;
 	private LinearLayout transferstatus;
 	private LinearLayout connectionTogglesgroup;
+	private TextView transferProgressPercent;
+	private ProgressBar fileProgressBar;
 
 	/** Called when the activity is first created. */
 
@@ -52,8 +55,7 @@ public class firstPage extends SherlockActivity {
 		setContentView(R.layout.firstscreen);
 
 		// Data elements initialization
-		uploaddownloadservice = new Intent(firstPage.this,
-				ServerService.class);
+		uploaddownloadservice = new Intent(firstPage.this, ServerService.class);
 
 		// Font
 		robotoregular = Typeface.createFromAsset(getAssets(),
@@ -74,12 +76,15 @@ public class firstPage extends SherlockActivity {
 
 		shareButton = (ImageButton) findViewById(R.id.shareButton);
 
+		fileProgressBar=(ProgressBar) findViewById(R.id.progressBar);
+		
 		availableSpace = (TextView) findViewById(R.id.spaceSD);
 		startstatus = (TextView) findViewById(R.id.startstatus);
 		modestatus = (TextView) findViewById(R.id.modestatus);
 		textIpaddr = (TextView) findViewById(R.id.ipaddress);
 		speed = (TextView) findViewById(R.id.speed);
 		filename = (TextView) findViewById(R.id.currentfilename);
+		transferProgressPercent = (TextView) findViewById(R.id.transferprogresspercent);
 
 		wifihotspotToggle = (ImageButton) findViewById(R.id.wifihotspot);
 		wifiNetToggle = (ImageButton) findViewById(R.id.wifinetwork);
@@ -175,12 +180,12 @@ public class firstPage extends SherlockActivity {
 		orb.setOnClickListener(clickListener);
 
 		// Initializing the UI
-		UI=new UI_updater();
-		UI.ui_initializer(PORT, wifihotspotToggle, dataToggle,
-				wifiNetToggle, startstatus, modestatus, orb, speed, filename,
+		UI = new UI_updater();
+		UI.ui_initializer(PORT, wifihotspotToggle, dataToggle, wifiNetToggle,
+				startstatus, modestatus, orb, speed, filename,
 				progressimviewleft, progressimviewright, progressanimleft,
 				progressanimright, textIpaddr, availableSpace, transferstatus,
-				connectionTogglesgroup, firstPage.this);
+				connectionTogglesgroup, transferProgressPercent, fileProgressBar,firstPage.this);
 
 		UI.update();
 		//

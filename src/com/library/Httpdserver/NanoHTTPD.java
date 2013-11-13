@@ -5,6 +5,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.common.methods.ExternalStorage;
+import com.common.methods.UI_updater;
 import com.master.webserver.ServerService;
 
 import java.io.*;
@@ -72,6 +73,7 @@ public abstract class NanoHTTPD {
 	 * This is required as the Keep-Alive HTTP connections would otherwise block
 	 * the socket reading thread forever (or as long the browser is open).
 	 */
+
 	public static final int SOCKET_READ_TIMEOUT = 5000;
 	/**
 	 * Common mime type for dynamic content: plain text
@@ -90,6 +92,8 @@ public abstract class NanoHTTPD {
 	private final int myPort;
 	private ServerSocket myServerSocket;
 	private Thread myThread;
+	private UI_updater UI;
+	Map<String, String> tempfiles;
 	/**
 	 * Pluggable strategy for asynchronously executing requests.
 	 */
@@ -98,10 +102,11 @@ public abstract class NanoHTTPD {
 	 * Pluggable strategy for creating and cleaning up temporary files.
 	 */
 	private TempFileManagerFactory tempFileManagerFactory;
-	
-	//Patch
+
+	// Patch
 	private static Context ServerContext;
-	//Patch
+
+	// Patch
 	/**
 	 * Constructs an HTTP server on given port.
 	 */
@@ -112,19 +117,19 @@ public abstract class NanoHTTPD {
 	/*
 	 * Patch
 	 */
-	public NanoHTTPD(int port,Context parentContext) {
+	public NanoHTTPD(int port, Context parentContext, UI_updater uI) {
 
 		this(null, port);
-		ServerContext=parentContext;
-	
+		ServerContext = parentContext;
+		this.UI = uI;
+
 	}
 
 	/*
 	 * 
 	 * End Patch
-	 * 
 	 */
-	
+
 	/**
 	 * Constructs an HTTP server on given hostname and port.
 	 */
@@ -133,7 +138,7 @@ public abstract class NanoHTTPD {
 		this.myPort = port;
 		setTempFileManagerFactory(new DefaultTempFileManagerFactory());
 		setAsyncRunner(new DefaultAsyncRunner());
-	
+
 	}
 
 	private static final void safeClose(ServerSocket serverSocket) {
@@ -181,9 +186,7 @@ public abstract class NanoHTTPD {
 					try {
 						final Socket finalAccept = myServerSocket.accept();
 						finalAccept.setSoTimeout(SOCKET_READ_TIMEOUT);
-						
-						
-						
+
 						final InputStream inputStream = finalAccept
 								.getInputStream();
 						if (inputStream == null) {
@@ -194,20 +197,18 @@ public abstract class NanoHTTPD {
 								public void run() {
 									OutputStream outputStream = null;
 									try {
-										
+
 										outputStream = finalAccept
 												.getOutputStream();
 										TempFileManager tempFileManager = tempFileManagerFactory
 												.create();
 
-									
-									
 										HTTPSession session = new HTTPSession(
 												tempFileManager, inputStream,
 												outputStream);
 										while (!finalAccept.isClosed()) {
 											session.execute();
-											
+
 										}
 									} catch (Exception e) {
 										// When the socket is closed by the
@@ -257,7 +258,7 @@ public abstract class NanoHTTPD {
 	}
 
 	public final boolean isAlive() {
-		
+
 		return wasStarted() && !myServerSocket.isClosed() && myThread.isAlive();
 	}
 
@@ -300,7 +301,7 @@ public abstract class NanoHTTPD {
 	public Response serve(IHTTPSession session) {
 		Map<String, String> files = new HashMap<String, String>();
 		Method method = session.getMethod();
-		
+
 		if (Method.PUT.equals(method) || Method.POST.equals(method)) {
 
 			try {
@@ -532,7 +533,6 @@ public abstract class NanoHTTPD {
 	public static class DefaultTempFileManager implements TempFileManager {
 		private final String tmpdir;
 		private final List<TempFile> tempFiles;
-		
 
 		public DefaultTempFileManager() {
 			// ---------------------- Patch ---------------------//
@@ -584,7 +584,7 @@ public abstract class NanoHTTPD {
 
 		public DefaultTempFile(String tempdir) throws IOException {
 			file = File.createTempFile("Temp-", ".cache", new File(tempdir));
-			
+
 			fstream = new FileOutputStream(file);
 		}
 
@@ -904,6 +904,7 @@ public abstract class NanoHTTPD {
 		private Map<String, String> parms;
 		private Map<String, String> headers;
 		private CookieHandler cookies;
+
 		public HTTPSession(TempFileManager tempFileManager,
 				InputStream inputStream, OutputStream outputStream) {
 			this.tempFileManager = tempFileManager;
@@ -979,9 +980,9 @@ public abstract class NanoHTTPD {
 				 */
 
 				boolean patchenable = false;
-				if(uri.contentEquals("/upload")){
-					
-					patchenable=true;
+				if (uri.contentEquals("/upload")) {
+
+					patchenable = true;
 				}
 				if (patchenable) {
 					/*
@@ -994,7 +995,7 @@ public abstract class NanoHTTPD {
 					Tempr.setRequestMethod(method);
 					Tempr.send(outputStream);
 				}
-				patchenable=false;
+				patchenable = false;
 				// //end patch
 
 				// Ok, now do the serve()
@@ -1039,7 +1040,7 @@ public abstract class NanoHTTPD {
 				long size;
 				if (headers.containsKey("content-length")) {
 					size = Integer.parseInt(headers.get("content-length"));
-					Log.d("unique","The Size of content is "+size);
+					Log.d("unique", "The Size of content is " + size);
 				} else if (splitbyte < rlen) {
 					size = rlen - splitbyte;
 				} else {
@@ -1047,22 +1048,43 @@ public abstract class NanoHTTPD {
 				}
 
 				// Now read all the body and write it to First Temp File
-				//Patch
-				ServerService.updateNotification("File Server is Running", "Receiving File ..",ServerContext);
-				//End Patch
-				byte[] buf = new byte[512];
+				// Patch
+				ServerService.updateNotification("File Server is Running",
+						"Receiving File ..", ServerContext);
+
+				long uisize = size;
+				long curtime = System.currentTimeMillis();
+				long prevsize = 0;
+				float progress;
+				double speed = 0.0;
+				// End Patch
+
+				byte[] buf = new byte[1024];
 				while (rlen >= 0 && size > 0) {
-					rlen = inputStream.read(buf, 0, 512);
+					rlen = inputStream.read(buf, 0, 1024);
 					size -= rlen;
+
+					// Patch for UI
+
+					progress = (float) (100.0 - (((float) size / (float) uisize)) * 100.0);
+
+					if ((System.currentTimeMillis() - curtime) > 100) {
+						prevsize = ((uisize - size) - prevsize);
+						speed = (prevsize) / 1000.0;
+						curtime = System.currentTimeMillis();
+						UI.updateSpeedandProgress(speed, progress);
+					}
+					// end Patch
 					if (rlen > 0) {
 						randomAccessFile.write(buf, 0, rlen);
 
 					}
 				}
-				//Patch
-				ServerService.updateNotification("File Server is Running", "Received RAW file",ServerContext);
-				//End Patch
-				
+				// Patch
+				ServerService.updateNotification("File Server is Running",
+						"Received RAW file", ServerContext);
+				// End Patch
+
 				// Get the raw body as a byte []
 				ByteBuffer fbuf = randomAccessFile.getChannel().map(
 						FileChannel.MapMode.READ_ONLY, 0,
@@ -1107,7 +1129,7 @@ public abstract class NanoHTTPD {
 							boundary = boundary.substring(1,
 									boundary.length() - 1);
 						}
-						
+
 						decodeMultipartData(boundary, fbuf, in, parms, files);
 					} else {
 						// Handle application/x-www-form-urlencoded
@@ -1125,8 +1147,8 @@ public abstract class NanoHTTPD {
 					files.put("content", saveTmpFile(fbuf, 0, fbuf.limit()));
 				}
 			} finally {
-				//Patch to rename the file created by NanoHttpd
-				
+				// Patch to rename the file created by NanoHttpd
+
 				if (files.get("myfile") != null
 						&& parms.get("filenamebackup") != null) {
 					/*
@@ -1147,13 +1169,12 @@ public abstract class NanoHTTPD {
 
 					from.renameTo(to);
 
-
 					ServerService.updateNotification("File Saved", "File: "
 							+ fileName, ServerContext);
 
-				
 				}
-				
+
+				tempfiles = files;
 				// End Patch
 				safeClose(randomAccessFile);
 				safeClose(in);
@@ -1228,9 +1249,7 @@ public abstract class NanoHTTPD {
 		private void decodeMultipartData(String boundary, ByteBuffer fbuf,
 				BufferedReader in, Map<String, String> parms,
 				Map<String, String> files) throws ResponseException {
-			
 
-			
 			try {
 				int[] bpositions = getBoundaryPositions(fbuf,
 						boundary.getBytes());
@@ -1339,10 +1358,10 @@ public abstract class NanoHTTPD {
 		 * Find the byte positions where multipart boundaries start.
 		 */
 		private int[] getBoundaryPositions(ByteBuffer b, byte[] boundary) {
-			//Patch
+			// Patch
 			ServerService.updateNotification("Boundary", " ", ServerContext);
-			//End Patch
-		
+			// End Patch
+
 			int matchcount = 0;
 			int matchbyte = -1;
 			List<Integer> matchbytes = new ArrayList<Integer>();
@@ -1366,10 +1385,11 @@ public abstract class NanoHTTPD {
 			for (int i = 0; i < ret.length; i++) {
 				ret[i] = matchbytes.get(i);
 			}
-			//Patch
-			ServerService.updateNotification("Boundary stop"," ", ServerContext);
-			//End Patch
-		
+			// Patch
+			ServerService.updateNotification("Boundary stop", " ",
+					ServerContext);
+			// End Patch
+
 			return ret;
 		}
 
@@ -1387,16 +1407,20 @@ public abstract class NanoHTTPD {
 					fileOutputStream = new FileOutputStream(tempFile.getName());
 					FileChannel dest = fileOutputStream.getChannel();
 					src.position(offset).limit(offset + len);
-					//Patch
-					ServerService.updateNotification("File Server is Processing", "Writing Decoded File", ServerContext);
-					//End Patch
+					// Patch
+					ServerService.updateNotification(
+							"File Server is Processing",
+							"Writing Decoded File", ServerContext);
+					// End Patch
 					dest.write(src.slice());
-					//Patch
-					ServerService.updateNotification("File Server is Processing", "Decoded File Written", ServerContext);
-					//End Patch
-				
-					
+					// Patch
+					ServerService.updateNotification(
+							"File Server is Processing",
+							"Decoded File Written", ServerContext);
+					// End Patch
+
 					path = tempFile.getName();
+
 				} catch (Exception e) { // Catch exception if any
 					System.err.println("Error: " + e.getMessage());
 				} finally {
@@ -1408,7 +1432,7 @@ public abstract class NanoHTTPD {
 
 		private RandomAccessFile getTmpBucket() {
 			try {
-				
+
 				TempFile tempFile = tempFileManager.createTempFile();
 				return new RandomAccessFile(tempFile.getName(), "rw");
 			} catch (Exception e) {

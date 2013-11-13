@@ -85,7 +85,7 @@ public class ServerService extends Service {
 
 		Log.d("FTDebug", "Upload Server Started!");
 
-		server = new MyHTTPD(getApplicationContext());
+		server = new MyHTTPD(getApplicationContext(), UI);
 		ClearCache.clean();
 
 		try {
@@ -126,8 +126,9 @@ public class ServerService extends Service {
 			super(PORT);
 		}
 
-		public MyHTTPD(Context parentContext) {
-			super(PORT, parentContext);
+		public MyHTTPD(Context parentContext, UI_updater uI) {
+			super(PORT, parentContext,UI);
+			
 		}
 
 		@Override
@@ -136,21 +137,6 @@ public class ServerService extends Service {
 				Map<String, String> files)
 
 		{
-			Log.d("msg", "I am here1" + uri);
-			/*
-			 * COMMENT V=1.0 This will happen but nothing will be displayed as
-			 * already a response would have gone because of a Patch in Nano
-			 * HTTPD file Thus The Text sent here will be of no use But this
-			 * function is required for background Data Processing!
-			 * 
-			 * This was supposedly the Old output This can still be used but the
-			 * response will be ultra slow as response is sent after all the
-			 * processing is done. This can be used for debugging purposes as it
-			 * displays all the header info but file upload will be slow. if
-			 * debug values have to be enabled set the patchenable value to
-			 * false and set the patchenable variable value in NanoHTTPD.java to
-			 * false.
-			 */
 
 			/*
 			 * COMMENT V=2.0 This is the serve method which is responsible for
@@ -211,9 +197,8 @@ public class ServerService extends Service {
 				return new Response(sb.toString());
 			} else if (uri.contentEquals("/upload")) {
 
-					// To Clean Cache File Created in the Process
-					ClearCache.clean();
-
+				// To Clean Cache File Created in the Process
+				ClearCache.clean();
 
 				return new Response(
 						"<center><h1>Oops! This was not supposed to happen ! My Bad ! :P </h1></center><br><center><h1>Please Reload Again!</h1></center></h1></center><br><center><h5>U Forgot one of patchenable Flag!</h5></center>");

@@ -213,6 +213,7 @@
                 android:orientation="horizontal" >
 
                 <TextView
+                    android:id="@+id/transferprogresspercent"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="50dp"
@@ -224,6 +225,7 @@
 
                     <ProgressBar
                         style="?android:attr/progressBarStyleHorizontal"
+                        android:id="@+id/progressBar"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
                         android:progress="50" />

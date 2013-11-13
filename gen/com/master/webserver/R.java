@@ -931,7 +931,7 @@ containing a value of this type.
     }
     public static final class id {
         public static final int Orb=0x7f05003e;
-        public static final int about=0x7f05004b;
+        public static final int about=0x7f05004d;
         public static final int abs__action_bar=0x7f050020;
         public static final int abs__action_bar_container=0x7f05001f;
         public static final int abs__action_bar_subtitle=0x7f050011;
@@ -984,14 +984,15 @@ containing a value of this type.
         public static final int filelist=0x7f050039;
         public static final int homeAsUp=0x7f050006;
         public static final int ipaddr=0x7f050032;
-        public static final int ipaddress=0x7f050048;
+        public static final int ipaddress=0x7f05004a;
         public static final int listMode=0x7f050002;
         public static final int modestatus=0x7f050041;
         public static final int normal=0x7f050001;
+        public static final int progressBar=0x7f050049;
         public static final int progrleft=0x7f05003d;
         public static final int progrright=0x7f05003f;
-        public static final int settings=0x7f05004a;
-        public static final int shareButton=0x7f050049;
+        public static final int settings=0x7f05004c;
+        public static final int shareButton=0x7f05004b;
         public static final int showCustom=0x7f050008;
         public static final int showHome=0x7f050005;
         public static final int showTitle=0x7f050007;
@@ -1002,6 +1003,7 @@ containing a value of this type.
         public static final int stopUS=0x7f050035;
         public static final int tabMode=0x7f050003;
         public static final int transferStatusLayout=0x7f050045;
+        public static final int transferprogresspercent=0x7f050048;
         public static final int useLogo=0x7f050004;
         public static final int wifihotspot=0x7f050042;
         public static final int wifinetwork=0x7f050043;

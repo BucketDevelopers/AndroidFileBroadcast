@@ -1,5 +1,6 @@
 package com.common.methods;
 
+import java.text.NumberFormat;
 
 import com.master.webserver.R;
 import com.master.webserver.ServerService;
@@ -10,11 +11,12 @@ import android.util.Log;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
-public class UI_updater{
+public class UI_updater {
 
- 	private int PORT;
+	private int PORT;
 	private ImageButton wifihotspotToggle;
 	private ImageButton dataToggle;
 	private ImageButton wifiNetToggle;
@@ -34,6 +36,8 @@ public class UI_updater{
 	public boolean speedviewenable = false;
 	public int modeSelected = 0;
 	public Context appContext;
+	private TextView transferProgressPercent;
+	private ProgressBar fileProgressBar;
 
 	public void ui_initializer(int PORT, ImageButton wifihotspotToggle,
 			ImageButton dataToggle, ImageButton wifiNetToggle,
@@ -42,7 +46,9 @@ public class UI_updater{
 			ImageView progressimviewright, AnimationDrawable progressanimleft,
 			AnimationDrawable progressanimright, TextView textIpaddr,
 			TextView availableSpace, LinearLayout transferstatus,
-			LinearLayout connectionTogglesgroup, Context appContext) {
+			LinearLayout connectionTogglesgroup,
+			TextView transferProgressPercent, ProgressBar fileProgressBar,
+			Context appContext) {
 
 		this.PORT = PORT;
 		this.wifihotspotToggle = wifihotspotToggle;
@@ -62,7 +68,8 @@ public class UI_updater{
 		this.transferstatus = transferstatus;
 		this.connectionTogglesgroup = connectionTogglesgroup;
 		this.appContext = appContext;
-
+		this.transferProgressPercent = transferProgressPercent;
+		this.fileProgressBar = fileProgressBar;
 	}
 
 	public void updateIP() {
@@ -114,8 +121,7 @@ public class UI_updater{
 		startstatus.setText("Start Flash");
 		this.updateIP();
 		Log.d("msg", "Mode selected Value here: " + modeSelected);
-		Log.d("msg", "serverenabled Value here: "
-				+ ServerService.serverenabled);
+		Log.d("msg", "serverenabled Value here: " + ServerService.serverenabled);
 
 		switch (modeSelected) {
 
@@ -142,7 +148,7 @@ public class UI_updater{
 			if (ServerService.serverenabled) {
 				// ----------------------------------------------
 				// Creating the alert to warn the user
-				
+
 				// ----------------------------------------------
 				orb.setImageResource(R.drawable.data);
 				startstatus.setText("Stop Flash");
@@ -157,6 +163,18 @@ public class UI_updater{
 
 	}
 
+	public void updateSpeedandProgress(double dataspeed, float progress) {
+		NumberFormat formatter = NumberFormat.getNumberInstance();
+		formatter.setMinimumFractionDigits(2);
+		formatter.setMaximumFractionDigits(2);
+		String progressString = formatter.format(progress);
+		Log.d("FTDebug", progressString);
+		Log.d("FTDebug", dataspeed + "");
+		fileProgressBar.setProgress((int) progress);
+		// transferProgressPercent.setText(progressString + " %");
+
+	}
+
 	public void update() {
 
 		this.updateServerStatus();
@@ -164,6 +182,5 @@ public class UI_updater{
 		this.updateIP();
 
 	}
-
 
 }

@@ -260,7 +260,7 @@ int drawable transferanim 0x7f02007d
 int drawable transferanimright 0x7f02007e
 int drawable wifi 0x7f02007f
 int id Orb 0x7f05003e
-int id about 0x7f05004b
+int id about 0x7f05004d
 int id abs__action_bar 0x7f050020
 int id abs__action_bar_container 0x7f05001f
 int id abs__action_bar_subtitle 0x7f050011
@@ -313,14 +313,15 @@ int id file_name 0x7f050038
 int id filelist 0x7f050039
 int id homeAsUp 0x7f050006
 int id ipaddr 0x7f050032
-int id ipaddress 0x7f050048
+int id ipaddress 0x7f05004a
 int id listMode 0x7f050002
 int id modestatus 0x7f050041
 int id normal 0x7f050001
+int id progressBar 0x7f050049
 int id progrleft 0x7f05003d
 int id progrright 0x7f05003f
-int id settings 0x7f05004a
-int id shareButton 0x7f050049
+int id settings 0x7f05004c
+int id shareButton 0x7f05004b
 int id showCustom 0x7f050008
 int id showHome 0x7f050005
 int id showTitle 0x7f050007
@@ -331,6 +332,7 @@ int id startstatus 0x7f05003c
 int id stopUS 0x7f050035
 int id tabMode 0x7f050003
 int id transferStatusLayout 0x7f050045
+int id transferprogresspercent 0x7f050048
 int id useLogo 0x7f050004
 int id wifihotspot 0x7f050042
 int id wifinetwork 0x7f050043
