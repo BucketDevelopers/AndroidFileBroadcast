@@ -1,0 +1,37 @@
+<html>
+<head>
+<script type="text/javascript">
+function leave() {
+	var path = document.URL;
+	var target = document.URL;
+	var pathArray = path.split('/');
+	for ( i = 0; i < pathArray.length; i++ ) {
+		  
+		  if(pathArray[i]=="upload")
+			  {
+			 	target = pathArray[i-1];
+			  }
+		}
+  	window.location = "http://"+target;
+}
+setTimeout("leave()", 5000);
+</script>
+</head>
+<body style="font-family:Tahoma, Geneva, sans-serif; font-size:24px; margin-top:150px; 
+background: #e0f3fa; /* Old browsers */
+background: -moz-linear-gradient(-45deg,  #e0f3fa 0%, #d8f0fc 50%, #b8e2f6 51%, #b6dffd 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#e0f3fa), color-stop(50%,#d8f0fc), color-stop(51%,#b8e2f6), color-stop(100%,#b6dffd)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg,  #e0f3fa 0%,#d8f0fc 50%,#b8e2f6 51%,#b6dffd 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg,  #e0f3fa 0%,#d8f0fc 50%,#b8e2f6 51%,#b6dffd 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg,  #e0f3fa 0%,#d8f0fc 50%,#b8e2f6 51%,#b6dffd 100%); /* IE10+ */
+background: linear-gradient(135deg,  #e0f3fa 0%,#d8f0fc 50%,#b8e2f6 51%,#b6dffd 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0f3fa', endColorstr='#b6dffd',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+">
+
+<center>File transfer successful.<br><br><br><br><br>
+<div style="font-size:36px; text-shadow: 0px 0px  8px #006600; font-family:'Arial Black', Gadget, sans-serif; font-weight:300; color:#FFF" >#Code2013</div>
+</center>
+
+</body>
+</html>

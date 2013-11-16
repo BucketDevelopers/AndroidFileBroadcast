@@ -3,6 +3,37 @@
 <meta http-equiv="Content-Type" content="text/html"; charset=UTF-8 />
 <title> File Server </title> 
 <style>
+#files h1{
+    color: rgba(0,146,220,0.9);
+    text-shadow: 1px 1px 2px rgba(0,0,0,1);
+	font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;
+	font-size:66px;}
+#files ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+ 
+#files ul li {
+  font: 200 17px/1.5 Helvetica, Verdana, sans-serif;
+  border-top: 1px dotted #006;
+  padding:4px;
+  }
+ 
+#files ul li:last-child {
+  border-bottom: 1px dotted #006;
+}
+ 
+#files ul li a {
+  text-decoration: none;
+  color: #666;
+  display: block;
+  width: 200px;
+ }
+ 
+#files ul li a:hover {
+  color:#000;
+}
 #yourBtn {  position: relative; 
 top: 150px; 
 font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; 
@@ -17,7 +48,16 @@ font-size:16px;
 border:solid 1px #0F9; 
 color:#FFF;}
 </style>
-</head><body><center>
+</head><body style="
+background: #e0f3fa; /* Old browsers */
+background: -moz-linear-gradient(-45deg,  #e0f3fa 0%, #d8f0fc 50%, #b8e2f6 51%, #b6dffd 100%); /* FF3.6+ */
+background: -webkit-gradient(linear, left top, right bottom, color-stop(0%,#e0f3fa), color-stop(50%,#d8f0fc), color-stop(51%,#b8e2f6), color-stop(100%,#b6dffd)); /* Chrome,Safari4+ */
+background: -webkit-linear-gradient(-45deg,  #e0f3fa 0%,#d8f0fc 50%,#b8e2f6 51%,#b6dffd 100%); /* Chrome10+,Safari5.1+ */
+background: -o-linear-gradient(-45deg,  #e0f3fa 0%,#d8f0fc 50%,#b8e2f6 51%,#b6dffd 100%); /* Opera 11.10+ */
+background: -ms-linear-gradient(-45deg,  #e0f3fa 0%,#d8f0fc 50%,#b8e2f6 51%,#b6dffd 100%); /* IE10+ */
+background: linear-gradient(135deg,  #e0f3fa 0%,#d8f0fc 50%,#b8e2f6 51%,#b6dffd 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e0f3fa', endColorstr='#b6dffd',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+margin: 0 auto; width: 70%;"">
 <script>
 
 function getFile(){
