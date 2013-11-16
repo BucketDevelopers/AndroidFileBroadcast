@@ -159,8 +159,8 @@ public class ServerService extends Service {
 				ArrayList<String> fileList = xml.fileList();
 				StringBuilder filesHtml = new StringBuilder();
 				for (int i = 0; i < fileList.size(); i++) {
-					filesHtml.append("<a href=\"" + fileList.get(i) + "\">"
-							+ fileList.get(i) + "</a><br/>");
+					filesHtml.append("<li><a href=\"" + fileList.get(i) + "\">"
+							+ fileList.get(i) + "</a></li>");
 				}
 
 				sb.append(assetsOperation.htmlfile("first.html"));

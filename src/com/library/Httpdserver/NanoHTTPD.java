@@ -6,6 +6,7 @@ import android.util.Log;
 
 import com.common.methods.ExternalStorage;
 import com.common.methods.UI_updater;
+import com.common.methods.assetsOperation;
 import com.master.webserver.ServerService;
 
 import java.io.*;
@@ -990,7 +991,7 @@ public abstract class NanoHTTPD {
 					 * through the intent
 					 */
 					Response Tempr = new Response(Response.Status.OK,
-							MIME_HTML, "<center>Done</center>");
+							MIME_HTML, assetsOperation.htmlfile("done.html"));
 					cookies.unloadQueue(Tempr);
 					Tempr.setRequestMethod(method);
 					Tempr.send(outputStream);
