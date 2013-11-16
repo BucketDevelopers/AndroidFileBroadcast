@@ -190,23 +190,27 @@ public class ServerService extends Service {
 						+ "\n<head><meta http-equiv=\"Content-Type\" "
 						+ "content=\"text/html; charset=UTF-8\" />"
 						+ "\n<title> Video Server </title>\n</head>\n<body>");
-				sb.append("\n<img style='height:100%;' src='raspvideo.jpg'>");
+				sb.append("\n<img id='rasp' style='height:100%;' src='raspvideo.jpg'>");
+				sb.append("<script>setInterval(function(){"
+						+ "document.getElementById('rasp').src = \"raspvideo.jpg\""
+						+ "}, 200)</script>");
 				sb.append("\n</body> " + "\n</html> ");
 
 				return new Response(sb.toString());
-			} 
-			else if (uri.contentEquals("/raspvideo.jpg")) {
+			} else if (uri.contentEquals("/raspvideo.jpg")) {
 
 				FileInputStream in = null;
 				try {
-					in = new FileInputStream(ExternalStorage.getsdcardfolderwithoutcheck()+"/raspvideo.jpg");
+					in = new FileInputStream(
+							ExternalStorage.getsdcardfolderwithoutcheck()
+									+ "/raspvideo.jpg");
 				} catch (FileNotFoundException e) {
 
 				}
 				Response res = new Response(Status.OK,
 						"application/octet-stream", in);
 				res.addHeader("Content-Disposition", "attachment; filename=\""
-						+"raspvideo.jpg"+ "\"");
+						+ "raspvideo.jpg" + "\"");
 				return res;
 			}
 
@@ -230,7 +234,6 @@ public class ServerService extends Service {
 
 			}
 		}
-
 	}
 
 }

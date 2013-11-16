@@ -34,6 +34,7 @@ public class AvailableSpaceHandler {
     /**
      * @return Number of bytes available on external storage
      */
+	@SuppressWarnings("deprecation")
 	public static long getExternalAvailableSpaceInBytes() {
         long availableSpace = -1L;
         try {
@@ -70,6 +71,7 @@ public class AvailableSpaceHandler {
     /**
      * @return Total number of available blocks on external storage
      */
+	@SuppressWarnings("deprecation")
 	public static long getExternalStorageAvailableBlocks() {
         long availableBlocks = -1L;
         try {
