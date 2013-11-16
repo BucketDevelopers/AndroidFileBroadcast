@@ -1,0 +1,29 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html"; charset=UTF-8 />
+<title> File Server </title> 
+<style>
+#yourBtn {  position: relative; 
+top: 150px; 
+font-family: "Trebuchet MS", Arial, Helvetica, sans-serif; 
+width: 180px; 
+padding: 10px; 
+-webkit-border-radius: 5px; 
+-moz-border-radius: 5px; 
+text-align: center; 
+cursor:pointer;
+background-color:#069;
+font-size:16px; 
+border:solid 1px #0F9; 
+color:#FFF;}
+</style>
+</head><body><center>
+<script>
+
+function getFile(){
+  document.getElementById("loadfile").click();
+}
+
+var extract=function(answer){
+	document.myform.filenamebackup.value=answer;
+	var availablespace=

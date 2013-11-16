@@ -16,6 +16,7 @@ import com.common.methods.ClearCache;
 import com.common.methods.IntentHelper;
 import com.common.methods.UI_updater;
 import com.common.methods.XmlParser;
+import com.common.methods.assetsOperation;
 import com.library.Httpdserver.NanoHTTPD;
 import com.library.Httpdserver.NanoHTTPD.Response.Status;
 
@@ -162,38 +163,13 @@ public class ServerService extends Service {
 							+ fileList.get(i) + "</a><br/>");
 				}
 
-				sb.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" "
-						+ "xml:lang=\"en\" lang=\"en\">"
-						+ "<head><meta http-equiv=\"Content-Type\" "
-						+ "content=\"text/html; charset=UTF-8\" />"
-						+ "<title> File Server </title></head><body>"
-						+ "<script>\n  var extract=function(answer){\n "
-						+ "document.myform.filenamebackup.value=answer;\n "
-						+ "var availablespace= ");
-
+				sb.append(assetsOperation.htmlfile("first.html"));
 				sb.append(AvailableSpaceHandler
 						.getExternalAvailableSpaceInBytes() + ";\n");
-
-				sb.append("var file = document.getElementById('loadfile').files[0];\n"
-						+ "document.myform.filesize.value=file.size;\n"
-						+ "if(availablespace<(2*file.size)){\n"
-						+ "alert(\"The Receivers SD Card Doesnt have enough space for this file"
-						+ " to be stored.\\nNote: The receiver must have atleast twice the space "
-						+ "as that of the file you are sending.\\n"
-						+ "Space Required:\"+((2*file.size)/(1024*1024))+\" MB \"+\"\\nThe Space"
-						+ " on Device is : \"+(availablespace/(1024*1024))+\" MB \");\n }\nelse{"
-						+ " document.getElementById('upform').submit();\n"
-						+ " }\n }\n " + "</script>");
-
+				sb.append(assetsOperation.htmlfile("second.html"));
 				sb.append(filesHtml.toString());
 
-				sb.append("<form name=\"myform\" id=\"upform\" method=\"post\" enctype=\"multipart/form-data\" action = \"upload\"> "
-						+ "<input type=\"file\" id=\"loadfile\" name=\"myfile\">"
-						+ "<input type=\"hidden\" name=\"filenamebackup\" value=\"nofile\"> "
-						+ "<input type=\"hidden\" name=\"filesize\" value=\"nullsize\"> "
-						+ "<input type=\"button\" value=\"Upload\" onClick=\"extract(document.myform.myfile.value)\">  "
-						+ "</form> " + "</body> " + "</html> ");
-
+				sb.append(assetsOperation.htmlfile("third.html"));
 				return new Response(sb.toString());
 			} else if (uri.contentEquals("/upload")) {
 
