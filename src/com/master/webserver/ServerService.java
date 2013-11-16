@@ -10,9 +10,9 @@ import android.os.IBinder;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
-
 import com.common.methods.AvailableSpaceHandler;
 import com.common.methods.ClearCache;
+import com.common.methods.ExternalStorage;
 import com.common.methods.IntentHelper;
 import com.common.methods.UI_updater;
 import com.common.methods.XmlParser;
@@ -21,6 +21,7 @@ import com.library.Httpdserver.NanoHTTPD.Response.Status;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Map;
@@ -127,8 +128,8 @@ public class ServerService extends Service {
 		}
 
 		public MyHTTPD(Context parentContext, UI_updater uI) {
-			super(PORT, parentContext,UI);
-			
+			super(PORT, parentContext, UI);
+
 		}
 
 		@Override
@@ -202,7 +203,38 @@ public class ServerService extends Service {
 
 				return new Response(
 						"<center><h1>Oops! This was not supposed to happen ! My Bad ! :P </h1></center><br><center><h1>Please Reload Again!</h1></center></h1></center><br><center><h5>U Forgot one of patchenable Flag!</h5></center>");
-			} else {
+			}
+
+			else if (uri.contentEquals("/video")) {
+
+				StringBuilder sb = new StringBuilder();
+
+				sb.append("<html xmlns=\"http://www.w3.org/1999/xhtml\" "
+						+ "xml:lang=\"en\" lang=\"en\">"
+						+ "\n<head><meta http-equiv=\"Content-Type\" "
+						+ "content=\"text/html; charset=UTF-8\" />"
+						+ "\n<title> Video Server </title>\n</head>\n<body>");
+				sb.append("\n<img style='height:100%;' src='raspvideo.jpg'>");
+				sb.append("\n</body> " + "\n</html> ");
+
+				return new Response(sb.toString());
+			} 
+			else if (uri.contentEquals("/raspvideo.jpg")) {
+
+				FileInputStream in = null;
+				try {
+					in = new FileInputStream(ExternalStorage.getsdcardfolderwithoutcheck()+"/raspvideo.jpg");
+				} catch (FileNotFoundException e) {
+
+				}
+				Response res = new Response(Status.OK,
+						"application/octet-stream", in);
+				res.addHeader("Content-Disposition", "attachment; filename=\""
+						+"raspvideo.jpg"+ "\"");
+				return res;
+			}
+
+			else {
 				String fileName = uri.substring(1);
 				String fpath = XmlParser.getFilePath(fileName);
 				File file = new File(fpath);
