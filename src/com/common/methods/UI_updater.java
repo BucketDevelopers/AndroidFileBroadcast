@@ -35,7 +35,7 @@ public class UI_updater {
 	private TextView availableSpace;
 	public boolean speedviewenable = false;
 	public int modeSelected = 0;
-	public Context appContext;
+	static public Context appContext;
 	private TextView transferProgressPercent;
 	private ProgressBar fileProgressBar;
 
