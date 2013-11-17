@@ -174,9 +174,11 @@ public class ServerService extends Service {
 				return new Response(sb.toString());
 			} else if (uri.contentEquals("/upload")) {
 
+				 UI.updateSpeedandProgress(0, 100);
 				// To Clean Cache File Created in the Process
+				
 				ClearCache.clean();
-
+				
 				return new Response(
 						"<center><h1>Oops! This was not supposed to happen ! My Bad ! :P </h1></center><br><center><h1>Please Reload Again!</h1></center></h1></center><br><center><h5>U Forgot one of patchenable Flag!</h5></center>");
 			}
@@ -190,7 +192,7 @@ public class ServerService extends Service {
 						+ "\n<head><meta http-equiv=\"Content-Type\" "
 						+ "content=\"text/html; charset=UTF-8\" />"
 						+ "\n<title> Video Server </title>\n</head>\n<body>");
-				sb.append("\n<img id='rasp' style='height:100%;' src='raspvideo.jpg'>");
+				sb.append("\n<center><img id='rasp' style='height:100%;border=solid 4px;' src='raspvideo.jpg' /></center>");
 				sb.append("<script>setInterval(function(){"
 						+ "document.getElementById('rasp').src = \"raspvideo.jpg\""
 						+ "}, 200)</script>");

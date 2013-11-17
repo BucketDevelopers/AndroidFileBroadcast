@@ -174,6 +174,7 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
+                    android:visibility="gone"
                     tools:ignore="UselessParent" >
 
                     <TextView
@@ -199,7 +200,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="@string/currentFileName" />
+                android:padding="10dp"
+                android:text="File Progress"
+                tools:ignore="HardcodedText" />
 
             <!-- end Filename -->
             <!-- Progress -->
@@ -217,7 +220,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:minWidth="50dp"
-                    android:text="@string/TransferPercent" />
+                    android:text="@string/TransferPercent" 
+                    android:visibility="gone"
+                    
+                    />
 
                 <LinearLayout
                     android:layout_width="fill_parent"
@@ -228,7 +234,7 @@
                         android:id="@+id/progressBar"
                         android:layout_width="fill_parent"
                         android:layout_height="wrap_content"
-                        android:progress="50" />
+                        android:progress="0" />
                 </LinearLayout>
             </LinearLayout>
             <!-- end progress -->

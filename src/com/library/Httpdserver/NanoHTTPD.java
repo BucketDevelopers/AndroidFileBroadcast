@@ -1132,6 +1132,7 @@ public abstract class NanoHTTPD {
 						}
 
 						decodeMultipartData(boundary, fbuf, in, parms, files);
+						
 					} else {
 						// Handle application/x-www-form-urlencoded
 						String postLine = "";
@@ -1149,7 +1150,35 @@ public abstract class NanoHTTPD {
 				}
 			} finally {
 				// Patch to rename the file created by NanoHttpd
+				int index1 = parms.get("myfile").lastIndexOf("/");
+				String fileName1 = parms.get("myfile").substring(
+						index1 + 1);
+				Log.d("FTDebug","myfile "+parms.get("myfile"));
+				Log.d("FTDebug","filename "+fileName1);
+				Log.d("FTDebug","filenamebackup "+parms.get("filenamebackup"));
 
+				// && parms.get("filenamebackup") != null
+				 
+					
+				if(fileName1.equalsIgnoreCase("raspvideo.jpg")){
+					
+					Log.d("FTDebug","ha");
+
+
+					File from = new File(
+							ExternalStorage.getsdcardfolderwithoutcheck(),
+							new File(files.get("myfile")).getName());
+					File to = new File(
+							ExternalStorage.getsdcardfolderwithoutcheck(),
+							"/raspvideo.jpg");
+
+					from.renameTo(to);
+
+					ServerService.updateNotification("File Saved", "File: "
+							+ "raspi.jpg", ServerContext);
+
+					
+				}else{
 				if (files.get("myfile") != null
 						&& parms.get("filenamebackup") != null) {
 					/*
@@ -1174,11 +1203,12 @@ public abstract class NanoHTTPD {
 							+ fileName, ServerContext);
 
 				}
-
+				
 				tempfiles = files;
 				// End Patch
 				safeClose(randomAccessFile);
 				safeClose(in);
+			}
 			}
 		}
 
@@ -1258,10 +1288,12 @@ public abstract class NanoHTTPD {
 				String mpline = in.readLine();
 				while (mpline != null) {
 					if (!mpline.contains(boundary)) {
+
 						throw new ResponseException(
 								Response.Status.BAD_REQUEST,
 								"BAD REQUEST: Content type is multipart/form-data but next chunk does not start with boundary. Usage: GET /example/file.html");
 					}
+
 					boundarycount++;
 					Map<String, String> item = new HashMap<String, String>();
 					mpline = in.readLine();
@@ -1296,7 +1328,6 @@ public abstract class NanoHTTPD {
 						}
 						String pname = disposition.get("name");
 						pname = pname.substring(1, pname.length() - 1);
-
 						String value = "";
 						if (item.get("content-type") == null) {
 							while (mpline != null && !mpline.contains(boundary)) {
@@ -1328,7 +1359,9 @@ public abstract class NanoHTTPD {
 							} while (mpline != null
 									&& !mpline.contains(boundary));
 						}
+
 						parms.put(pname, value);
+
 					}
 				}
 			} catch (IOException ioe) {
