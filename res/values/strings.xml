@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">FileTransfer</string>
+    <string name="app_name">UFT</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="hai">hai</string>
+    <string name="wifi">Wifi</string>
+    <string name="hotspot">Hotspot</string>
+    <string name="mobile_data">Mobile Data</string>
+    <string name="choose_mode">Choose Mode :</string>
     <string name="settings">Settings</string>
-    <string name="sdcard_error">Oops! External Storage Not Present (O_o) ! Please switch of USB Storage Mode or insert a SDCard</string>
-    <string name="availabeSpace">Cannot get Available Space !</string>
-    <string name="ipaddress">IPAddress</string>
-    <string name="stop_uploadserver">Stop Server</string>
-	<string name="start_uploadserver">Start Server</string>
-	<string name="dummytext">DummyText</string>
-	<string name="tagline">Flash \'em All</string>
-	<string name="wifi">Wi-Fi</string>
-	<string name="server_status">Start</string>
-	<string name="current_Mode">Select the mode below:</string>
-	<string name="speednumber">XY.ABC</string>
-	<string name="currentFileName">filename.ext</string>
-	<string name="TransferPercent">xy%</string>
-	<string name="about">About</string>
+    <string name="settings_button">Settings Button</string>
+    <string name="about_us">About Us</string>
+    <string name="select_files">2.Select Files</string>
+    <string name="enable_transfer">1.Enable Transfer</string>
+    <string name="status">Status</string>
+
 </resources>

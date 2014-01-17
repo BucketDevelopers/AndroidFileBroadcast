@@ -24,7 +24,6 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-import android.annotation.SuppressLint;
 import android.content.res.AssetManager;
 import android.util.Log;
  
@@ -51,7 +50,7 @@ public class XmlParser{
 	//			xmlFile.
 				FileWriter fw = new FileWriter(xmlFile.getAbsoluteFile());
 				BufferedWriter bw = new BufferedWriter(fw);
-				bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><list><file><name>some.mp3</name><path>/sdcard/Music/Us/some.MP3</path></111111111file></list>");
+				bw.write("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?><list><file><name>some.mp3</name></file></list>");
 				bw.close();
 				stream = new FileInputStream(xmlFile);
 				doc = parser.getDocument(stream);
@@ -96,7 +95,6 @@ public class XmlParser{
 	{
 		return hm.get(name);
 	}
-	@SuppressLint("NewApi")
 	public void addFile(String fname,String fpath)
 	{
 		NodeList rootList = doc.getElementsByTagName("list");

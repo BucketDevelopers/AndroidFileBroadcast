@@ -5,9 +5,8 @@ import android.content.Context;
 import android.util.Log;
 
 import com.common.methods.ExternalStorage;
-import com.common.methods.UI_updater;
 import com.common.methods.assetsOperation;
-import com.master.webserver.ServerService;
+import com.bucketdevelopers.uft.ServerService;
 
 import java.io.*;
 import java.net.*;
@@ -93,7 +92,6 @@ public abstract class NanoHTTPD {
 	private final int myPort;
 	private ServerSocket myServerSocket;
 	private Thread myThread;
-	private UI_updater UI;
 	Map<String, String> tempfiles;
 	/**
 	 * Pluggable strategy for asynchronously executing requests.
@@ -118,11 +116,10 @@ public abstract class NanoHTTPD {
 	/*
 	 * Patch
 	 */
-	public NanoHTTPD(int port, Context parentContext, UI_updater uI) {
+	public NanoHTTPD(int port, Context parentContext) {
 
 		this(null, port);
 		ServerContext = parentContext;
-		this.UI = uI;
 
 	}
 
@@ -1056,7 +1053,9 @@ public abstract class NanoHTTPD {
 				long uisize = size;
 				long curtime = System.currentTimeMillis();
 				long prevsize = 0;
+				@SuppressWarnings("unused")
 				float progress;
+				@SuppressWarnings("unused")
 				double speed = 0.0;
 				// End Patch
 
@@ -1073,7 +1072,11 @@ public abstract class NanoHTTPD {
 						prevsize = ((uisize - size) - prevsize);
 						speed = (prevsize) / 1000.0;
 						curtime = System.currentTimeMillis();
-						UI.updateSpeedandProgress(speed, progress);
+						
+						//-------------------------------------
+						//Update Speed and progress here
+						//UI.updateSpeedandProgress(speed, progress);
+						//------------------------------------
 					}
 					// end Patch
 					if (rlen > 0) {
