@@ -6,17 +6,20 @@
 <RelativeLayout 
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="8dp"
     >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
+        android:textStyle="bold"
+        android:paddingLeft="5dp"
         android:layout_centerVertical="true"
-        android:text="Select files to send." />
+        android:text="Outbox" />
 
     <Button
+        android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -31,9 +34,9 @@
 <RelativeLayout 
     android:layout_width="fill_parent"
             
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="6dp"
 android:layout_height="2dip"
-android:background="#FF000000"></RelativeLayout>
+android:background="#FF18a4df"/>
 <ListView 
     android:id="@+id/listview" 
     android:choiceMode="singleChoice"  
