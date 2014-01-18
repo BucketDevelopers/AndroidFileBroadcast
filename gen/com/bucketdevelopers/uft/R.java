@@ -992,17 +992,20 @@ containing a value of this type.
         public static final int check=0x7f02005a;
         public static final int data=0x7f02005b;
         public static final int data_connect=0x7f02005c;
-        public static final int file_any=0x7f02005d;
-        public static final int fileany=0x7f02005e;
-        public static final int fileselect=0x7f02005f;
-        public static final int hotspot=0x7f020060;
-        public static final int ic_chooser=0x7f020061;
-        public static final int ic_file=0x7f020062;
-        public static final int ic_folder=0x7f020063;
-        public static final int ic_launcher=0x7f020064;
-        public static final int runningserver=0x7f020065;
-        public static final int stoppedserver=0x7f020066;
-        public static final int wifi=0x7f020067;
+        public static final int data_connect_selected=0x7f02005d;
+        public static final int file_any=0x7f02005e;
+        public static final int fileany=0x7f02005f;
+        public static final int fileselect=0x7f020060;
+        public static final int hotspot=0x7f020061;
+        public static final int hotspot_selected=0x7f020062;
+        public static final int ic_chooser=0x7f020063;
+        public static final int ic_file=0x7f020064;
+        public static final int ic_folder=0x7f020065;
+        public static final int ic_launcher=0x7f020066;
+        public static final int runningserver=0x7f020067;
+        public static final int stoppedserver=0x7f020068;
+        public static final int wifi=0x7f020069;
+        public static final int wifi_selected=0x7f02006a;
     }
     public static final class id {
         public static final int About=0x7f060057;

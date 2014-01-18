@@ -16,6 +16,7 @@ import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
@@ -32,6 +33,7 @@ public class MainActivity extends ActionBarActivity {
 	MyPageAdapter pageAdapter;
 	WifiManager wifi_manager;
 	private WifiConfiguration config;
+	private Menu menuobj;
 
 	public enum WIFI_AP_STATE {
 		WIFI_AP_STATE_DISABLING, WIFI_AP_STATE_DISABLED, WIFI_AP_STATE_ENABLING, WIFI_AP_STATE_ENABLED, WIFI_AP_STATE_FAILED
@@ -41,6 +43,7 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+
 		// initialising XML list for file selection..
 		XmlParser.checkXml(getFilesDir(), "list.xml"); // Create xml file
 
@@ -144,18 +147,37 @@ public class MainActivity extends ActionBarActivity {
 	}
 
 	@Override
+	protected void onRestoreInstanceState(Bundle savedInstanceState) {
+		updateToggleDisplay();
+		super.onRestoreInstanceState(savedInstanceState);
+	}
+
+	@Override
+	protected void onRestart() {
+		updateToggleDisplay();
+		super.onRestart();
+	}
+
+	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
+		menuobj = menu;
+
 		return true;
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+
 		switch (item.getItemId()) {
 		case R.id.About:
+			updateToggleDisplay();
+
 			return true;
 		case R.id.Settings:
+			updateToggleDisplay();
+
 			return true;
 
 		case R.id.wifi_hotspot:
@@ -168,10 +190,16 @@ public class MainActivity extends ActionBarActivity {
 
 				if (isWifiApEnabled()) {
 					enableHotspot(false);
+					item.setIcon(R.drawable.hotspot);
+
 				} else {
 					enableHotspot(true);
+					item.setIcon(R.drawable.hotspot_selected);
 				}
 			}
+
+			updateToggleDisplay();
+
 			return true;
 		case R.id.wifi:
 			// Toggling Wifi
@@ -180,12 +208,18 @@ public class MainActivity extends ActionBarActivity {
 			wifi_manager = (WifiManager) this
 					.getSystemService(Context.WIFI_SERVICE);
 			if (wifi_manager.isWifiEnabled()) {
+
 				wifi_manager.setWifiEnabled(false);
+				item.setIcon(R.drawable.wifi);
+
 			} else {
 				wifi_manager.setWifiEnabled(true);
+				item.setIcon(R.drawable.wifi_selected);
+
 				MainActivity.this.startActivity(new Intent(
 						WifiManager.ACTION_PICK_WIFI_NETWORK));
 			}
+			updateToggleDisplay();
 
 			return true;
 
@@ -195,6 +229,8 @@ public class MainActivity extends ActionBarActivity {
 
 				try {
 					turnData(false);
+					item.setIcon(R.drawable.data_connect);
+
 				} catch (Exception e) {
 					Toast.makeText(getApplicationContext(),
 							"Please turn off your data manually",
@@ -205,6 +241,7 @@ public class MainActivity extends ActionBarActivity {
 
 				try {
 					turnData(true);
+					item.setIcon(R.drawable.data_connect_selected);
 				} catch (Exception e) {
 					Toast.makeText(getApplicationContext(),
 							"Please turn on your data manually",
@@ -215,10 +252,24 @@ public class MainActivity extends ActionBarActivity {
 
 			}
 
+			updateToggleDisplay();
+
 			return true;
 		default:
-			return super.onOptionsItemSelected(item);
+			updateToggleDisplay();
+			break;
 		}
+
+		final Handler handler = new Handler();
+		handler.post(new Runnable() {
+
+			@Override
+			public void run() {
+				updateToggleDisplay();
+				handler.postDelayed(this, 3 * 1000L);
+			}
+		});
+		return super.onOptionsItemSelected(item);
 
 	}
 
@@ -385,15 +436,26 @@ public class MainActivity extends ActionBarActivity {
 
 	// Method to update the display of Toggles
 	void updateToggleDisplay() {
-
-		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
-			boolean hotspot = isWifiApEnabled();
-
-		}
-
+		boolean hotspot;
 		boolean mobiledata = checkMobileData();
 		boolean wifi = wifi_manager.isWifiEnabled();
 
-	}
+		menuobj.getItem(3).setIcon(R.drawable.hotspot);
+		menuobj.getItem(4).setIcon(R.drawable.wifi);
+		menuobj.getItem(5).setIcon(R.drawable.data_connect);
 
+		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
+			hotspot = isWifiApEnabled();
+			if (hotspot) {
+				menuobj.getItem(3).setIcon(R.drawable.hotspot_selected);
+
+			}
+		}
+		if (wifi) {
+			menuobj.getItem(4).setIcon(R.drawable.wifi_selected);
+		}
+		if (mobiledata) {
+			menuobj.getItem(5).setIcon(R.drawable.data_connect_selected);
+		}
+	}
 }// end of Activity
