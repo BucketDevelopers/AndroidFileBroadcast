@@ -1,6 +1,11 @@
 # cache for current jar dependency. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
+<<<<<<< HEAD
+1389507655000 627582 db0f122c99ef9f90dbab3fada6d191f2880cbb8e /home/master/custom/adt-bundle-linux-x86_64-20131030/sdk/extras/android/support/v7/appcompat/libs/android-support-v4.jar
+1389990882000 627582 db0f122c99ef9f90dbab3fada6d191f2880cbb8e /home/master/workspace/FileTransfer/libs/android-support-v4.jar
+=======
 1389803542000 627582 db0f122c99ef9f90dbab3fada6d191f2880cbb8e /home/ravio/workspace/aFileChooser/libs/android-support-v4.jar
 1389803542000 627582 db0f122c99ef9f90dbab3fada6d191f2880cbb8e /home/ravio/file_transfer/uft/libs/android-support-v4.jar
 1389803542000 627582 db0f122c99ef9f90dbab3fada6d191f2880cbb8e /home/ravio/adt-bundle-linux-x86_64-20131030/sdk/extras/android/support/v7/appcompat/libs/android-support-v4.jar
+>>>>>>> 7f5845d82d90642e09b30d7445d24c997939de69

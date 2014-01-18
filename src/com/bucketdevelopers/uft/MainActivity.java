@@ -26,9 +26,9 @@ public class MainActivity extends ActionBarActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		//SPlash shit..
-		XmlParser.checkXml(getFilesDir(), "list.xml");	//Create xml file
-		
+		// SPlash shit..
+		XmlParser.checkXml(getFilesDir(), "list.xml"); // Create xml file
+
 		// Processing in the splash
 
 		/*
@@ -43,15 +43,14 @@ public class MainActivity extends ActionBarActivity {
 			}
 
 		} catch (Exception e) {
-			Toast.makeText(MainActivity.this,"Error: SD card unavailable.",
+			Toast.makeText(MainActivity.this, "Error: SD card unavailable.",
 					Toast.LENGTH_LONG).show();
 
 			Log.d("FTDebug", e.toString());
 			MainActivity.this.finish();
 
 		}
-		
-		
+
 		// Setting up Indicators (page indicators)
 		final View pg1indicator = findViewById(R.id.page1);
 		final View pg2indicator = findViewById(R.id.page2);

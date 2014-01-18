@@ -20,6 +20,7 @@
     </uses-permission>
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" >
     </uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
@@ -28,6 +29,7 @@
         <activity
             android:name="com.bucketdevelopers.uft.MainActivity"
             android:label="@string/app_name"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:uiOptions="splitActionBarWhenNarrow" >
             <intent-filter>
@@ -36,12 +38,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
+
         <service android:name="com.bucketdevelopers.uft.ServerService$HTTPD" >
-        </service><service android:name="com.bucketdevelopers.uft.ServerService" >
+        </service>
+        <service android:name="com.bucketdevelopers.uft.ServerService" >
         </service>
 
-        <activity android:name="com.bucketdevelopers.uft.File_Download" />
+        <activity
+            android:name="com.bucketdevelopers.uft.File_Download"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.bucketdevelopers.uft.FullScreenQRCode"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.ipaulpro.afilechooser.FileChooserActivity"
             android:icon="@drawable/ic_chooser"
@@ -56,6 +64,6 @@
                 <data android:mimeType="*/*" />
             </intent-filter>
         </activity>
-        </application>
+    </application>
 
 </manifest>

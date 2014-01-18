@@ -10,6 +10,7 @@ import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -33,6 +34,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
 
+@SuppressLint("DefaultLocale")
 public class Listpage extends Fragment {
 
 	private static final int REQUEST_CODE = 122;
@@ -229,12 +231,11 @@ private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
       
     }
   };
-  
   @Override
 public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {
 		case REQUEST_CODE:
-			if (resultCode == xy.RESULT_OK) {
+			if (resultCode == Activity.RESULT_OK) {
 				String tempFilePath, tempFileName;
 				final Uri uri = data.getData();
 				File file = FileUtils.getFile(uri);

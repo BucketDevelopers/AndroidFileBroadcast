@@ -1,4 +1,4 @@
-package com.qrcode.library;
+package com.common.methods.qrcodelibrary;
 import android.provider.ContactsContract;
 
 

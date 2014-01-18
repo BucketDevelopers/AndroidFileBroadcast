@@ -1,4 +1,4 @@
-package com.qrcode.library;
+package com.common.methods.qrcodelibrary;
 
 /*
  * Copyright (C) 2008 ZXing authors

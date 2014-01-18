@@ -15,5 +15,7 @@
     <string name="select_files">2.Select Files</string>
     <string name="enable_transfer">1.Enable Transfer</string>
     <string name="status">Status</string>
+    <string name="scan_description">Scan this QRCode in the Other phone to Download the file</string>
+    <string name="sdSpaceError">Unable to Determine SD Card Space</string>
 
 </resources>
