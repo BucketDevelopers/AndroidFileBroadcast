@@ -21,7 +21,6 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.TelephonyManager;
-import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -154,6 +153,11 @@ public class MainActivity extends ActionBarActivity {
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		switch (item.getItemId()) {
+		case R.id.About:
+			return true;
+		case R.id.Settings:
+			return true;
+
 		case R.id.wifi_hotspot:
 			// SWITCH ON?OFF WIFI HOTSPOT HERE
 			if (android.os.Build.VERSION.SDK_INT < Build.VERSION_CODES.FROYO) {

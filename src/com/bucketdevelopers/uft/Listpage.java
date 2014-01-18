@@ -2,6 +2,7 @@ package com.bucketdevelopers.uft;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
 
 import com.common.methods.MimeUtils;
@@ -38,13 +39,14 @@ import android.widget.Toast;
 public class Listpage extends Fragment {
 
 	private static final int REQUEST_CODE = 122;
-	protected Object mActionMode;
+	protected ActionMode mActionMode;
 	protected static Context ab;
 	protected ListView listview;
+	
 	protected static MainActivity xy;
 	protected Boolean selected;
+	public static ArrayList<Integer> selectedItems= new ArrayList<Integer>();
 	protected View selectedView;
-	public int selectedItem = -1;
 	Button addFiles;
 	ArrayList<String> filearray;
 	ArrayAdapter<String> arrayadapter;
@@ -61,7 +63,6 @@ public class Listpage extends Fragment {
 
 	}
 
-	@SuppressLint("NewApi")
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 
@@ -95,7 +96,7 @@ public class Listpage extends Fragment {
 		xml = new XmlParser(v.getContext().getFilesDir());
 		filearray = xml.fileList();
 
-		arrayadapter = new ArrayAdapter<String>(v.getContext(),R.layout.list_text, filearray);
+		arrayadapter = new CustomAdaptor(v.getContext(), filearray);
 	     listview.setAdapter(arrayadapter);
         listview.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         listview.setOnItemClickListener(new OnItemClickListener() {
@@ -105,7 +106,7 @@ public class Listpage extends Fragment {
 					long id) {
 				if(!selected)
 				{
-					// User clicked on the file -> Open the file
+					// User clicked on the file, unselected -> Open the file
 					String fpath = XmlParser.getFilePath(filearray.get(pos))
 							.toLowerCase();
 					String extension = fpath.substring(fpath.lastIndexOf('.') + 1);
@@ -122,6 +123,22 @@ public class Listpage extends Fragment {
 					}
 					// TODO Auto-generated method stub
 				}
+				else{
+					//user clicked on file when CAB is shown. 
+					//If selected-> unselect else select.
+					if(selectedItems.contains((Integer)pos))
+						{
+							selectedItems.remove((Integer)pos);
+							mActionMode.setTitle(selectedItems.size()+" selected");
+						}
+					else
+						{
+							selectedItems.add((Integer)pos);
+							mActionMode.setTitle(selectedItems.size()+" selected");
+						}
+					arrayadapter.notifyDataSetChanged();
+					 
+					}
 			}
 		});
        
@@ -133,12 +150,9 @@ public class Listpage extends Fragment {
 	    	            if (mActionMode != null) {
 	    	              return false;
 	    	            }
-	    	            selectedItem = position;
-	    	            listview.setItemChecked(position, true);
-	    	            view.setBackgroundColor(getResources().getColor(R.color.selected));
-	    	            view.setSelected(true);
-	    	            selectedView =view;
+	    	            selectedItems.add(position) ;
 	    	            selected = true;
+	    	            arrayadapter.notifyDataSetChanged();
 	    	            // start the CAB using the ActionMode.Callback defined above
 	    	            mActionMode = xy.startSupportActionMode( mActionModeCallback);
 	    	
@@ -167,9 +181,8 @@ private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
     // onCreateActionMode, but
     // may be called multiple times if the mode is invalidated.
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-    	mode.setTitle(filearray.get(selectedItem));
-    	
-      return false; // Return false if nothing is done
+    	mode.setTitle(selectedItems.size()+" selected");
+        return false; // Return false if nothing is done
     }
 
     // called when the user selects a contextual menu item
@@ -178,33 +191,30 @@ private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
       switch (item.getItemId()) {
       case R.id.cab_selected:
         
-        Map<String, String> filemap = XmlParser
-				.getFileMap();
-		Log.d("Hell",
-				"List has " + filearray.size());
-		filearray.remove(selectedItem);
-		arrayadapter.notifyDataSetChanged();
-		tempfile = new File(ab.getFilesDir(),
-				"list.xml");
-		tempfile.delete();
-		XmlParser.checkXml(ab.getFilesDir(),
-				"list.xml");
-		XmlParser t_xml = new XmlParser(
-				ab.getFilesDir());
-		Log.d("Hell",
-				"List has " + filearray.size());
-		for (int i = 0; i < filearray.size(); i++) {
-			// Log.d("attempt",
-			// "Trying "+filearray.get(i)+" at "+filemap.get(filearray.get(i)));
-			t_xml.addFile(filearray.get(i),
-					filemap.get(filearray.get(i)));
-		}
-		Toast.makeText(ab, "Removed",
-				Toast.LENGTH_SHORT).show();
-		
-        // the Action was executed, close the CAB
-        mode.finish();
-        return true;
+				Map<String, String> filemap = XmlParser.getFileMap();
+				
+				Log.d("Hell", "List has " + filearray.size());
+
+				Collections.sort(selectedItems);
+
+				for (int i = selectedItems.size() - 1; i >= 0; i--) {
+					filearray.remove((int) selectedItems.get(i));
+				}
+				arrayadapter.notifyDataSetChanged();
+
+				tempfile = new File(ab.getFilesDir(), "list.xml");
+				tempfile.delete();
+				XmlParser.checkXml(ab.getFilesDir(), "list.xml");
+				XmlParser t_xml = new XmlParser(ab.getFilesDir());
+
+				for (int i = 0; i < filearray.size(); i++) {
+					t_xml.addFile(filearray.get(i),
+							filemap.get(filearray.get(i)));
+				}
+
+				// the Action was executed, close the CAB
+				mode.finish();
+				return true;
       case R.id.cab_clear_list:
     	  
     	  
@@ -215,19 +225,19 @@ private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 					"list.xml");
 			filearray.clear();
 			arrayadapter.notifyDataSetChanged();
-    	  mode.finish();
-    	  return true;
+			mode.finish();
+			return true;
       default:
-        return false;
+    	  	return false;
       }
     }
 
     // called when the user exits the action mode
     public void onDestroyActionMode(ActionMode mode) {
     	selected = false;
-    	selectedView.setBackgroundColor(getResources().getColor(R.color.deselected));
     	mActionMode = null;
-    	selectedItem = -1;
+    	selectedItems.clear();
+    	arrayadapter.notifyDataSetChanged();
       
     }
   };
