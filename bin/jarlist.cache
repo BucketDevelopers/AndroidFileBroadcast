@@ -1,5 +1,5 @@
 # cache for current jar dependency. DO NOT EDIT.
 # format is <lastModified> <length> <SHA-1> <path>
 # Encoding is UTF-8
-1389878034567 627582 db0f122c99ef9f90dbab3fada6d191f2880cbb8e C:\Users\Master\workspace\Flash-File-Transfer\libs\android-support-v4.jar
-1389327834296 627582 db0f122c99ef9f90dbab3fada6d191f2880cbb8e C:\Development\adt-bundle-windows-x86_64\sdk\extras\android\support\v7\appcompat\libs\android-support-v4.jar
+1389507655000 627582 db0f122c99ef9f90dbab3fada6d191f2880cbb8e /home/master/custom/adt-bundle-linux-x86_64-20131030/sdk/extras/android/support/v7/appcompat/libs/android-support-v4.jar
+1389990882000 627582 db0f122c99ef9f90dbab3fada6d191f2880cbb8e /home/master/workspace/FileTransfer/libs/android-support-v4.jar

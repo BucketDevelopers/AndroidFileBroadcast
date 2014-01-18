@@ -35,9 +35,9 @@ public class IpAddress {
 			}
 
 		} catch (SocketException ex) {
-			return "IP Error";
+			return "IP generation Exception";
 		}
-		return "Unable to Read IP";
+		return "Not Connected to Any Network";
 	}
 
 

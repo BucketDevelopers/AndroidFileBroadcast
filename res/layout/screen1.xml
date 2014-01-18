@@ -70,8 +70,9 @@
 
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_gravity="center"
+        android:layout_weight="1"
         android:orientation="horizontal" >
 
         <ImageView
@@ -88,6 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="20dp"
+            android:layout_gravity="center"
             android:text="@string/status" />
     </LinearLayout>
 
@@ -103,7 +105,22 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
-            android:contentDescription="QRCodeImage" />
+            android:contentDescription="QRCodeImage"
+            tools:ignore="HardcodedText" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/sdspace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/sdSpaceError" />
     </LinearLayout>
 
 </LinearLayout>
