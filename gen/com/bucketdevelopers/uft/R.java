@@ -985,21 +985,22 @@ containing a value of this type.
         public static final int abc_textfield_searchview_holo_light=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020056;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020057;
-        public static final int check=0x7f020058;
-        public static final int data=0x7f020059;
-        public static final int data_connect=0x7f02005a;
-        public static final int fileselect=0x7f02005b;
-        public static final int hotspot=0x7f02005c;
-        public static final int ic_chooser=0x7f02005d;
-        public static final int ic_file=0x7f02005e;
-        public static final int ic_folder=0x7f02005f;
-        public static final int ic_launcher=0x7f020060;
-        public static final int runningserver=0x7f020061;
-        public static final int stoppedserver=0x7f020062;
-        public static final int wifi=0x7f020063;
+        public static final int add_files=0x7f020058;
+        public static final int check=0x7f020059;
+        public static final int data=0x7f02005a;
+        public static final int data_connect=0x7f02005b;
+        public static final int fileselect=0x7f02005c;
+        public static final int hotspot=0x7f02005d;
+        public static final int ic_chooser=0x7f02005e;
+        public static final int ic_file=0x7f02005f;
+        public static final int ic_folder=0x7f020060;
+        public static final int ic_launcher=0x7f020061;
+        public static final int runningserver=0x7f020062;
+        public static final int stoppedserver=0x7f020063;
+        public static final int wifi=0x7f020064;
     }
     public static final class id {
-        public static final int About=0x7f090052;
+        public static final int About=0x7f090053;
         public static final int ServerEnable=0x7f09004a;
         public static final int action_bar=0x7f09001c;
         public static final int action_bar_activity_content=0x7f090015;
@@ -1016,10 +1017,12 @@ containing a value of this type.
         public static final int always=0x7f09000b;
         public static final int beginning=0x7f090011;
         public static final int button1=0x7f090047;
+        public static final int cab_clear_list=0x7f09004e;
+        public static final int cab_selected=0x7f09004d;
         public static final int checkbox=0x7f09002d;
         public static final int clientheaderinfo=0x7f090046;
         public static final int collapseActionView=0x7f09000d;
-        public static final int data_connection=0x7f090051;
+        public static final int data_connection=0x7f090052;
         public static final int default_activity_button=0x7f090028;
         public static final int dialog=0x7f09000e;
         public static final int disableHome=0x7f090008;
@@ -1044,8 +1047,7 @@ containing a value of this type.
         public static final int listview=0x7f090049;
         public static final int middle=0x7f090012;
         public static final int never=0x7f090009;
-        public static final int new_cab=0x7f09004d;
-        public static final int new_wifi_hotspot=0x7f09004e;
+        public static final int new_wifi_hotspot=0x7f09004f;
         public static final int none=0x7f090010;
         public static final int normal=0x7f090000;
         public static final int page1=0x7f09003d;
@@ -1079,8 +1081,8 @@ containing a value of this type.
         public static final int up=0x7f090021;
         public static final int useLogo=0x7f090003;
         public static final int viewpager=0x7f090040;
-        public static final int wifi=0x7f090050;
-        public static final int wifi_hotspot=0x7f09004f;
+        public static final int wifi=0x7f090051;
+        public static final int wifi_hotspot=0x7f090050;
         public static final int withText=0x7f09000c;
     }
     public static final class integer {

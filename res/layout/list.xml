@@ -1,5 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ListView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+<RelativeLayout 
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:layout_marginTop="10dp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_centerVertical="true"
+        android:text="Select files to send." />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="20dp"
+        android:text="Add Files"
+        android:background="@drawable/ab_btn_color"
+        android:drawableLeft="@drawable/add_files"
+        android:paddingRight="5dp"
+        />
+
+</RelativeLayout>
+<RelativeLayout 
+    android:layout_width="fill_parent"
+            
+        android:layout_marginTop="8dp"
+android:layout_height="2dip"
+android:background="#FF000000"></RelativeLayout>
+<ListView 
     android:id="@+id/listview" 
     android:choiceMode="singleChoice"  
     android:layout_width="match_parent"
@@ -7,3 +42,4 @@
     
 
 </ListView>
+</LinearLayout>

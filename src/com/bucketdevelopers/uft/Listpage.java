@@ -1,11 +1,15 @@
 package com.bucketdevelopers.uft;
 
+import java.io.File;
 import java.util.ArrayList;
 
+import com.common.methods.MimeUtils;
 import com.common.methods.XmlParser;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.view.ActionMode;
@@ -14,9 +18,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -29,6 +35,9 @@ public class Listpage extends Fragment {
 	protected ListView listview;
 	protected static MainActivity xy;
 	public int selectedItem = -1;
+	ArrayList<String> filearray;
+	ArrayAdapter<String> arrayadapter;
+	XmlParser xml;
 	public static final Listpage newInstance(MainActivity mainActivity)
 
 	{
@@ -50,13 +59,43 @@ public class Listpage extends Fragment {
 		ab = v.getContext();
 		listview = (ListView) v.findViewById(R.id.listview);
 
-	    ArrayList<String> filearray = new ArrayList<String>();
-		XmlParser xml = new XmlParser(v.getContext().getFilesDir());
+	    filearray = new ArrayList<String>();
+		xml = new XmlParser(v.getContext().getFilesDir());
 		filearray = xml.fileList();
 
-		ArrayAdapter<String> arrayadapter = new ArrayAdapter<String>(v.getContext(),android.R.layout.simple_list_item_1, filearray);
+		arrayadapter = new ArrayAdapter<String>(v.getContext(),android.R.layout.simple_list_item_activated_1, filearray);
 	     listview.setAdapter(arrayadapter);
         listview.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+        listview.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int pos,
+					long id) {
+				
+				// User clicked on the file -> Open the file
+				String fpath = XmlParser.getFilePath(
+						filearray.get(pos)).toLowerCase();
+				String extension = fpath.substring(fpath
+						.lastIndexOf('.') + 1);
+				File file = new File(fpath.substring(1));
+				if (MimeUtils
+						.guessMimeTypeFromExtension(extension) == null)
+					Toast.makeText(view.getContext(),
+							"Unknown file type",
+							Toast.LENGTH_SHORT).show();
+				else {
+					Intent intent = new Intent();
+					intent.setAction(android.content.Intent.ACTION_VIEW);
+					intent.setDataAndType(
+							Uri.fromFile(file),
+							MimeUtils
+									.guessMimeTypeFromExtension(extension));
+					startActivity(intent);
+				}
+				// TODO Auto-generated method stub
+				
+			}
+		});
        
 	    listview.setOnItemLongClickListener(new OnItemLongClickListener() {
 	    	@Override
@@ -97,7 +136,7 @@ private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
     // onCreateActionMode, but
     // may be called multiple times if the mode is invalidated.
     public boolean onPrepareActionMode(ActionMode mode, Menu menu) {
-    	mode.setTitle("hello");
+    	mode.setTitle(filearray.get(selectedItem));
     	
       return false; // Return false if nothing is done
     }
@@ -105,11 +144,14 @@ private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
     // called when the user selects a contextual menu item
     public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
       switch (item.getItemId()) {
-      case R.id.new_cab:
+      case R.id.cab_selected:
         show();
         // the Action was executed, close the CAB
         mode.finish();
         return true;
+      case R.id.cab_clear_list:
+    	  mode.finish();
+    	  return true;
       default:
         return false;
       }

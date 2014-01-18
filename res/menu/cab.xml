@@ -1,16 +1,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:mastercode="http://schemas.android.com/apk/res-auto" >
 
+    
     <item
         android:orderInCategory="100"
-        android:id="@+id/new_cab"
-        android:title="CABB"
-        mastercode:showAsAction="always"/>
+        android:id="@+id/cab_selected"
+        android:title="Remove Selected"
+        mastercode:showAsAction="always|withText"/>
+    <item
+        android:orderInCategory="100"
+        android:id="@+id/cab_clear_list"
+        android:title="Clear List"
+        mastercode:showAsAction="always|withText"/>
     <item
         android:id="@+id/new_wifi_hotspot"
         android:icon="@drawable/hotspot"
         android:orderInCategory="100"
-        android:title="@string/hotspot"
-        mastercode:showAsAction="always"/>
+        android:title="Now"
+        mastercode:showAsAction="always|withText"/>
    
 </menu>
