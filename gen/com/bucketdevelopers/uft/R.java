@@ -985,22 +985,25 @@ containing a value of this type.
         public static final int abc_textfield_searchview_holo_light=0x7f020055;
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020056;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020057;
-        public static final int check=0x7f020058;
-        public static final int data=0x7f020059;
-        public static final int data_connect=0x7f02005a;
-        public static final int fileselect=0x7f02005b;
-        public static final int hotspot=0x7f02005c;
-        public static final int ic_chooser=0x7f02005d;
-        public static final int ic_file=0x7f02005e;
-        public static final int ic_folder=0x7f02005f;
-        public static final int ic_launcher=0x7f020060;
-        public static final int runningserver=0x7f020061;
-        public static final int stoppedserver=0x7f020062;
-        public static final int wifi=0x7f020063;
+        public static final int add_files=0x7f020058;
+        public static final int check=0x7f020059;
+        public static final int data=0x7f02005a;
+        public static final int data_connect=0x7f02005b;
+        public static final int file_any=0x7f02005c;
+        public static final int fileany=0x7f02005d;
+        public static final int fileselect=0x7f02005e;
+        public static final int hotspot=0x7f02005f;
+        public static final int ic_chooser=0x7f020060;
+        public static final int ic_file=0x7f020061;
+        public static final int ic_folder=0x7f020062;
+        public static final int ic_launcher=0x7f020063;
+        public static final int runningserver=0x7f020064;
+        public static final int stoppedserver=0x7f020065;
+        public static final int wifi=0x7f020066;
     }
     public static final class id {
-        public static final int About=0x7f060052;
-        public static final int ServerEnable=0x7f06004b;
+        public static final int About=0x7f060057;
+        public static final int ServerEnable=0x7f06004d;
         public static final int action_bar=0x7f06001c;
         public static final int action_bar_activity_content=0x7f060015;
         public static final int action_bar_container=0x7f06001b;
@@ -1013,13 +1016,16 @@ containing a value of this type.
         public static final int action_menu_presenter=0x7f060017;
         public static final int action_mode_close_button=0x7f060024;
         public static final int activity_chooser_view_content=0x7f060025;
+        public static final int addButton=0x7f06004b;
         public static final int always=0x7f06000b;
         public static final int beginning=0x7f060011;
         public static final int button1=0x7f060047;
+        public static final int cab_clear_list=0x7f060052;
+        public static final int cab_selected=0x7f060051;
         public static final int checkbox=0x7f06002d;
         public static final int clientheaderinfo=0x7f060046;
         public static final int collapseActionView=0x7f06000d;
-        public static final int data_connection=0x7f060051;
+        public static final int data_connection=0x7f060056;
         public static final int default_activity_button=0x7f060028;
         public static final int dialog=0x7f06000e;
         public static final int disableHome=0x7f060008;
@@ -1029,7 +1035,7 @@ containing a value of this type.
         public static final int expand_activities_button=0x7f060026;
         public static final int expanded_menu=0x7f06002c;
         public static final int explorer_fragment=0x7f060041;
-        public static final int fileSelector=0x7f06004c;
+        public static final int fileSelector=0x7f06004e;
         public static final int file_icon=0x7f060042;
         public static final int file_name=0x7f060043;
         public static final int filelist=0x7f060044;
@@ -1042,8 +1048,10 @@ containing a value of this type.
         public static final int ipfullscrn=0x7f060049;
         public static final int listMode=0x7f060001;
         public static final int list_item=0x7f060029;
+        public static final int listview=0x7f06004c;
         public static final int middle=0x7f060012;
         public static final int never=0x7f060009;
+        public static final int new_wifi_hotspot=0x7f060053;
         public static final int none=0x7f060010;
         public static final int normal=0x7f060000;
         public static final int page1=0x7f06003d;
@@ -1051,10 +1059,10 @@ containing a value of this type.
         public static final int page3=0x7f06003f;
         public static final int progress_circular=0x7f060018;
         public static final int progress_horizontal=0x7f060019;
-        public static final int qrCode=0x7f06004d;
+        public static final int qrCode=0x7f06004f;
         public static final int qrFullScreen=0x7f06004a;
         public static final int radio=0x7f06002f;
-        public static final int sdspace=0x7f06004e;
+        public static final int sdspace=0x7f060050;
         public static final int search_badge=0x7f060032;
         public static final int search_bar=0x7f060031;
         public static final int search_button=0x7f060033;
@@ -1079,8 +1087,8 @@ containing a value of this type.
         public static final int up=0x7f060021;
         public static final int useLogo=0x7f060003;
         public static final int viewpager=0x7f060040;
-        public static final int wifi=0x7f060050;
-        public static final int wifi_hotspot=0x7f06004f;
+        public static final int wifi=0x7f060055;
+        public static final int wifi_hotspot=0x7f060054;
         public static final int withText=0x7f06000c;
     }
     public static final class integer {
@@ -1139,11 +1147,14 @@ containing a value of this type.
         public static final int file_download=0x7f03001b;
         public static final int fragment_layout=0x7f03001c;
         public static final int fullscreen_qr=0x7f03001d;
-        public static final int screen1=0x7f03001e;
-        public static final int support_simple_spinner_dropdown_item=0x7f03001f;
+        public static final int list=0x7f03001e;
+        public static final int list_text=0x7f03001f;
+        public static final int screen1=0x7f030020;
+        public static final int support_simple_spinner_dropdown_item=0x7f030021;
     }
     public static final class menu {
-        public static final int main=0x7f0d0000;
+        public static final int cab=0x7f0d0000;
+        public static final int main=0x7f0d0001;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 

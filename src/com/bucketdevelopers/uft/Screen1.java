@@ -4,7 +4,6 @@ import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.bucketdevelopers.uft.ServerService;
 import com.common.methods.AvailableSpaceHandler;
-import com.common.methods.ExternalStorage;
 import com.common.methods.IpAddress;
 import com.common.methods.qrcodelibrary.Contents;
 import com.common.methods.qrcodelibrary.QRCodeEncoder;
