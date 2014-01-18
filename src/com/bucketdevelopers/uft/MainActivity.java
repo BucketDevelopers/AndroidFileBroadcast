@@ -19,9 +19,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.telephony.TelephonyManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -78,10 +78,14 @@ public class MainActivity extends ActionBarActivity {
 		pg1indicator.setBackgroundColor(0XFF18a4df);
 
 		// For Top ActionBar
-		android.support.v7.app.ActionBar acbar = getSupportActionBar();
-		acbar.setCustomView(R.layout.actionbar_top); // load your layout
-		acbar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME
-				| ActionBar.DISPLAY_SHOW_CUSTOM); // show it
+		// getSupportActionBar().setTitle(
+		// Html.fromHtml("<font color=\"#81cda8\">"
+		// + getString(R.string.app_name) + "</font>"));
+
+		// android.support.v7.app.ActionBar acbar = getSupportActionBar();
+		// acbar.setCustomView(R.layout.actionbar_top); // load your layout
+		// acbar.setDisplayOptions(ActionBar.DISPLAY_SHOW_HOME
+		// | ActionBar.DISPLAY_SHOW_CUSTOM); // show it
 
 		// For Fragments Setup
 
@@ -372,6 +376,19 @@ public class MainActivity extends ActionBarActivity {
 		} else {
 			return false;
 		}
+
+	}
+
+	// Method to update the display of Toggles
+	void updateToggleDisplay() {
+
+		if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.FROYO) {
+			boolean hotspot = isWifiApEnabled();
+
+		}
+
+		boolean mobiledata = checkMobileData();
+		boolean wifi = wifi_manager.isWifiEnabled();
 
 	}
 

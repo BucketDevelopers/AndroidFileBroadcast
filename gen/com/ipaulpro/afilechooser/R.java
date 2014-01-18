@@ -275,9 +275,9 @@ public final class R {
 		public static final int end = 0x7f060013;
 		public static final int expand_activities_button = 0x7f060026;
 		public static final int expanded_menu = 0x7f06002c;
-		public static final int explorer_fragment = 0x7f060041;
-		public static final int file_icon = 0x7f060042;
-		public static final int file_name = 0x7f060043;
+		public static final int explorer_fragment = 0x7f060040;
+		public static final int file_icon = 0x7f060041;
+		public static final int file_name = 0x7f060042;
 		public static final int home = 0x7f060014;
 		public static final int homeAsUp = 0x7f060005;
 		public static final int icon = 0x7f06002a;
@@ -342,9 +342,9 @@ public final class R {
 		public static final int abc_popup_menu_item_layout = 0x7f030014;
 		public static final int abc_search_dropdown_item_icons_2line = 0x7f030015;
 		public static final int abc_search_view = 0x7f030016;
-		public static final int chooser = 0x7f030019;
-		public static final int file = 0x7f03001a;
-		public static final int support_simple_spinner_dropdown_item = 0x7f030021;
+		public static final int chooser = 0x7f030018;
+		public static final int file = 0x7f030019;
+		public static final int support_simple_spinner_dropdown_item = 0x7f030020;
 	}
 	public static final class string {
 		public static final int abc_action_bar_home_description = 0x7f0b0001;

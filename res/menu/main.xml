@@ -29,5 +29,11 @@
         android:orderInCategory="10"
         android:title="@string/about_us"
         mastercode:showAsAction="never"/>
+    <item
+        android:id="@+id/Settings"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:orderInCategory="10"
+        android:title="@string/settings"
+        mastercode:showAsAction="never"/>
 
 </menu>
