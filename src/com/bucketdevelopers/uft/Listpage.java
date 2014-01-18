@@ -40,6 +40,8 @@ public class Listpage extends Fragment {
 	protected static Context ab;
 	protected ListView listview;
 	protected static MainActivity xy;
+	protected Boolean selected;
+	protected View selectedView;
 	public int selectedItem = -1;
 	Button addFiles;
 	ArrayList<String> filearray;
@@ -64,6 +66,7 @@ public class Listpage extends Fragment {
 	Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.list, container, false);
 		ab = v.getContext();
+		selected= false;
 		addFiles = (Button) v.findViewById(R.id.addButton);
 		listview = (ListView) v.findViewById(R.id.listview);
 
@@ -76,8 +79,11 @@ public class Listpage extends Fragment {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				if(!selected)
+				{
 				Intent intent = new Intent( v.getContext(), FileChooserActivity.class);
 				startActivityForResult(intent, REQUEST_CODE);
+				}
 			}
 		});
 		
@@ -95,29 +101,25 @@ public class Listpage extends Fragment {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int pos,
 					long id) {
-				
-				// User clicked on the file -> Open the file
-				String fpath = XmlParser.getFilePath(
-						filearray.get(pos)).toLowerCase();
-				String extension = fpath.substring(fpath
-						.lastIndexOf('.') + 1);
-				File file = new File(fpath.substring(1));
-				if (MimeUtils
-						.guessMimeTypeFromExtension(extension) == null)
-					Toast.makeText(view.getContext(),
-							"Unknown file type",
-							Toast.LENGTH_SHORT).show();
-				else {
-					Intent intent = new Intent();
-					intent.setAction(android.content.Intent.ACTION_VIEW);
-					intent.setDataAndType(
-							Uri.fromFile(file),
-							MimeUtils
-									.guessMimeTypeFromExtension(extension));
-					startActivity(intent);
+				if(!selected)
+				{
+					// User clicked on the file -> Open the file
+					String fpath = XmlParser.getFilePath(filearray.get(pos))
+							.toLowerCase();
+					String extension = fpath.substring(fpath.lastIndexOf('.') + 1);
+					File file = new File(fpath.substring(1));
+					if (MimeUtils.guessMimeTypeFromExtension(extension) == null)
+						Toast.makeText(view.getContext(), "Unknown file type",
+								Toast.LENGTH_SHORT).show();
+					else {
+						Intent intent = new Intent();
+						intent.setAction(android.content.Intent.ACTION_VIEW);
+						intent.setDataAndType(Uri.fromFile(file),
+								MimeUtils.guessMimeTypeFromExtension(extension));
+						startActivity(intent);
+					}
+					// TODO Auto-generated method stub
 				}
-				// TODO Auto-generated method stub
-				
 			}
 		});
        
@@ -131,10 +133,13 @@ public class Listpage extends Fragment {
 	    	            }
 	    	            selectedItem = position;
 	    	            listview.setItemChecked(position, true);
-
+	    	            view.setBackgroundColor(getResources().getColor(R.color.selected));
+	    	            view.setSelected(true);
+	    	            selectedView =view;
+	    	            selected = true;
 	    	            // start the CAB using the ActionMode.Callback defined above
 	    	            mActionMode = xy.startSupportActionMode( mActionModeCallback);
-	    	           view.setSelected(true);
+	    	
 		    	            
 	    	            return true;
 	    	          }
@@ -217,17 +222,14 @@ private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
 
     // called when the user exits the action mode
     public void onDestroyActionMode(ActionMode mode) {
-    	listview.setItemChecked(selectedItem, false);
+    	selected = false;
+    	selectedView.setBackgroundColor(getResources().getColor(R.color.deselected));
     	mActionMode = null;
-      selectedItem = -1;
+    	selectedItem = -1;
       
     }
   };
-
-  private void show() {
-    Toast.makeText(Listpage.ab,
-        String.valueOf(selectedItem), Toast.LENGTH_SHORT).show();
-  }
+  
   @Override
 public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (requestCode) {

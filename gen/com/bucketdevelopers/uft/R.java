@@ -794,12 +794,14 @@ containing a value of this type.
         public static final int abc_split_action_bar_is_narrow=0x7f0a0002;
     }
     public static final class color {
-        public static final int abc_search_url_text_holo=0x7f0b0005;
+        public static final int abc_search_url_text_holo=0x7f0b0007;
         public static final int abc_search_url_text_normal=0x7f0b0000;
         public static final int abc_search_url_text_pressed=0x7f0b0002;
         public static final int abc_search_url_text_selected=0x7f0b0001;
+        public static final int blue=0x7f0b0005;
         public static final int deselected=0x7f0b0003;
-        public static final int selected=0x7f0b0004;
+        public static final int selected=0x7f0b0006;
+        public static final int white=0x7f0b0004;
     }
     public static final class dimen {
         /**  Default height of an action bar. 
@@ -986,20 +988,21 @@ containing a value of this type.
         public static final int abc_textfield_searchview_right_holo_dark=0x7f020056;
         public static final int abc_textfield_searchview_right_holo_light=0x7f020057;
         public static final int add_files=0x7f020058;
-        public static final int check=0x7f020059;
-        public static final int data=0x7f02005a;
-        public static final int data_connect=0x7f02005b;
-        public static final int file_any=0x7f02005c;
-        public static final int fileany=0x7f02005d;
-        public static final int fileselect=0x7f02005e;
-        public static final int hotspot=0x7f02005f;
-        public static final int ic_chooser=0x7f020060;
-        public static final int ic_file=0x7f020061;
-        public static final int ic_folder=0x7f020062;
-        public static final int ic_launcher=0x7f020063;
-        public static final int runningserver=0x7f020064;
-        public static final int stoppedserver=0x7f020065;
-        public static final int wifi=0x7f020066;
+        public static final int bg_key=0x7f020059;
+        public static final int check=0x7f02005a;
+        public static final int data=0x7f02005b;
+        public static final int data_connect=0x7f02005c;
+        public static final int file_any=0x7f02005d;
+        public static final int fileany=0x7f02005e;
+        public static final int fileselect=0x7f02005f;
+        public static final int hotspot=0x7f020060;
+        public static final int ic_chooser=0x7f020061;
+        public static final int ic_file=0x7f020062;
+        public static final int ic_folder=0x7f020063;
+        public static final int ic_launcher=0x7f020064;
+        public static final int runningserver=0x7f020065;
+        public static final int stoppedserver=0x7f020066;
+        public static final int wifi=0x7f020067;
     }
     public static final class id {
         public static final int About=0x7f090054;
