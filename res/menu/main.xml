@@ -1,0 +1,39 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:mastercode="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:orderInCategory="100"
+        android:title="@string/choose_mode"
+        mastercode:showAsAction="always"/>
+    <item
+        android:id="@+id/wifi_hotspot"
+        android:icon="@drawable/hotspot"
+        android:orderInCategory="100"
+        android:title="@string/hotspot"
+        mastercode:showAsAction="always"/>
+    <item
+        android:id="@+id/wifi"
+        android:icon="@drawable/wifi"
+        android:orderInCategory="100"
+        android:title="@string/wifi"
+        mastercode:showAsAction="always"/>
+    <item
+        android:id="@+id/data_connection"
+        android:icon="@drawable/data_connect"
+        android:orderInCategory="100"
+        android:title="@string/mobile_data"
+        mastercode:showAsAction="always"/>
+    <item
+        android:id="@+id/About"
+        android:icon="@android:drawable/ic_dialog_info"
+        android:orderInCategory="10"
+        android:title="@string/about_us"
+        mastercode:showAsAction="never"/>
+    <item
+        android:id="@+id/Settings"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:orderInCategory="10"
+        android:title="@string/settings"
+        mastercode:showAsAction="never"/>
+
+</menu>

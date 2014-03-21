@@ -1,0 +1,14 @@
+</ul>
+</div>
+<center>
+<form name="myform" id="upform" method="post" enctype="multipart/form-data" action = "upload">
+<div id="yourBtn" onclick="getFile()">Send a file</div>
+<input type="hidden" name="filenamebackup" value="nofile">
+<input type="hidden" name="filesize" value="nullsize">
+<div style="height: 0px;width: 0px; overflow:hidden;">
+<input type="file" id="loadfile" value="Upload" name="myfile" onchange="extract(document.myform.myfile.value)">
+</div>
+</form>
+</center>
+</body>
+</html>
