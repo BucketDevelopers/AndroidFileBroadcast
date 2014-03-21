@@ -41,7 +41,7 @@ public class ExternalStorage extends Activity{
 		if(checksdcardstate()){
 			
 			File sdcardpath= Environment.getExternalStorageDirectory();
-			String appsdfolder=sdcardpath.toString()+"/webserverdata";
+			String appsdfolder=sdcardpath.toString()+"/received_data";
 			return appsdfolder;
 			
 		}else{
@@ -55,7 +55,7 @@ public class ExternalStorage extends Activity{
 	public static String getsdcardfolderwithoutcheck(){
 		
 		File sdcardpath= Environment.getExternalStorageDirectory();
-		String appsdfolder=sdcardpath.toString()+"/webserverdata";
+		String appsdfolder=sdcardpath.toString()+"/received_data";
 		return appsdfolder;
 		
 		

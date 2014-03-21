@@ -2,9 +2,13 @@ package com.bucketdevelopers.uft;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
+import com.common.methods.ExternalStorage;
 import com.common.methods.MimeUtils;
 import com.common.methods.XmlParser;
 import com.ipaulpro.afilechooser.FileChooserActivity;
@@ -36,9 +40,8 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 @SuppressLint("DefaultLocale")
-public class Listpage extends Fragment {
+public class ReceivedPage extends Fragment {
 
-	private static final int REQUEST_CODE = 122;
 	protected ActionMode mActionMode;
 	protected static Context ab;
 	protected ListView listview;
@@ -46,16 +49,15 @@ public class Listpage extends Fragment {
 	protected static MainActivity xy;
 	protected Boolean selected;
 	public ArrayList<Integer> selectedItems= new ArrayList<Integer>();
-	protected View selectedView;
-	Button addFiles;
-	ArrayList<String> filearray;
+	Button refreshButton;
+	List<String> filearray;
 	ArrayAdapter<String> arrayadapter;
-	XmlParser xml;
-	public static final Listpage newInstance(MainActivity mainActivity)
+	File extPath;
+	public static final ReceivedPage newInstance(MainActivity mainActivity)
 
 	{
 
-		Listpage f = new Listpage();
+		ReceivedPage f = new ReceivedPage();
 		Bundle bdl = new Bundle(1);
 		xy = mainActivity;
 		f.setArguments(bdl);
@@ -67,37 +69,54 @@ public class Listpage extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 
 	Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.list, container, false);
+		View v = inflater.inflate(R.layout.received, container, false);
 		ab = v.getContext();
 		selected= false;
-		addFiles = (Button) v.findViewById(R.id.addButton);
-		listview = (ListView) v.findViewById(R.id.listview);
-
+		refreshButton = (Button) v.findViewById(R.id.browseButton);
+		listview = (ListView) v.findViewById(R.id.receivedList);
 		
-		//addFiles Button setup
+		//Browse Button setup
 		
 		
-		addFiles.setOnClickListener(new OnClickListener() {
+		refreshButton.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				if(!selected)
 				{
-				Intent intent = new Intent( v.getContext(), FileChooserActivity.class);
-				startActivityForResult(intent, REQUEST_CODE);
+					try{
+						
+					
+					File tempPath = new File(ExternalStorage.getsdcardfolderwithoutcheck());
+					filearray.clear();
+					filearray.addAll(Arrays.asList(tempPath.list(null)));
+					Log.d("refresh2", filearray.toString());
+					arrayadapter.notifyDataSetChanged();				
+					}
+					catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
 				}
 			}
 		});
 		
+		filearray = new ArrayList<String>();
 		
+		try {
+			extPath = new File(ExternalStorage.getsdcardfolderpath());
+			filearray =  new LinkedList<String>(Arrays.asList(extPath.list(null)));
+			Log.d("files", filearray.toString());
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-	    filearray = new ArrayList<String>();
-		xml = new XmlParser(v.getContext().getFilesDir());
-		filearray = xml.fileList();
-
 		arrayadapter = new CustomAdaptor(v.getContext(), filearray,this.selectedItems);
-	     listview.setAdapter(arrayadapter);
+		listview.setAdapter(arrayadapter);
+		
         listview.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         listview.setOnItemClickListener(new OnItemClickListener() {
 
@@ -107,8 +126,8 @@ public class Listpage extends Fragment {
 				if(!selected)
 				{
 					// User clicked on the file, unselected -> Open the file
-					String fpath = XmlParser.getFilePath(filearray.get(pos))
-							.toLowerCase();
+					String fpath = (extPath+"/"+filearray.get(pos)).toLowerCase();
+					Log.d("files", fpath);
 					String extension = fpath.substring(fpath.lastIndexOf('.') + 1);
 					File file = new File(fpath.substring(1));
 					if (MimeUtils.guessMimeTypeFromExtension(extension) == null)
@@ -243,7 +262,7 @@ private ActionMode.Callback mActionModeCallback = new ActionMode.Callback() {
   };
   @Override
 public void onActivityResult(int requestCode, int resultCode, Intent data) {
-		switch (requestCode) {
+		/*switch (requestCode) {
 		case REQUEST_CODE:
 			if (resultCode == Activity.RESULT_OK) {
 				String tempFilePath, tempFileName;
@@ -258,7 +277,8 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 				Log.d("msg2", tempFilePath);
 				arrayadapter.add(tempFileName);
 			}
-		}
+		}*/
 	}
 } 
+
 

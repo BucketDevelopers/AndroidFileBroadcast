@@ -134,7 +134,7 @@ public class MainActivity extends ActionBarActivity {
 		List<Fragment> fList = new ArrayList<Fragment>();
 		fList.add(Screen1.newInstance(""));
 		fList.add(Listpage.newInstance(this));
-		fList.add(MyFragment.newInstance("Fragment 3"));
+		fList.add(ReceivedPage.newInstance(this));
 
 		return fList;
 
