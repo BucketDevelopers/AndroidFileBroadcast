@@ -1,7 +1,7 @@
-Flash-File-Transfer
-===================
+Android File Broadcast
+======================
 
-Next Generation File Transfer Android App !
+Next Generation File Broadcast or Transfer Android App !
 
 The app enables any two devices (only one of them having this app installed)
 to transfer files at speeds similar to wifi-direct
@@ -12,7 +12,7 @@ and Transfer Files to any device (Mobile Phone , PC or Tablet )  with a web brow
 
 -----------------------------------------------------------------------
 
-Note: App is now in Alpha Stage
+Note: App is now in Beta Stage and will be released soon !
 
 Warning:
 The App is in development stage .
