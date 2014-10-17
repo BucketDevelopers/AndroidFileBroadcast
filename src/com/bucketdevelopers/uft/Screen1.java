@@ -55,9 +55,20 @@ public class Screen1 extends Fragment {
 		updateSDSpace();
 
 		// Start\Stop the Server
-
-		ImageButton serverToggle = (ImageButton) v
+		final TextView transfer_text = (TextView) v.findViewById(R.id.transfer_text);
+		final ImageButton serverToggle = (ImageButton) v
 				.findViewById(R.id.ServerEnable);
+
+		if(ServerService.serverenabled==true)
+		{
+			transfer_text.setText("1.Disable transfer");
+			
+		}
+		else
+		{
+			transfer_text.setText("1.Enable transfer");
+			
+		}
 		serverToggle.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -75,11 +86,12 @@ public class Screen1 extends Fragment {
 					Log.d("tag", "Starting");
 					uploaddownloadservice.putExtra("Port", PORT);
 					getActivity().startService(uploaddownloadservice);
-					
+					transfer_text.setText("1.Disable transfer");
 					updateIP(true);
 
 				} else {
 					getActivity().stopService(uploaddownloadservice);
+					transfer_text.setText("1.Enable transfer");
 					ServerService.serverenabled = false;
 					updateIP(false);
 				}

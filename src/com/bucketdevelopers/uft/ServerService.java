@@ -101,14 +101,14 @@ public class ServerService extends Service {
 				notificationIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
 		mBuilder = new NotificationCompat.Builder(this)
-				.setSmallIcon(R.drawable.ic_launcher)
+				.setSmallIcon(R.drawable.runningserver)
 				.setContentTitle("File Server is Running")
 				.setContentText("Just Started :)")
 				.setContentIntent(contentIntent).setAutoCancel(false)
 		// .setProgress(100, 30, false)
 		;
 
-		updateNotification("File Server Started", " Waiting to Connect !",
+		updateNotification("Transfer enabled", " ",
 				getApplicationContext());
 		/*
 		 * End of Notification Management

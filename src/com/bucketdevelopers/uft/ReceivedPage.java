@@ -11,11 +11,7 @@ import java.util.Map;
 import com.common.methods.ExternalStorage;
 import com.common.methods.MimeUtils;
 import com.common.methods.XmlParser;
-import com.ipaulpro.afilechooser.FileChooserActivity;
-import com.ipaulpro.afilechooser.utils.FileUtils;
-
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;

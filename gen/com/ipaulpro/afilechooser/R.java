@@ -7,129 +7,31 @@
 package com.ipaulpro.afilechooser;
 
 public final class R {
+	public static final class bool {
+		public static final int use_activity = 0x7f070006;
+		public static final int use_provider = 0x7f070007;
+	}
 	public static final class dimen {
 		public static final int list_item_padding = 0x7f090012;
 		public static final int list_padding = 0x7f090011;
 	}
 	public static final class drawable {
-		public static final int ic_chooser = 0x7f020061;
-		public static final int ic_file = 0x7f020062;
-		public static final int ic_folder = 0x7f020063;
-	}
-	public static final class id {
-<<<<<<< HEAD
-		public static final int explorer_fragment = 0x7f060041;
-		public static final int file_icon = 0x7f060042;
-		public static final int file_name = 0x7f060043;
+		public static final int ic_chooser = 0x7f020063;
+		public static final int ic_file = 0x7f020064;
+		public static final int ic_folder = 0x7f020065;
+		public static final int ic_provider = 0x7f020067;
 	}
 	public static final class layout {
-		public static final int chooser = 0x7f030019;
-		public static final int file = 0x7f03001a;
-=======
-		public static final int action_bar = 0x7f06001c;
-		public static final int action_bar_activity_content = 0x7f060015;
-		public static final int action_bar_container = 0x7f06001b;
-		public static final int action_bar_overlay_layout = 0x7f06001f;
-		public static final int action_bar_root = 0x7f06001a;
-		public static final int action_bar_subtitle = 0x7f060023;
-		public static final int action_bar_title = 0x7f060022;
-		public static final int action_context_bar = 0x7f06001d;
-		public static final int action_menu_divider = 0x7f060016;
-		public static final int action_menu_presenter = 0x7f060017;
-		public static final int action_mode_close_button = 0x7f060024;
-		public static final int activity_chooser_view_content = 0x7f060025;
-		public static final int always = 0x7f06000b;
-		public static final int beginning = 0x7f060011;
-		public static final int checkbox = 0x7f06002d;
-		public static final int collapseActionView = 0x7f06000d;
-		public static final int default_activity_button = 0x7f060028;
-		public static final int dialog = 0x7f06000e;
-		public static final int disableHome = 0x7f060008;
-		public static final int dropdown = 0x7f06000f;
-		public static final int edit_query = 0x7f060030;
-		public static final int end = 0x7f060013;
-		public static final int expand_activities_button = 0x7f060026;
-		public static final int expanded_menu = 0x7f06002c;
-		public static final int explorer_fragment = 0x7f060040;
-		public static final int file_icon = 0x7f060041;
-		public static final int file_name = 0x7f060042;
-		public static final int home = 0x7f060014;
-		public static final int homeAsUp = 0x7f060005;
-		public static final int icon = 0x7f06002a;
-		public static final int ifRoom = 0x7f06000a;
-		public static final int image = 0x7f060027;
-		public static final int listMode = 0x7f060001;
-		public static final int list_item = 0x7f060029;
-		public static final int middle = 0x7f060012;
-		public static final int never = 0x7f060009;
-		public static final int none = 0x7f060010;
-		public static final int normal = 0x7f060000;
-		public static final int progress_circular = 0x7f060018;
-		public static final int progress_horizontal = 0x7f060019;
-		public static final int radio = 0x7f06002f;
-		public static final int search_badge = 0x7f060032;
-		public static final int search_bar = 0x7f060031;
-		public static final int search_button = 0x7f060033;
-		public static final int search_close_btn = 0x7f060038;
-		public static final int search_edit_frame = 0x7f060034;
-		public static final int search_go_btn = 0x7f06003a;
-		public static final int search_mag_icon = 0x7f060035;
-		public static final int search_plate = 0x7f060036;
-		public static final int search_src_text = 0x7f060037;
-		public static final int search_voice_btn = 0x7f06003b;
-		public static final int shortcut = 0x7f06002e;
-		public static final int showCustom = 0x7f060007;
-		public static final int showHome = 0x7f060004;
-		public static final int showTitle = 0x7f060006;
-		public static final int split_action_bar = 0x7f06001e;
-		public static final int submit_area = 0x7f060039;
-		public static final int tabMode = 0x7f060002;
-		public static final int title = 0x7f06002b;
-		public static final int top_action_bar = 0x7f060020;
-		public static final int up = 0x7f060021;
-		public static final int useLogo = 0x7f060003;
-		public static final int withText = 0x7f06000c;
-	}
-	public static final class integer {
-		public static final int abc_max_action_buttons = 0x7f0a0000;
-	}
-	public static final class layout {
-		public static final int abc_action_bar_decor = 0x7f030000;
-		public static final int abc_action_bar_decor_include = 0x7f030001;
-		public static final int abc_action_bar_decor_overlay = 0x7f030002;
-		public static final int abc_action_bar_home = 0x7f030003;
-		public static final int abc_action_bar_tab = 0x7f030004;
-		public static final int abc_action_bar_tabbar = 0x7f030005;
-		public static final int abc_action_bar_title_item = 0x7f030006;
-		public static final int abc_action_bar_view_list_nav_layout = 0x7f030007;
-		public static final int abc_action_menu_item_layout = 0x7f030008;
-		public static final int abc_action_menu_layout = 0x7f030009;
-		public static final int abc_action_mode_bar = 0x7f03000a;
-		public static final int abc_action_mode_close_item = 0x7f03000b;
-		public static final int abc_activity_chooser_view = 0x7f03000c;
-		public static final int abc_activity_chooser_view_include = 0x7f03000d;
-		public static final int abc_activity_chooser_view_list_item = 0x7f03000e;
-		public static final int abc_expanded_menu_layout = 0x7f03000f;
-		public static final int abc_list_menu_item_checkbox = 0x7f030010;
-		public static final int abc_list_menu_item_icon = 0x7f030011;
-		public static final int abc_list_menu_item_layout = 0x7f030012;
-		public static final int abc_list_menu_item_radio = 0x7f030013;
-		public static final int abc_popup_menu_item_layout = 0x7f030014;
-		public static final int abc_search_dropdown_item_icons_2line = 0x7f030015;
-		public static final int abc_search_view = 0x7f030016;
-		public static final int chooser = 0x7f030018;
 		public static final int file = 0x7f030019;
-		public static final int support_simple_spinner_dropdown_item = 0x7f030020;
->>>>>>> 892e91ac909f766eb3f2c5b4f7610dfe241f12b5
 	}
 	public static final class string {
 		public static final int choose_file = 0x7f0b000f;
 		public static final int empty_directory = 0x7f0b000d;
 		public static final int error_selecting_file = 0x7f0b0010;
+		public static final int internal_storage = 0x7f0b0011;
 		public static final int storage_removed = 0x7f0b000e;
 	}
 	public static final class style {
-		public static final int fileChooserIcon = 0x7f0c0084;
 		public static final int fileChooserName = 0x7f0c0083;
 	}
 	public static final class xml {

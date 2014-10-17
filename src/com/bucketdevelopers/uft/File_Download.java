@@ -3,10 +3,12 @@ package com.bucketdevelopers.uft;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Map;
+
 import com.common.methods.MimeUtils;
 import com.common.methods.XmlParser;
 import com.ipaulpro.afilechooser.FileChooserActivity;
 import com.ipaulpro.afilechooser.utils.FileUtils;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -164,7 +166,7 @@ public class File_Download extends Activity implements OnClickListener {
 			if (resultCode == RESULT_OK) {
 				String tempFilePath, tempFileName;
 				final Uri uri = data.getData();
-				File file = FileUtils.getFile(uri);
+				File file = FileUtils.getFile(getApplicationContext(),uri);
 				tempFilePath = file.toString();
 				tempFileName = tempFilePath.substring(tempFilePath
 						.lastIndexOf('/') + 1);

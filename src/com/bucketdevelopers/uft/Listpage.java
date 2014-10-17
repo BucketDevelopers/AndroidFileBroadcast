@@ -248,7 +248,7 @@ public void onActivityResult(int requestCode, int resultCode, Intent data) {
 			if (resultCode == Activity.RESULT_OK) {
 				String tempFilePath, tempFileName;
 				final Uri uri = data.getData();
-				File file = FileUtils.getFile(uri);
+				File file = FileUtils.getFile(ab,uri);
 				tempFilePath = file.toString();
 				tempFileName = tempFilePath.substring(tempFilePath
 						.lastIndexOf('/') + 1);

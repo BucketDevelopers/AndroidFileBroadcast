@@ -116,6 +116,8 @@ int bool abc_config_actionMenuItemAllCaps 0x7f070005
 int bool abc_config_allowActionMenuItemTextWithIcon 0x7f070004
 int bool abc_config_showMenuShortcutsWhenKeyboardPresent 0x7f070003
 int bool abc_split_action_bar_is_narrow 0x7f070002
+int bool use_activity 0x7f070006
+int bool use_provider 0x7f070007
 int color abc_search_url_text_holo 0x7f080007
 int color abc_search_url_text_normal 0x7f080000
 int color abc_search_url_text_pressed 0x7f080002
@@ -238,22 +240,6 @@ int drawable bg_key 0x7f020059
 int drawable check 0x7f02005a
 int drawable data 0x7f02005b
 int drawable data_connect 0x7f02005c
-<<<<<<< HEAD
-int drawable file_any 0x7f02005d
-int drawable fileany 0x7f02005e
-int drawable fileselect 0x7f02005f
-int drawable hotspot 0x7f020060
-int drawable ic_chooser 0x7f020061
-int drawable ic_file 0x7f020062
-int drawable ic_folder 0x7f020063
-int drawable ic_launcher 0x7f020064
-int drawable runningserver 0x7f020065
-int drawable stoppedserver 0x7f020066
-int drawable uft 0x7f020067
-int drawable wifi 0x7f020068
-int id About 0x7f06005a
-int id ServerEnable 0x7f060050
-=======
 int drawable data_connect_selected 0x7f02005d
 int drawable file_any 0x7f02005e
 int drawable fileany 0x7f02005f
@@ -264,14 +250,15 @@ int drawable ic_chooser 0x7f020063
 int drawable ic_file 0x7f020064
 int drawable ic_folder 0x7f020065
 int drawable ic_launcher 0x7f020066
-int drawable runningserver 0x7f020067
-int drawable stoppedserver 0x7f020068
-int drawable wifi 0x7f020069
-int drawable wifi_selected 0x7f02006a
-int id About 0x7f060057
+int drawable ic_provider 0x7f020067
+int drawable runningserver 0x7f020068
+int drawable stoppedserver 0x7f020069
+int drawable uft 0x7f02006a
+int drawable wifi 0x7f02006b
+int drawable wifi_selected 0x7f02006c
+int id About 0x7f060058
 int id ServerEnable 0x7f06004d
-int id Settings 0x7f060058
->>>>>>> 892e91ac909f766eb3f2c5b4f7610dfe241f12b5
+int id Settings 0x7f060059
 int id action_bar 0x7f06001c
 int id action_bar_activity_content 0x7f060015
 int id action_bar_container 0x7f06001b
@@ -284,23 +271,17 @@ int id action_menu_divider 0x7f060016
 int id action_menu_presenter 0x7f060017
 int id action_mode_close_button 0x7f060024
 int id activity_chooser_view_content 0x7f060025
-int id addButton 0x7f06004a
+int id addButton 0x7f060048
 int id always 0x7f06000b
 int id beginning 0x7f060011
-<<<<<<< HEAD
-int id browseButton 0x7f06004e
-int id button1 0x7f060047
-int id cab_clear_list 0x7f060055
-int id cab_selected 0x7f060054
-=======
-int id button1 0x7f060046
-int id cab_clear_list 0x7f060052
-int id cab_selected 0x7f060051
->>>>>>> 892e91ac909f766eb3f2c5b4f7610dfe241f12b5
+int id browseButton 0x7f06004b
+int id button1 0x7f060044
+int id cab_clear_list 0x7f060053
+int id cab_selected 0x7f060052
 int id checkbox 0x7f06002d
-int id clientheaderinfo 0x7f060045
+int id clientheaderinfo 0x7f060043
 int id collapseActionView 0x7f06000d
-int id data_connection 0x7f060059
+int id data_connection 0x7f060057
 int id default_activity_button 0x7f060028
 int id dialog 0x7f06000e
 int id disableHome 0x7f060008
@@ -309,49 +290,33 @@ int id edit_query 0x7f060030
 int id end 0x7f060013
 int id expand_activities_button 0x7f060026
 int id expanded_menu 0x7f06002c
-<<<<<<< HEAD
-int id explorer_fragment 0x7f060041
-int id fileSelector 0x7f060051
-int id file_icon 0x7f060042
-int id file_name 0x7f060043
-int id filelist 0x7f060044
-=======
-int id explorer_fragment 0x7f060040
-int id fileSelector 0x7f06004e
-int id file_icon 0x7f060041
-int id file_name 0x7f060042
-int id filelist 0x7f060043
->>>>>>> 892e91ac909f766eb3f2c5b4f7610dfe241f12b5
+int id fileSelector 0x7f06004f
+int id filelist 0x7f060041
 int id home 0x7f060014
 int id homeAsUp 0x7f060005
 int id icon 0x7f06002a
 int id ifRoom 0x7f06000a
 int id image 0x7f060027
-int id ipaddr 0x7f060044
-int id ipfullscrn 0x7f060048
+int id ipaddr 0x7f060042
+int id ipfullscrn 0x7f060046
 int id listMode 0x7f060001
 int id list_item 0x7f060029
-int id listview 0x7f06004b
+int id listview 0x7f060049
 int id middle 0x7f060012
 int id never 0x7f060009
-int id new_wifi_hotspot 0x7f060056
+int id new_wifi_hotspot 0x7f060054
 int id none 0x7f060010
 int id normal 0x7f060000
-int id page1 0x7f06003c
-int id page2 0x7f06003d
-int id page3 0x7f06003e
+int id page1 0x7f06003d
+int id page2 0x7f06003e
+int id page3 0x7f06003f
 int id progress_circular 0x7f060018
 int id progress_horizontal 0x7f060019
-<<<<<<< HEAD
-int id qrCode 0x7f060052
-int id qrFullScreen 0x7f06004a
-=======
-int id qrCode 0x7f06004f
-int id qrFullScreen 0x7f060049
->>>>>>> 892e91ac909f766eb3f2c5b4f7610dfe241f12b5
+int id qrCode 0x7f060050
+int id qrFullScreen 0x7f060047
 int id radio 0x7f06002f
-int id receivedList 0x7f06004f
-int id sdspace 0x7f060053
+int id receivedList 0x7f06004c
+int id sdspace 0x7f060051
 int id search_badge 0x7f060032
 int id search_bar 0x7f060031
 int id search_button 0x7f060033
@@ -362,6 +327,7 @@ int id search_mag_icon 0x7f060035
 int id search_plate 0x7f060036
 int id search_src_text 0x7f060037
 int id search_voice_btn 0x7f06003b
+int id settings 0x7f06003c
 int id shortcut 0x7f06002e
 int id showCustom 0x7f060007
 int id showHome 0x7f060004
@@ -369,24 +335,16 @@ int id showTitle 0x7f060006
 int id split_action_bar 0x7f06001e
 int id submit_area 0x7f060039
 int id tabMode 0x7f060002
-int id textView 0x7f060047
+int id textView 0x7f060045
 int id title 0x7f06002b
 int id top_action_bar 0x7f060020
-<<<<<<< HEAD
-int id tv_list 0x7f06004d
+int id transfer_text 0x7f06004e
+int id tv_list 0x7f06004a
 int id up 0x7f060021
 int id useLogo 0x7f060003
 int id viewpager 0x7f060040
-int id wifi 0x7f060058
-int id wifi_hotspot 0x7f060057
-=======
-int id tv_list 0x7f06004c
-int id up 0x7f060021
-int id useLogo 0x7f060003
-int id viewpager 0x7f06003f
-int id wifi 0x7f060055
-int id wifi_hotspot 0x7f060054
->>>>>>> 892e91ac909f766eb3f2c5b4f7610dfe241f12b5
+int id wifi 0x7f060056
+int id wifi_hotspot 0x7f060055
 int id withText 0x7f06000c
 int integer abc_max_action_buttons 0x7f0a0000
 int layout abc_action_bar_decor 0x7f030000
@@ -412,31 +370,17 @@ int layout abc_list_menu_item_radio 0x7f030013
 int layout abc_popup_menu_item_layout 0x7f030014
 int layout abc_search_dropdown_item_icons_2line 0x7f030015
 int layout abc_search_view 0x7f030016
-<<<<<<< HEAD
 int layout actionbar_top 0x7f030017
 int layout activity_main 0x7f030018
-int layout chooser 0x7f030019
-int layout file 0x7f03001a
-int layout file_download 0x7f03001b
-int layout fragment_layout 0x7f03001c
-int layout fullscreen_qr 0x7f03001d
-int layout list 0x7f03001e
-int layout list_text 0x7f03001f
-int layout received 0x7f030020
-int layout screen1 0x7f030021
-int layout support_simple_spinner_dropdown_item 0x7f030022
-=======
-int layout activity_main 0x7f030017
-int layout chooser 0x7f030018
 int layout file 0x7f030019
 int layout file_download 0x7f03001a
 int layout fragment_layout 0x7f03001b
 int layout fullscreen_qr 0x7f03001c
 int layout list 0x7f03001d
 int layout list_text 0x7f03001e
-int layout screen1 0x7f03001f
-int layout support_simple_spinner_dropdown_item 0x7f030020
->>>>>>> 892e91ac909f766eb3f2c5b4f7610dfe241f12b5
+int layout received 0x7f03001f
+int layout screen1 0x7f030020
+int layout support_simple_spinner_dropdown_item 0x7f030021
 int menu cab 0x7f0d0000
 int menu main 0x7f0d0001
 int string abc_action_bar_home_description 0x7f0b0001
@@ -452,28 +396,29 @@ int string abc_searchview_description_submit 0x7f0b0007
 int string abc_searchview_description_voice 0x7f0b0008
 int string abc_shareactionprovider_share_with 0x7f0b000c
 int string abc_shareactionprovider_share_with_application 0x7f0b000b
-int string about_us 0x7f0b001b
-int string action_settings 0x7f0b0012
-int string app_name 0x7f0b0011
+int string about_us 0x7f0b001c
+int string action_settings 0x7f0b0013
+int string app_name 0x7f0b0012
 int string choose_file 0x7f0b000f
-int string choose_mode 0x7f0b0018
+int string choose_mode 0x7f0b0019
 int string empty_directory 0x7f0b000d
-int string enable_transfer 0x7f0b001d
+int string enable_transfer 0x7f0b001e
 int string error_selecting_file 0x7f0b0010
-int string hai 0x7f0b0014
-int string hello_world 0x7f0b0013
-int string hotspot 0x7f0b0016
-int string mobile_data 0x7f0b0017
-int string scan_description 0x7f0b001f
-int string sdSpaceError 0x7f0b0020
-int string select_files 0x7f0b001c
-int string settings 0x7f0b0019
-int string settings_button 0x7f0b001a
-int string status 0x7f0b001e
+int string hai 0x7f0b0015
+int string hello_world 0x7f0b0014
+int string hotspot 0x7f0b0017
+int string internal_storage 0x7f0b0011
+int string mobile_data 0x7f0b0018
+int string scan_description 0x7f0b0020
+int string sdSpaceError 0x7f0b0021
+int string select_files 0x7f0b001d
+int string settings 0x7f0b001a
+int string settings_button 0x7f0b001b
+int string status 0x7f0b001f
 int string storage_removed 0x7f0b000e
-int string wifi 0x7f0b0015
-int style AppBaseTheme 0x7f0c0085
-int style AppTheme 0x7f0c0086
+int string wifi 0x7f0b0016
+int style AppBaseTheme 0x7f0c0084
+int style AppTheme 0x7f0c0085
 int style TextAppearance_AppCompat_Base_CompactMenu_Dialog 0x7f0c0063
 int style TextAppearance_AppCompat_Base_SearchResult 0x7f0c006d
 int style TextAppearance_AppCompat_Base_SearchResult_Subtitle 0x7f0c006f
@@ -605,7 +550,6 @@ int style Widget_AppCompat_PopupMenu 0x7f0c002b
 int style Widget_AppCompat_ProgressBar 0x7f0c000a
 int style Widget_AppCompat_ProgressBar_Horizontal 0x7f0c0009
 int style Widget_AppCompat_Spinner_DropDown_ActionBar 0x7f0c0022
-int style fileChooserIcon 0x7f0c0084
 int style fileChooserName 0x7f0c0083
 int[] styleable ActionBar { 0x7f010021, 0x7f010022, 0x7f010023, 0x7f010024, 0x7f010025, 0x7f010026, 0x7f010027, 0x7f010028, 0x7f010029, 0x7f01002a, 0x7f01002b, 0x7f01002c, 0x7f01002d, 0x7f01002e, 0x7f01002f, 0x7f010030, 0x7f010031, 0x7f010032, 0x7f010033 }
 int styleable ActionBar_background 10
